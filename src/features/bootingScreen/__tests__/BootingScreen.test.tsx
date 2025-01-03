@@ -49,7 +49,7 @@ describe("BootingScreen component tests", () => {
 
    test("renders the copyright element", () => {
       render(<BootingScreen />);
-      const copyrightStatement = screen.getByText("Copyright© MacroHard Corporation");
+      const copyrightStatement = screen.getByText("Copyright MacroHard Corporation");
       const companyName = screen.getByText("MacroHard");
       const elements = [companyName, copyrightStatement];
       elements.forEach((element) => {
