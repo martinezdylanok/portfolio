@@ -1,13 +1,13 @@
-import Logo from "./components/Logo";
-import Navigation from "./components/Navigation";
-import ModeSwitcher from "./components/ModeSwitcher";
+import HeaderLogo from "./components/header-logo/HeaderLogo";
+import HeaderNavigation from "./components/header-navigation/HeaderNavigation";
+import HeaderModeSwitcher from "./components/header-mode-switcher/HeaderModeSwitcher";
 
 const Header = () => {
    return (
       <header>
-         <Logo />
-         <Navigation />
-         <ModeSwitcher />
+         <HeaderLogo />
+         <HeaderNavigation />
+         <HeaderModeSwitcher />
       </header>
    );
 };
