@@ -1,5 +1,5 @@
 import ProjectOverviewContainer from "./components/project-overview-container/ProjectOverviewContainer";
-import PROJECT_OVERVIEW_ARIA_LABEL from "./data/projectOverviewData";
+import { PROJECT_OVERVIEW_ARIA_LABEL } from "./data/projectOverviewData";
 
 const ProjectOverview = () => {
    return (
