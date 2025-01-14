@@ -1,9 +1,12 @@
+//TODO: Fetch project's title and details from database.
+
+import { PROJECT_OVERVIEW_CONTENT_ARIA_LABEL } from "./data/projectOverviewContentData";
+
 const ProjectOverviewContent = () => {
    return (
-      <div className="overview__content" aria-label="Project overview content">
-         <h2 className="overview__title">Project overview</h2>
-         <h3 className="overview__subtitle">Project details</h3>
-         <p className="overview__paragraph">Project paragraph</p>
+      <div className="project__overview-content" aria-label={PROJECT_OVERVIEW_CONTENT_ARIA_LABEL}>
+         <h2 className="project__overview-content-title"></h2>
+         <p className="project__overview-project-details"></p>
       </div>
    );
 };
