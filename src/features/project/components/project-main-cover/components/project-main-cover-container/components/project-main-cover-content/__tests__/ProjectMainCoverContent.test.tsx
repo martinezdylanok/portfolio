@@ -2,27 +2,20 @@ import { render, screen } from "@testing-library/react";
 import ProjectMainCoverContent from "../ProjectMainCoverContent";
 
 describe("ProjectMainCoverContent tests", () => {
-   test("render the main cover content", () => {
+   test("render ProjectMainCoverContent element", () => {
       render(<ProjectMainCoverContent />);
-      const mainCoverContent = screen.getByLabelText("Main cover content");
+      const mainCoverContent = screen.getByLabelText("Project main cover content");
       expect(mainCoverContent).toBeInTheDocument();
    });
 
-   test("render the main cover subtitle", () => {
+   test("render the main cover subtitle element", () => {
       render(<ProjectMainCoverContent />);
       const mainCoverSubtitle = screen.getByRole("heading", { level: 3 });
-      expect(mainCoverSubtitle).toHaveClass("main-cover__subtitle");
+      expect(mainCoverSubtitle).toHaveClass("main-cover__project-title");
       expect(mainCoverSubtitle).toBeInTheDocument();
    });
 
-   test("render the main cover title", () => {
-      render(<ProjectMainCoverContent />);
-      const mainCoverTitle = screen.getByRole("heading", { level: 2 });
-      expect(mainCoverTitle).toHaveClass("main-cover__title");
-      expect(mainCoverTitle).toBeInTheDocument();
-   });
-
-   test("render the main cover project description", () => {
+   test("render the main cover project description element", () => {
       render(<ProjectMainCoverContent />);
       const mainCoverProjectDescription = screen.getByRole("paragraph");
       expect(mainCoverProjectDescription).toHaveClass("main-cover__project-description");
