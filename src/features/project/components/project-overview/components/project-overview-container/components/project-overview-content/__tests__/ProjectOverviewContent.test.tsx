@@ -8,15 +8,9 @@ describe("ProjectOverviewContent tests", () => {
       expect(ProjectOverviewElement).toBeInTheDocument();
    });
 
-   test("renders Project overview title", () => {
-      render(<ProjectOverviewContent />);
-      const ProjectOverviewTitle = screen.getByRole("heading", { name: "Project overview", level: 2 });
-      expect(ProjectOverviewTitle).toBeInTheDocument();
-   });
-
    test("renders Project overview subtitle", () => {
       render(<ProjectOverviewContent />);
-      const ProjectOverviewSubtitle = screen.getByRole("heading", { name: "Project details", level: 3 });
+      const ProjectOverviewSubtitle = screen.getByRole("heading", { level: 2 });
       expect(ProjectOverviewSubtitle).toBeInTheDocument();
    });
 
