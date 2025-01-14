@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import ProjectMainCoverLogos from "../ProjectMainCoverLogos";
 
 describe("ProjectMainCoverLogos", () => {
-   test("render the logos", () => {
+   test("render ProjectMainCoverLogos element", () => {
       render(<ProjectMainCoverLogos />);
-      const logos = screen.getByLabelText("Logos");
-      expect(logos).toBeInTheDocument();
+      const container = screen.getByLabelText("Logos of the project's involved parties");
+      expect(container).toBeInTheDocument();
    });
 
    test("render the company logo", () => {
