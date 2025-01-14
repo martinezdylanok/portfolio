@@ -8,13 +8,13 @@ describe("ProjectOverviewTechnologies tests", () => {
       expect(element).toBeInTheDocument();
    });
 
-   test("renders ProjectOverviewTechnoligies subtitle", () => {
+   test("renders ProjectOverviewTechnoligies title element", () => {
       render(<ProjectOverviewTechnologies />);
       const subtitle = screen.getByRole("heading");
       expect(subtitle).toBeInTheDocument();
    });
 
-   test("renders ProjectOverviewTechnoligies list", () => {
+   test("renders ProjectOverviewTechnoligies list element", () => {
       render(<ProjectOverviewTechnologies />);
       const list = screen.getByRole("list");
       expect(list).toBeInTheDocument();
