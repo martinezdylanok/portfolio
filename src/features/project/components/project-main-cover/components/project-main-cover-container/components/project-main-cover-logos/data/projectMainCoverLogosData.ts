@@ -1,5 +1,5 @@
-const PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL = "Logos of the project's involved parties";
-const PROJECT_MAIN_COVER_COMPANY_LOGO_ALT_TEXT = "Company logo";
-const PROJECT_MAIN_COVER_OWN_LOGO_ALT_TEXT = "Dylan Martinez's logo";
+const PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL: string = "Logos of the project's involved parties";
+const PROJECT_MAIN_COVER_COMPANY_LOGO_ALT_TEXT: string = "Company logo";
+const PROJECT_MAIN_COVER_OWN_LOGO_ALT_TEXT: string = "Dylan Martinez's logo";
 
 export { PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL, PROJECT_MAIN_COVER_COMPANY_LOGO_ALT_TEXT, PROJECT_MAIN_COVER_OWN_LOGO_ALT_TEXT };
