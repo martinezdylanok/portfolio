@@ -4,7 +4,7 @@ import ProjectResultsContainer from "../ProjectResultsContainer";
 describe("ProjectResultsContainer tests", () => {
    test("renders ProjectResultsContainer element", () => {
       render(<ProjectResultsContainer />);
-      const ProjectResultsContainerElement = screen.getByLabelText("Results container");
+      const ProjectResultsContainerElement = screen.getByLabelText("Project results container");
       expect(ProjectResultsContainerElement).toBeInTheDocument();
    });
 });
