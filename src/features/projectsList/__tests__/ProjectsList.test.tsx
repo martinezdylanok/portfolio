@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import ProjectsList from "../ProjectsList";
 
 describe("ProjectsList component tests", () => {
-   test("renders the projects list element", () => {
+   test("renders ProjectsList element", () => {
       render(<ProjectsList />);
       const projectsList = screen.getByRole("main");
       expect(projectsList).toBeInTheDocument();
