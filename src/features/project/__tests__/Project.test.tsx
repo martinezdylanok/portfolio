@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Project from "../Project";
 
 describe("Project component tests", () => {
-   test("renders project element", () => {
+   test("renders Project element", () => {
       render(<Project />);
       const projectElement = screen.getByLabelText("Project container");
       expect(projectElement).toBeInTheDocument();
