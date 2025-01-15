@@ -1,8 +1,9 @@
 import ProjectResultsContent from "./components/project-results-content/ProjectResultsContent";
+import { PROJECT_RESULTS_CONTAINER_ARIA_LABEL } from "./data/projectResultsContainerData";
 
 const ProjectResultsContainer = () => {
    return (
-      <div className="results__container" aria-label="Results container">
+      <div className="project__results-container" aria-label={PROJECT_RESULTS_CONTAINER_ARIA_LABEL}>
          <ProjectResultsContent />
       </div>
    );
