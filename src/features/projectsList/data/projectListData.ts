@@ -1,6 +1,7 @@
-const PROJECT_LIST_CONTAINER_ARIA_LABEL_TEXT: string = "Project list container";
+const PROJECTS_LIST_CONTAINER_ARIA_LABEL_TEXT: string = "Projects list container";
+const PROJECTS_LIST_TITLE: string = "Some of my work";
 
-const PROJECT_LIST_TEMPORAL: { id: string; name: string }[] = [
+const PROJECTS_LIST_TEMPORAL: { id: string; name: string }[] = [
    { id: "project-1", name: "Project 1" },
    { id: "project-2", name: "Project 2" },
    { id: "project-3", name: "Project 3" },
@@ -8,4 +9,4 @@ const PROJECT_LIST_TEMPORAL: { id: string; name: string }[] = [
    { id: "project-5", name: "Project 5" },
 ];
 
-export { PROJECT_LIST_CONTAINER_ARIA_LABEL_TEXT, PROJECT_LIST_TEMPORAL };
+export { PROJECTS_LIST_CONTAINER_ARIA_LABEL_TEXT, PROJECTS_LIST_TITLE, PROJECTS_LIST_TEMPORAL };
