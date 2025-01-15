@@ -10,7 +10,7 @@ describe("ProjectResultsContent tests", () => {
 
    test("renders Project results subtitle", () => {
       render(<ProjectResultsContent />);
-      const ProjectResultsSubtitle = screen.getByRole("heading", { name: "Final results", level: 3 });
+      const ProjectResultsSubtitle = screen.getByRole("heading", { name: "Final results", level: 2 });
       expect(ProjectResultsSubtitle).toBeInTheDocument();
    });
 
