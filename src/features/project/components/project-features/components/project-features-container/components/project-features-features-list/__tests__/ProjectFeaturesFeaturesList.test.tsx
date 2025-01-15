@@ -2,15 +2,15 @@ import { render, screen } from "@testing-library/react";
 import ProjectFeaturesFeaturesList from "../ProjectFeaturesFeaturesList";
 
 describe("ProjectFeaturesFeaturesList", () => {
-   test("renders the features list container", () => {
+   test("renders ProjectFeaturesList element", () => {
       render(<ProjectFeaturesFeaturesList />);
-      const featuresListContainer = screen.getByLabelText("Features list");
+      const featuresListContainer = screen.getByLabelText("Project features features list");
       expect(featuresListContainer).toBeInTheDocument();
    });
 
    test("renders the subtitle element", () => {
       render(<ProjectFeaturesFeaturesList />);
-      const subtitleElement = screen.getByRole("heading", { level: 3, name: /features list/i });
+      const subtitleElement = screen.getByRole("heading", { level: 2, name: /features/i });
       expect(subtitleElement).toBeInTheDocument();
    });
 
