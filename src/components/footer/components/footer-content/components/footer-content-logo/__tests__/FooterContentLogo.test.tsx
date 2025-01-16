@@ -4,7 +4,7 @@ import FooterContentLogo from "../FooterContentLogo";
 describe("FooterContentLogo tests", () => {
    test("renders FooterContentLogo element", () => {
       render(<FooterContentLogo />);
-      const FooterContentLogoElement = screen.getByLabelText("Footer logo container");
+      const FooterContentLogoElement = screen.getByLabelText("Footer content logo container");
       expect(FooterContentLogoElement).toBeInTheDocument();
    });
 
