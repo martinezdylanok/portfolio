@@ -1,11 +1,11 @@
-import { ARROW_ICON, ARROW_ICON_ALT_TEXT, SCROLL_UP_TEXT } from "./data/constants";
+import { FOOTER_SCROLL_UP_ARIA_LABEL, FOOTER_SCROLL_UP_ARROW_ICON, FOOTER_SCROLL_UP_ARROW_ICON_ALT_TEXT, FOOTER_SCROLL_UP_TEXT, SCROLL_UP_TEXT } from "./data/footerScrollUpData";
 
 const FooterContentScrollUp = () => {
    return (
-      <div className="footer__scroll-up" aria-label="Footer scroll up">
-         <a href="." className="scroll-up__link">
-            <img src={ARROW_ICON} alt={ARROW_ICON_ALT_TEXT} className="link__arrow-icon" />
-            <span className="link__text">{SCROLL_UP_TEXT}</span>
+      <div className="footer__scroll-up-container" aria-label={FOOTER_SCROLL_UP_ARIA_LABEL}>
+         <a href="." className="footer__scroll-up-link">
+            <img src={FOOTER_SCROLL_UP_ARROW_ICON} alt={FOOTER_SCROLL_UP_ARROW_ICON_ALT_TEXT} className="footer__scroll-up-image" />
+            <span className="footer__scroll-up-text">{FOOTER_SCROLL_UP_TEXT}</span>
          </a>
       </div>
    );
