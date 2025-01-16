@@ -1,4 +1,4 @@
-const PROJECT_FEATURES_CHALLENGES_ARIA_LABEL = "Project features challenges list";
-const PROJECT_FEATURES_CHALLENGES_TITLE = "Challenges";
+const PROJECT_FEATURES_CHALLENGES_ARIA_LABEL: string = "Project features challenges list";
+const PROJECT_FEATURES_CHALLENGES_TITLE: string = "Challenges";
 
 export { PROJECT_FEATURES_CHALLENGES_ARIA_LABEL, PROJECT_FEATURES_CHALLENGES_TITLE };
