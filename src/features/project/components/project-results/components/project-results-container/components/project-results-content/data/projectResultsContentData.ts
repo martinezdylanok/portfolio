@@ -1,4 +1,4 @@
-const PROJECT_RESULTS_CONTENT_ARIA_LABEL = "Project results content";
-const PROJECT_RESULTS_CONTENT_TITLE = "Final results";
+const PROJECT_RESULTS_CONTENT_ARIA_LABEL: string = "Project results content";
+const PROJECT_RESULTS_CONTENT_TITLE: string = "Final results";
 
 export { PROJECT_RESULTS_CONTENT_ARIA_LABEL, PROJECT_RESULTS_CONTENT_TITLE };
