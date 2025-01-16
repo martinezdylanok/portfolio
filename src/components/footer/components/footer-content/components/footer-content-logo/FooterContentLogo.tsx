@@ -1,7 +1,11 @@
+//TODO: Fetch image from database.
+
+import { FOOTER_CONTENT_LOGO__ARIA_LABEL, FOOTER_CONTENT_LOGO__IMAGE_ALT } from "./data/footerContentLogoData";
+
 const FooterContentLogo = () => {
    return (
-      <div className="footer-content__logo" aria-label="Footer logo container">
-         <img src="" alt="Dylan Martinez's logo" />
+      <div className="footer-content__logo" aria-label={FOOTER_CONTENT_LOGO__ARIA_LABEL}>
+         <img src="" alt={FOOTER_CONTENT_LOGO__IMAGE_ALT} />
       </div>
    );
 };
