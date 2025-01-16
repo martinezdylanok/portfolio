@@ -4,7 +4,7 @@ import FooterScrollUp from "../FooterScrollUp";
 describe("FooterScrollUp tests", () => {
    test("renders FooterScrollUp element", () => {
       render(<FooterScrollUp />);
-      const FooterScrollUpElement = screen.getByLabelText("Footer scroll up");
+      const FooterScrollUpElement = screen.getByLabelText("Footer scroll up container");
       expect(FooterScrollUpElement).toBeInTheDocument();
    });
 
