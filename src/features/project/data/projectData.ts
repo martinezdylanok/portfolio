@@ -1,1 +1,1 @@
-export const PROJECT_ARIA_LABEL = "Project container";
+export const PROJECT_ARIA_LABEL: string = "Project container";
