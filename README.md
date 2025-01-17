@@ -1,50 +1,29 @@
-# React + TypeScript + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The nexus of my programming explorations.
 
-Currently, two official plugins are available:
+## Table of contents
+1. [Overview](#overview)
+2. [The process](#the-process)
+3. [Try it!](#try-it)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+## The process
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### ORIGIN
 
-- Configure the top-level `parserOptions` property like this:
+A seamless fusion of minimalist design and complex storytelling, embodied in a website.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Current wims... for now
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Speed, speed, speed: It needs to load fast, faster than fast.
+- Swiss Grid System: It's just... beautiful.
+- Accessibility: To be used for anyone, anywhere.
+- Three modes: Dark, light, and retro.
+- User authentication.
+- CLI: Easter egg, he-he.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Obstacles along the way
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Try it!
