@@ -13,6 +13,8 @@ The nexus of my programming explorations.
 
 ### ORIGIN
 
+![Original design files](assets/images/original-design.webp)
+
 A seamless fusion of minimalist design and complex storytelling, embodied in a website.
 
 ### Current wims... for now
