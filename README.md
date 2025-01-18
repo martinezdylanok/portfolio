@@ -13,7 +13,7 @@ The nexus of my programming explorations.
 
 ### ORIGIN
 
-<img alt="Original design image" src="/assets/images/original-design.webp" width="600">
+<img alt="Original design image" src="/assets/images/original-design-image/original-design.webp" width="600">
 
 A seamless fusion of minimalist design and complex storytelling, embodied in a website.
 
