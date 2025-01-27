@@ -13,7 +13,7 @@ The nexus of my programming explorations.
 
 ### ORIGIN
 
-<img alt="Original design image" src="/assets/images/original-design-image/original-design.webp" width="600">
+![Original design image](assets/images/original-design-image/original-design.webp)
 
 A seamless fusion of minimalist design and complex storytelling, embodied in a website.
 
@@ -26,6 +26,10 @@ A seamless fusion of minimalist design and complex storytelling, embodied in a w
 - User authentication.
 - CLI: Easter egg, he-he.
 
-### Obstacles along the way
+### A deeper look into it
+
+![Chart showing the folder structure](assets/images/charts/Folder%20structure%20and%20normal%20workflow.png)
+
+![Chart showing the workflow](assets/images/charts/Project%20workflow.png)
 
 ## Try it!
