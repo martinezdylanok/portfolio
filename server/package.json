@@ -6,7 +6,7 @@
    "scripts": {
       "dev": "ts-node src/app/app.ts",
       "build": "tsc -p tsconfig.node.json",
-      "start": "node dist/app.js",
+      "start": "node --watch dist/app.js",
       "lint": "eslint .",
       "test": "vitest"
    },
