@@ -15,6 +15,9 @@
     "noUncheckedSideEffectImports": true,
     "types": ["vitest/globals"],
 
+    "rootDir": "./src",
     "outDir": "./dist",
-  }
+  },
+  "include": ["src/**/*"], // Ensure that only the src directory is included
+  "exclude": ["node_modules", "dist"] // Exclude node_modules and dist directories
 }
