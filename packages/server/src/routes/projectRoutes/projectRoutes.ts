@@ -1,16 +1,8 @@
-import Router from "express";
-import getProjectByName from "./data/projectRoutesData.mock.js";
+import { Router } from "express";
+import { getProjectByName } from "../../controllers/projectController/projectController.js";
 
 const projectRoutes = Router();
 
-projectRoutes.get("/:projectName", (req, res) => {
-   const projectName = req.params.projectName.toLocaleLowerCase();
-   const project = getProjectByName(projectName);
-   if (!project) {
-      res.status(404).send(`Project with id ${projectName} not found`);
-   } else {
-      res.json(project);
-   }
-});
+projectRoutes.get("/:projectName", getProjectByName);
 
 export default projectRoutes;
