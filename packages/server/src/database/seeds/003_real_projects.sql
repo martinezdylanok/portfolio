@@ -56,4 +56,4 @@ INSERT INTO projects (
     'This project leaned heavily into a visual approach, embracing a clean and minimalist design inspired by Italian fashion and design principles. The website emphasizes high-quality imagery and a simple, intuitive navigation system, allowing the visuals to take center stage and communicate Monica''s style effectively.',
     'Maintaining consistency with the initial design vision while accommodating the client''s evolving feedback and changes was the primary challenge. This required adaptability and flexibility, teaching me valuable lessons in project management and client communication.  Successfully navigating these changes while preserving the project''s core integrity was crucial for its ultimate success.',
     'Despite the dynamic nature of the project and the client''s adjustments, the final result was a source of mutual satisfaction. The successful collaboration on this project laid the foundation for future collaborations, demonstrating the value of open communication and a shared commitment to achieving the client''s vision.'
-),
+)
