@@ -1,20 +1,9 @@
 import pkg from "pg";
 import dotenv from "dotenv";
-
+import PoolConfigInterface from "./interfaces/databaseConfigInterface.js";
 dotenv.config();
 
 const { Pool } = pkg;
-
-interface PoolConfigInterface {
-   host: string;
-   user: string;
-   password: string;
-   database: string;
-   port?: number;
-   max?: number;
-   idleTimeoutMillis?: number;
-   ssl?: any;
-}
 
 const poolConfig: PoolConfigInterface = {
    host: process.env.DB_HOST as string,
