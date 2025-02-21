@@ -1,25 +1,27 @@
 import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "@typescript-eslint/eslint-plugin";
+import tsParser from "@typescript-eslint/parser";
 import eslintPluginPrettier from "eslint-plugin-prettier";
 import vitest from "@vitest/eslint-plugin";
 
 export default [
    {
-      ignores: ["packages/client/", "packages/server/", "dist"],
+      ignores: ["dist"],
    },
    {
       files: ["**/*.{ts,tsx,js,jsx}"],
       languageOptions: {
          ecmaVersion: 2024,
+         parser: tsParser,
          globals: {
             ...globals.browser,
             ...globals.node,
          },
       },
       plugins: {
-         tseslint: tseslint,
-         eslintPluginPrettier: eslintPluginPrettier,
+         "@typescript-eslint": tseslint,
+         prettier: eslintPluginPrettier,
       },
       rules: {
          ...js.configs.recommended.rules,
