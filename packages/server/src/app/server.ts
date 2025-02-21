@@ -20,7 +20,7 @@ server.use(express.static(clientDistPath));
 /* Routes */
 server.use("/projects", projectRoutes);
 
-server.get("*", (__, res) => {
+server.get("/", (__, res) => {
    res.sendFile(path.join(clientDistPath, "index.html"));
 });
 
