@@ -1,25 +1,24 @@
 import { getProjectByName } from "../projectController.js";
 import { dbQuery } from "../../../config/databaseConfig.js";
 import { Mock } from "vitest"; // TODO: Get rid of this import statement by using globals importing
-
-vi.mock("../../../config/databaseConfig.js");
+import { mockRequest, mockResponse, statusSpy, jsonSpy, initializeMocks, initializeConsoleErrorSpy, restoreConsoleErrorSpy, deinitializeMocks } from "./test-utils/test-utils.js";
 
 describe("projectController controller tests", () => {
-   let mockRequest: any;
-   let mockResponse: any;
-   let statusSpy: any;
-   let jsonSpy: any;
+   beforeAll(() => {
+      vi.mock("../../../config/databaseConfig.js");
+   });
 
-   const initializeMocks = (projectName: string) => {
-      mockRequest = { params: { projectName } };
-      mockResponse = { status: vi.fn().mockReturnThis(), json: vi.fn() };
-      statusSpy = vi.spyOn(mockResponse, "status");
-      jsonSpy = vi.spyOn(mockResponse, "json");
-   };
+   beforeEach(() => {
+      initializeConsoleErrorSpy();
+      initializeMocks("project 01");
+   });
+
+   afterEach(() => {
+      restoreConsoleErrorSpy();
+      deinitializeMocks();
+   });
 
    test("should return a correct project given a valid name", async () => {
-      initializeMocks("project 01");
-
       const mockProject = { project_name: "project 01" };
 
       (dbQuery as Mock).mockResolvedValueOnce({ rows: [mockProject] });
@@ -29,7 +28,7 @@ describe("projectController controller tests", () => {
       expect(jsonSpy).toHaveBeenCalledWith(mockProject);
    });
 
-   test("should return a correct project vien a valid name with different case", async () => {
+   test("should return a correct project given a valid name with different case", async () => {
       initializeMocks("ProJect 01");
 
       const mockProject = { project_name: "project 01" };
@@ -53,7 +52,7 @@ describe("projectController controller tests", () => {
    });
 
    test("should return a 400 status code if projectName parameter is missing", async () => {
-      mockRequest = { params: {} };
+      initializeMocks("");
 
       await getProjectByName(mockRequest, mockResponse);
 
@@ -62,8 +61,6 @@ describe("projectController controller tests", () => {
    });
 
    test("should return a 500 status code and an error message if an error occurs", async () => {
-      initializeMocks("project 01");
-
       (dbQuery as Mock).mockRejectedValueOnce(new Error("Database error"));
 
       await getProjectByName(mockRequest, mockResponse);
