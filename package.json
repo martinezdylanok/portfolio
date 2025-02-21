@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
     "@vitest/eslint-plugin": "^1.1.32-beta.1",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
