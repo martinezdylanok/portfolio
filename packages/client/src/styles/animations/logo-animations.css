@@ -1,0 +1,87 @@
+@keyframes logo-lift-and-border-add {
+   0% {
+     transform: translateY(0);
+     border-bottom: 0px solid black;
+     padding-bottom: 0px;
+   }
+   50% {
+     transform: translateY(-3px);
+     border-bottom: 2px solid black;
+     padding-bottom: 1px;
+   }
+   100% {
+     transform: translateY(-5px);
+     border-bottom: 5px solid black;
+     padding-bottom: 3px;
+   }
+}
+ 
+@keyframes logo-lower-and-border-remove {
+   0% {
+       transform: translateY(-5px);
+       border-bottom: 5px solid black;
+       padding-bottom: 3px;
+   }
+   50% {
+       transform: translateY(-3px);
+       border-bottom: 2px solid black;
+       padding-bottom: 1px;
+   }
+   100% {
+       transform: translateY(0);
+       border-bottom: 0px solid black;
+       padding-bottom: 0px;
+   }
+}
+
+.header__logo-image:not(.lifted) {
+   animation: logo-lower-and-border-remove 0.4s ease-in-out 1 forwards;
+}
+ 
+.header__logo-image.lifted {
+   animation: logo-lift-and-border-add 0.3s ease-in-out 1 forwards;
+}
+ 
+/*TODO: Work this animations out so they look smother*/
+ 
+@keyframes title-lift-and-fade-in {
+   0% {
+     top: 100%;
+     opacity: 1;
+   }
+   1% {
+     opacity: 0.1;
+   }
+   100% {
+     top: 1%;
+     opacity: 0;
+   }
+}
+ 
+@keyframes title-lower-and-fade-out {
+   0%{
+     top: -1%;
+     opacity: 0;
+   }
+   35% {
+     top: 90%;
+   }
+   70% {
+     opacity: 1;
+   }
+   100% {
+     top: 90%;
+     opacity: 1;
+   }
+}
+
+.header__logo-title:not(.unlifted) {
+   animation: title-lift-and-fade-in 0.4s ease-in-out 1 forwards;
+}
+
+.header__logo-title.unlifted {
+   animation: title-lower-and-fade-out 1.2s ease-in-out 1 forwards;
+}
+
+
+
