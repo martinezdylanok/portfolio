@@ -5,26 +5,26 @@
      padding-bottom: 0px;
    }
    50% {
-     transform: translateY(-3px);
-     border-bottom: 2px solid black;
+     transform: translateY(-0.188rem);
+     border-bottom: 0.125rem solid black;
      padding-bottom: 1px;
    }
    100% {
-     transform: translateY(-5px);
-     border-bottom: 5px solid black;
-     padding-bottom: 3px;
+     transform: translateY(-0.313rem);
+     border-bottom: 0.313rem solid black;
+     padding-bottom: 0.188rem;
    }
 }
  
 @keyframes logo-lower-and-border-remove {
    0% {
-       transform: translateY(-5px);
-       border-bottom: 5px solid black;
-       padding-bottom: 3px;
+       transform: translateY(-0.313rem);
+       border-bottom: 0.313rem solid black;
+       padding-bottom: 0.188rem;
    }
    50% {
-       transform: translateY(-3px);
-       border-bottom: 2px solid black;
+       transform: translateY(-0.188rem);
+       border-bottom: 0.125rem solid black;
        padding-bottom: 1px;
    }
    100% {
@@ -41,16 +41,15 @@
 .header__logo-image.lifted {
    animation: logo-lift-and-border-add 0.3s ease-in-out 1 forwards;
 }
- 
-/*TODO: Work this animations out so they look smother*/
- 
+  
 @keyframes title-lift-and-fade-in {
    0% {
      top: 100%;
      opacity: 1;
    }
-   1% {
-     opacity: 0.1;
+   25% {
+      top: 99%;
+     opacity: 0;
    }
    100% {
      top: 1%;
@@ -64,13 +63,11 @@
      opacity: 0;
    }
    35% {
-     top: 90%;
-   }
-   70% {
-     opacity: 1;
+     top: 100%;
+     opacity: 0.1;
    }
    100% {
-     top: 90%;
+     top: 105%;
      opacity: 1;
    }
 }
@@ -80,8 +77,5 @@
 }
 
 .header__logo-title.unlifted {
-   animation: title-lower-and-fade-out 1.2s ease-in-out 1 forwards;
+   animation: title-lower-and-fade-out 0.4s ease-in-out 1 forwards;
 }
-
-
-
