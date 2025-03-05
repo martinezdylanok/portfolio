@@ -20,3 +20,13 @@ export const getProjectByName = async (req: any, res: any) => {
       return res.status(500).json({ message: "Internal server error" });
    }
 };
+
+export const getAllProjects = async (_: any, res: any) => {
+   try {
+      const result = await dbQuery("SELECT * FROM projects");
+      res.json(result.rows);
+   } catch (error) {
+      console.error("Error fetching projects:", error);
+      res.status(500).json({ message: "Internal server error" });
+   }
+};
