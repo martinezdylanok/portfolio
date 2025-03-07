@@ -1,7 +1,7 @@
 import HeaderLogo from "./components/header-logo/HeaderLogo";
 import HeaderNavigation from "./components/header-navigation/HeaderNavigation";
 import HeaderModeSwitcher from "./components/header-mode-switcher/HeaderModeSwitcher";
-import { useThemeContext } from "../../utils/theme-provider/themeProvider";
+import { useThemeContext } from "../../utils/hooks/useTheme";
 
 const Header = () => {
    const { mode } = useThemeContext();
