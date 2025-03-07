@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NAV_ARIA_LABEL_TEXT } from "./data/headerNavigationData";
+import { NAV_ARIA_LABEL_TEXT, BUTTON_ARIA_LABEL_TEXT, SPAN_TEXT, INPUT_ARIA_LABEL_TEXT } from "./data/headerNavigationData";
 import type { Project } from "./data/headerNavigationData";
 import "./styles/custom-ping-animation.css";
 import "./styles/navbar-animations.css";
-import { useThemeContext } from "../../../../utils/theme-provider/themeProvider";
+import { useThemeContext } from "../../../../utils/hooks/useTheme";
 
 const HeaderNavigation = () => {
    const { mode } = useThemeContext();
@@ -97,16 +97,16 @@ const HeaderNavigation = () => {
 
    return (
       <nav className="relative header__navigation" aria-label={NAV_ARIA_LABEL_TEXT}>
-         <div className="flex font-mono gap-1">
-            <button className="font-bold cursor-pointer header__navigation__projects-span" onClick={() => toggleMenu()}>
-               <span className={`${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} header-navigation__projects-span`}>~/documents/Projects $</span>
+         <div className="flex font-mono gap-1 header__navigation-wrapper">
+            <button id="projects-menu-buttom" className="font-bold cursor-pointer header__navigation__projects-button" aria-label={BUTTON_ARIA_LABEL_TEXT} onClick={() => toggleMenu()}>
+               <span className={`${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} header-navigation__projects-span`}>{SPAN_TEXT}</span>
             </button>
             <form className="flex relative header-navigation__projects-form" action="">
-               <input type="text" maxLength={18} ref={inputRef} onChange={handleInputChange()} className="min-w-2.5 w-auto max-w-[13.125rem] caret-transparent outline-none header-navigation__projects-search" />
-               <span ref={cursorRef} className="flex absolute -z-1 w-2.5 h-4 mt-1 rounded-xs custom-ping-animation bg-red-500 header-navigation__projects-cursor-pointer"></span>
+               <input type="text" maxLength={18} ref={inputRef} aria-label={INPUT_ARIA_LABEL_TEXT} onChange={handleInputChange()} className={`min-w-2.5 w-auto max-w-[13.125rem] ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} caret-transparent outline-none header-navigation__projects-search`} />
+               <span ref={cursorRef} aria-hidden="true" className="flex absolute -z-1 w-2.5 h-4 mt-1 rounded-xs custom-ping-animation bg-red-500 header-navigation__projects-cursor-pointer"></span>
             </form>
          </div>
-         <ul className={`hidden absolute left-[-17rem] origin-top font-mono ${mode === "light" ? "bg-[#B6CCFE]" : "bg-[#E2EAFC]"} header-navigation__list ${projectsAreVisible ? "visible" : ""} ${projectsAreClosing ? "closing" : ""}`}>
+         <ul aria-labelledby="projects-menu-buttom" className={`hidden absolute left-[-17rem] origin-top font-mono ${mode === "light" ? "bg-[#B6CCFE]" : "bg-[#E2EAFC]"} header-navigation__list ${projectsAreVisible ? "visible" : ""} ${projectsAreClosing ? "closing" : ""}`}>
             {projects.map((project) => (
                <li key={project.project_id} className={`p-5 ${mode === "light" ? "hover:bg-[#ABC4FF]" : "hover:bg-[#EDF2FB]"} hover:cursor-pointer header-navigation__list-item`}>
                   <a href={`#${project.project_name}`} className={` ${mode === "light" ? "text-[#E2EAFC]" : "text-[#B6CCFE]"} header-navigation__list-link`}>
