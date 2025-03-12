@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root[data-theme="light"] {
+   background-color: #EDF2FB;
+}
+
+:root[data-theme="dark"] {
+   background-color: #ABC4FF;
+}
