@@ -1,4 +1,4 @@
-.projects-list__link:hover .projects-list__text-block p{
+.projects-list__link:hover .projects-list__text-block span {
   filter: blur(2px);
 }
 
