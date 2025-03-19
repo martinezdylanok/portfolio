@@ -1,1 +1,1 @@
-export const CONTACT_FORM_TITLE: string = "Let's talk";
+export const CONTACT_FORM_TITLE: string = "LET'S TALK";
