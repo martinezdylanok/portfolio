@@ -16,31 +16,31 @@ describe("ContactFormSelector tests", () => {
       resetModes();
    });
 
-   test("renders ContactFormSelector element", () => {
+   test("should render ContactFormSelector element", () => {
       render(<ContactFormSelector {...defaultProps} />);
       const element = screen.getByLabelText("Contact form selector");
       expect(element).toBeInTheDocument();
    });
 
-   test("renders ContactFormSelector first element", () => {
+   test("should render ContactFormSelector first element", () => {
       render(<ContactFormSelector {...defaultProps} />);
       const element = screen.getByLabelText("Contact form first selector");
       expect(element).toBeInTheDocument();
    });
 
-   test("renders ContactFormSelector first element's h2 element", () => {
+   test("should render ContactFormSelector first element's h2 element", () => {
       render(<ContactFormSelector {...defaultProps} />);
       const element = screen.getByRole("heading", { name: "CONTACT", level: 2 });
       expect(element).toBeInTheDocument();
    });
 
-   test("renders ContactFormSelector second element", () => {
+   test("should render ContactFormSelector second element", () => {
       render(<ContactFormSelector {...defaultProps} />);
       const element = screen.getByLabelText("Contact form second selector");
       expect(element).toBeInTheDocument();
    });
 
-   test("renders ContactFormSelector second element's h2 element", () => {
+   test("should render ContactFormSelector second element's h2 element", () => {
       render(<ContactFormSelector {...defaultProps} />);
       const element = screen.getByRole("heading", { name: "JOB OFFER", level: 2 });
       expect(element).toBeInTheDocument();
