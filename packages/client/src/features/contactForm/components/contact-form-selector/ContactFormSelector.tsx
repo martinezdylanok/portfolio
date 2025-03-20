@@ -11,14 +11,14 @@ const ContactFormSelector = ({ activeState, activeStateChange }: ContactFormSele
    return (
       <div data-tabs-headline className={`relative grid grid-cols-2 m-5 mb-0 z-1 cursor-pointer ${mode === "light" ? "light" : "dark"} contact-form__selector`} aria-label={CONTACT_FORM_SELECTOR_ARIA_LABEL}>
          <button className={`flex transition-all cursor-pointer duration-500 ease-in-out contact-form__selector-first`} aria-label={CONTACT_FORM_SELECTOR_FIRST_ARIA_LABEL} onClick={() => activeStateChange.handleActiveStateChange("first")}>
-            <span data-is-active={`${activeState.active === "first"}`} className={`text-4xl m-10 font-bold transition-all duration-500 ease-in-out ${colorScheme.text}`}>
+            <h2 data-is-active={`${activeState.active === "first"}`} className={`text-4xl m-10 font-bold transition-all duration-500 ease-in-out ${colorScheme.text}`}>
                {CONTACT_FORM_SELECTOR_FIRST_TEXT}
-            </span>
+            </h2>
          </button>
          <button className={`flex transition-all cursor-pointer duration-500 ease-in-out contact-form__selector-second`} aria-label={CONTACT_FORM_SELECTOR_SECOND_ARIA_LABEL} onClick={() => activeStateChange.handleActiveStateChange("second")}>
-            <span data-is-active={`${activeState.active === "second"}`} className={`text-4xl m-10 font-bold transition-all duration-500 ease-in-out ${colorScheme.text} `}>
+            <h2 data-is-active={`${activeState.active === "second"}`} className={`text-4xl m-10 font-bold transition-all duration-500 ease-in-out ${colorScheme.text} `}>
                {CONTACT_FORM_SELECTOR_SECOND_TEXT}
-            </span>
+            </h2>
          </button>
       </div>
    );
