@@ -15,7 +15,7 @@ describe("ContactFormTitle component tests", () => {
       resetModes();
    });
 
-   test("renders ContactFormTitle element", () => {
+   test("should render ContactFormTitle element", () => {
       render(<ContactFormTitle />);
       const titleElement = screen.getByRole("heading", { name: "LET'S TALK" });
       expect(titleElement).toBeInTheDocument();
