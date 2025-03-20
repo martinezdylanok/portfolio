@@ -1,8 +1,8 @@
-import { CONTACT_FORM_ACTUAL_FORM_ARIA_LABEL, CONTACT_FORM_ACTUAL_FORM_EMAIL_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_MESSAGE_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_NAME_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_PHONE_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_SEND_BUTTON_TEXT, CONTACT_FORM_ACTUAL_FORM_JOB_OFFER_TEXT, ContactFormActualFormProps, colors } from "./data/contactFormActualFormData";
+import { CONTACT_FORM_ACTUAL_FORM_CONTACT_ARIA_LABEL, CONTACT_FORM_ACTUAL_FORM_EMAIL_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_MESSAGE_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_NAME_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_PHONE_PLACEHOLDER, CONTACT_FORM_ACTUAL_FORM_SEND_BUTTON_TEXT, CONTACT_FORM_ACTUAL_FORM_JOB_OFFER_TEXT, ContactFormActualFormProps, colors, CONTACT_FORM_ACTUAL_FORM_JOB_OFFER_ARIA_LABEL } from "./data/contactFormActualFormData";
 import "./styles/contact-form-actual-form-styles.css";
 import { useThemeContext } from "../../../../utils/hooks/useTheme";
 
-// TODO: Split the two divs into separate components with each form.
+// TODO: Split the two divs into separate components with each form displaying depending on the active state.
 const ContactFormActualForm = ({ activeState }: ContactFormActualFormProps) => {
    const { mode } = useThemeContext();
 
@@ -12,7 +12,7 @@ const ContactFormActualForm = ({ activeState }: ContactFormActualFormProps) => {
       <div className={`m-5 mt-0 ${mode === "light" ? "light" : "dark"} contact-form__actual-form-wrapper`}>
          <div className="relative contact-form__actual-forms-container">
             <div className={`contact-form__actual-form-${activeState.active === "first" ? "active" : "inactive"}`}>
-               <form className="contact-form__actual-form-form" aria-label={CONTACT_FORM_ACTUAL_FORM_ARIA_LABEL}>
+               <form className="contact-form__actual-form-form" aria-label={CONTACT_FORM_ACTUAL_FORM_CONTACT_ARIA_LABEL}>
                   <div className="pt-20 pb-20 grid grid-cols-2 gap-y-10">
                      <div className={`ml-10 mr-10 contact-form__actual-form-input-field`}>
                         <label htmlFor="name"></label>
@@ -40,7 +40,7 @@ const ContactFormActualForm = ({ activeState }: ContactFormActualFormProps) => {
             </div>
             <div className={`contact-form__actual-form-${activeState.active === "second" ? "active" : "inactive"}`}>
                <h3 className={`pl-10 pt-10 text-2xl font-bold whitespace-pre-line ${colorScheme.text}`}>{CONTACT_FORM_ACTUAL_FORM_JOB_OFFER_TEXT}</h3>
-               <form className="contact-form__actual-form-form" aria-label={CONTACT_FORM_ACTUAL_FORM_ARIA_LABEL}>
+               <form className="contact-form__actual-form-form" aria-label={CONTACT_FORM_ACTUAL_FORM_JOB_OFFER_ARIA_LABEL}>
                   <div className="pt-20 pb-20 grid grid-cols-2 gap-y-10 contact-form__actual-form-input-fields">
                      <div className={`ml-10 mr-10 contact-form__actual-form-input-field`}>
                         <label htmlFor="name"></label>
