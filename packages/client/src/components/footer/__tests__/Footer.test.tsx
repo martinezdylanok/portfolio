@@ -15,7 +15,7 @@ describe("Footer Component tests", () => {
       resetModes();
    });
 
-   test("render Footer element", () => {
+   test("should render the Footer element", () => {
       render(<Footer />);
       const footerElement = screen.getByRole("contentinfo");
       expect(footerElement).toBeInTheDocument();
