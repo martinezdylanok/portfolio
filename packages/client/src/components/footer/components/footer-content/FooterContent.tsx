@@ -1,12 +1,14 @@
 import FooterContentLogo from "./components/footer-content-logo/FooterContentLogo";
-import FooterContentSocial from "./components/footer-content-social/FooterContentSocial";
+import FooterContentScrollUp from "./components/footer-content-scroll-up/FooterContentScrollUp";
 import { FOOTER_CONTENT_ARIA_LABEL } from "./data/footerContentData";
+import FooterContentLinks from "./components/footer-content-links/FooterContentLinks";
 
 const FooterContent = () => {
    return (
-      <div className="footer__content-container" aria-label={FOOTER_CONTENT_ARIA_LABEL}>
+      <div className="mx-5 grid grid-cols-3 footer__content-container" aria-label={FOOTER_CONTENT_ARIA_LABEL}>
          <FooterContentLogo />
-         <FooterContentSocial />
+         <FooterContentLinks />
+         <FooterContentScrollUp />
       </div>
    );
 };
