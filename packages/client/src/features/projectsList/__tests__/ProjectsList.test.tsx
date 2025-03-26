@@ -54,12 +54,46 @@ describe("ProjectsList component tests", () => {
       expect(projectDetails).toBeInTheDocument();
    });
 
+   test("should render the project details container with the correct order given an odd index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[0];
+      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} details`);
+      expect(projectDetails).toHaveClass("order-1");
+   });
+
+   test("should render the project details container with the correct order given an even index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[1];
+      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} details`);
+      expect(projectDetails).toHaveClass("order-2");
+   });
+
    test("should render the project logo image", async () => {
       render(<ProjectsList />);
       const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
       const firstProject = projectListLi[0];
       const projectLogoImage = within(firstProject).getByAltText("Project logo");
       expect(projectLogoImage).toBeInTheDocument();
+   });
+
+   test("should render the project logo image with the correct order given an odd index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[0];
+      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} details`);
+      const projectLogoImage = within(projectDetails).getByAltText("Project logo");
+      expect(projectLogoImage).toHaveClass("self-start");
+   });
+
+   test("should render the project logo image with the correct order given an even index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[1];
+      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} details`);
+      const projectLogoImage = within(projectDetails).getByAltText("Project logo");
+      expect(projectLogoImage).toHaveClass("self-end");
    });
 
    test("should render the project details elements", async () => {
@@ -80,6 +114,38 @@ describe("ProjectsList component tests", () => {
       const firstProject = projectListLi[0];
       const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} showcase`);
       expect(projectShowcase).toBeInTheDocument();
+   });
+
+   test("should render the project showcase container with the correct order given an odd index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[0];
+      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} showcase`);
+      expect(projectShowcase).toHaveClass("order-2");
+   });
+
+   test("should render the project showcase container with the correct order given an even index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[1];
+      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} showcase`);
+      expect(projectShowcase).toHaveClass("order-1");
+   });
+
+   test("should render the project showcase container with the correct justify content given an odd index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[0];
+      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} showcase`);
+      expect(projectShowcase).toHaveClass("justify-end");
+   });
+
+   test("should render the project showcase container with the correct justify content given an even index number", async () => {
+      render(<ProjectsList />);
+      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
+      const firstProject = projectListLi[1];
+      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} showcase`);
+      expect(projectShowcase).toHaveClass("justify-start");
    });
 
    test("should render the project showcase container image element", async () => {
