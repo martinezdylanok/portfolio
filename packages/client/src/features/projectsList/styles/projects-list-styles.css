@@ -2,7 +2,7 @@
   filter: blur(2px);
 }
 
-.projects-list__link:hover .projects-list__right-side img {
+.projects-list__link:hover .projects-list__second-wrapper img {
   transform: scale(1.1) translateZ(50px) translateY(-25px);
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.25));
 }
