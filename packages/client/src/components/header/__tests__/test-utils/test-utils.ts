@@ -7,7 +7,6 @@ const setupLightMode = () => {
    });
 };
 
-// For testing dark mode
 const setupDarkMode = () => {
    vi.mocked(useThemeContext).mockReturnValue({
       mode: "dark",
@@ -19,4 +18,11 @@ const resetModes = () => {
    vi.resetAllMocks();
 };
 
-export { setupLightMode, setupDarkMode, resetModes };
+const getPageYOffset = () => {
+   Object.defineProperty(window, "pageYOffset", {
+      get: () => 0,
+      configurable: true,
+   });
+};
+
+export { setupLightMode, setupDarkMode, resetModes, getPageYOffset };
