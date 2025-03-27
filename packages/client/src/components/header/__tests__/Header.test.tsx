@@ -41,7 +41,7 @@ describe("Header component tests", () => {
       expect(header).toHaveClass("transform-none");
    });
 
-   test("should render the header with the correct Y position when scrolling", async () => {
+   test("should render the header with the correct Y position after scrolling", async () => {
       render(<Header />);
       const header = screen.getByRole("banner", { name: "Site header" });
       expect(header).toHaveClass("transform-none");
