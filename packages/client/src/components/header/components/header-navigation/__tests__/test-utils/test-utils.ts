@@ -1,4 +1,5 @@
 import { useThemeContext } from "../../../../../../utils/hooks/useTheme";
+import { useState } from "react";
 
 const setupLightMode = () => {
    vi.mocked(useThemeContext).mockReturnValue({
