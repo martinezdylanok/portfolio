@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NAV_ARIA_LABEL_TEXT, BUTTON_ARIA_LABEL_TEXT, SPAN_TEXT, INPUT_ARIA_LABEL_TEXT } from "./data/headerNavigationData";
+import { NAV_ARIA_LABEL_TEXT, WRAPPER_ARIA_LABEL_TEXT, SPAN_TEXT, FORM_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT } from "./data/headerNavigationData";
 import type { Project } from "./data/headerNavigationData";
 import type { HeaderNavigationProps } from "./data/headerNavigationData";
 import "./styles/custom-ping-animation.css";
@@ -88,20 +88,6 @@ const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
       }
    }, [headerIsVisible, projectsAreVisible]);
 
-   const toggleMenu = () => {
-      if (headerIsVisible) {
-         if (!projectsAreVisible) {
-            setProjectsAreVisible(true);
-         } else {
-            setProjectsAreClosing(true);
-            setTimeout(() => {
-               setProjectsAreVisible(false);
-               setProjectsAreClosing(false);
-            }, 500);
-         }
-      }
-   };
-
    const handleInputChange = () => {
       return (event: React.ChangeEvent<HTMLInputElement>) => {
          setInputValue(event.target.value);
@@ -145,24 +131,23 @@ const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
    };
    return (
       <nav className="relative header__navigation" aria-label={NAV_ARIA_LABEL_TEXT}>
-         <div className="flex font-mono gap-1 w-[24.264rem] header__navigation-wrapper">
-            <button id="projects-menu-buttom" className="font-bold cursor-pointer header__navigation__projects-button" aria-label={BUTTON_ARIA_LABEL_TEXT} onClick={() => toggleMenu()}>
-               <span className={`${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} header-navigation__projects-span`}>{SPAN_TEXT}</span>
-            </button>
+         <div className="flex font-mono gap-1 w-[24.264rem] header__navigation-wrapper" aria-label={WRAPPER_ARIA_LABEL_TEXT}>
+            <span className={`font-bold ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} header-navigation__projects-span`}>{SPAN_TEXT}</span>
             <form
                className="flex relative header-navigation__projects-form"
+               aria-label={FORM_ARIA_LABEL_TEXT}
                onSubmit={(event) => {
                   event.preventDefault();
                   executeCommand(inputValue);
                }}
             >
-               <input type="text" maxLength={18} ref={inputRef} aria-label={INPUT_ARIA_LABEL_TEXT} onChange={handleInputChange()} className={`min-w-2.5 w-auto max-w-[13.125rem] ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} caret-transparent outline-none header-navigation__projects-search`} />
-               <span ref={cursorRef} aria-hidden="true" className="flex absolute -z-1 w-2.5 h-4 mt-1 rounded-xs custom-ping-animation bg-red-500 header-navigation__projects-cursor-pointer"></span>
+               <input type="text" maxLength={18} ref={inputRef} aria-label={INPUT_ARIA_LABEL_TEXT} onChange={handleInputChange()} className={`min-w-2.5 w-auto max-w-[13.125rem] text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} caret-transparent outline-none header-navigation__projects-search`} />
+               <span ref={cursorRef} data-testid="cursor-span" aria-hidden="true" className={`flex absolute -z-1 w-2.5 h-4 mt-1 rounded-xs custom-ping-animation bg-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} header-navigation__projects-cursor-pointer`}></span>
             </form>
          </div>
-         <ul aria-labelledby="projects-menu-buttom" className={`hidden absolute left-[-17rem] origin-top font-mono ${mode === "light" ? "bg-[#B6CCFE]" : "bg-[#E2EAFC]"} header-navigation__list ${projectsAreVisible ? "visible" : ""} ${projectsAreClosing ? "closing" : ""}`}>
+         <ul aria-labelledby="projects-menu-button" className={`hidden absolute left-[-17rem] origin-top font-mono ${mode === "light" ? "bg-[#B6CCFE]" : "bg-[#E2EAFC]"} header-navigation__list ${projectsAreVisible ? "visible" : ""} ${projectsAreClosing ? "closing" : ""}`}>
             {projects.map((project) => (
-               <li key={project.project_id} className={`p-5 ${mode === "light" ? "hover:bg-[#ABC4FF]" : "hover:bg-[#EDF2FB]"} hover:cursor-pointer header-navigation__list-item`}>
+               <li key={project.project_id} className={`p-5 hover:bg-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} hover:cursor-pointer header-navigation__list-item`}>
                   <a href={`#${project.project_name}`} className={` ${mode === "light" ? "text-[#E2EAFC]" : "text-[#B6CCFE]"} header-navigation__list-link`}>
                      {project.project_name}
                   </a>
