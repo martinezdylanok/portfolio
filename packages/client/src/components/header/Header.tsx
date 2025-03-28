@@ -43,7 +43,7 @@ const Header = () => {
          `}
       >
          <HeaderLogo />
-         <HeaderNavigation />
+         <HeaderNavigation headerIsVisible={isVisible} />
          <HeaderModeSwitcher />
       </header>
    );
