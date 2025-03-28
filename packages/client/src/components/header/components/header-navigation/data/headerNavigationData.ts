@@ -1,5 +1,6 @@
 const NAV_ARIA_LABEL_TEXT: string = "Main navigation";
-const BUTTON_ARIA_LABEL_TEXT: string = "Toggle projects menu";
+const WRAPPER_ARIA_LABEL_TEXT: string = "Navigation wrapper";
+const FORM_ARIA_LABEL_TEXT: string = "Search projects form";
 const INPUT_ARIA_LABEL_TEXT: string = "Search projects";
 
 interface Project {
@@ -15,6 +16,6 @@ interface HeaderNavigationProps {
    headerIsVisible: boolean;
 }
 
-export { NAV_ARIA_LABEL_TEXT, BUTTON_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT, SPAN_TEXT, COMMANDS_LIST };
+export { NAV_ARIA_LABEL_TEXT, WRAPPER_ARIA_LABEL_TEXT, FORM_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT, SPAN_TEXT, COMMANDS_LIST };
 export type { Project };
 export type { HeaderNavigationProps };
