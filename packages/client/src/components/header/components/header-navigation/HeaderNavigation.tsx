@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NAV_ARIA_LABEL_TEXT, BUTTON_ARIA_LABEL_TEXT, SPAN_TEXT, INPUT_ARIA_LABEL_TEXT } from "./data/headerNavigationData";
 import type { Project } from "./data/headerNavigationData";
+import type { HeaderNavigationProps } from "./data/headerNavigationData";
 import "./styles/custom-ping-animation.css";
 import "./styles/navbar-animations.css";
 import { useThemeContext } from "../../../../utils/hooks/useTheme";
 
-const HeaderNavigation = () => {
+const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
    const { mode } = useThemeContext();
    const [projects, setProjects] = useState<Project[]>([]);
    const [projectsAreVisible, setProjectsAreVisible] = useState(false);
@@ -77,15 +78,27 @@ const HeaderNavigation = () => {
       adjustCursorPosition();
    }, [inputValue]);
 
-   const toggleMenu = () => {
-      if (projectsAreVisible) {
+   useEffect(() => {
+      if (!headerIsVisible && projectsAreVisible) {
          setProjectsAreClosing(true);
          setTimeout(() => {
             setProjectsAreVisible(false);
             setProjectsAreClosing(false);
          }, 500);
-      } else {
-         setProjectsAreVisible(true);
+      }
+   }, [headerIsVisible, projectsAreVisible]);
+
+   const toggleMenu = () => {
+      if (headerIsVisible) {
+         if (!projectsAreVisible) {
+            setProjectsAreVisible(true);
+         } else {
+            setProjectsAreClosing(true);
+            setTimeout(() => {
+               setProjectsAreVisible(false);
+               setProjectsAreClosing(false);
+            }, 500);
+         }
       }
    };
 
@@ -95,13 +108,54 @@ const HeaderNavigation = () => {
       };
    };
 
+   const executeCommand = (command: string) => {
+      const normalizedCommand = command.trim().toLowerCase();
+
+      switch (normalizedCommand) {
+         case "ls":
+            setProjectsAreVisible(true);
+            break;
+         case "exit":
+            setProjectsAreClosing(true);
+            setTimeout(() => {
+               setProjectsAreVisible(false);
+               setProjectsAreClosing(false);
+            }, 500);
+            break;
+         default:
+            if (normalizedCommand.startsWith("cd")) {
+               const projectName = normalizedCommand.substring(3).trim().toLocaleLowerCase();
+               if (projectName.length >= 4) {
+                  const matchingProject = projects.find((project) => project.project_name.toLowerCase().includes(projectName));
+
+                  if (matchingProject) {
+                     window.location.href = `#${matchingProject.project_name}`;
+                     setProjectsAreVisible(false);
+                  } else {
+                     console.error(`Project "${projectName}" not found`);
+                  }
+               } else {
+                  console.error("Project name must be at least 4 characters long");
+               }
+            } else if (normalizedCommand && normalizedCommand !== "") {
+               console.error(`Command "${normalizedCommand}" not found`);
+            }
+            break;
+      }
+   };
    return (
       <nav className="relative header__navigation" aria-label={NAV_ARIA_LABEL_TEXT}>
-         <div className="flex font-mono gap-1 header__navigation-wrapper">
+         <div className="flex font-mono gap-1 w-[24.264rem] header__navigation-wrapper">
             <button id="projects-menu-buttom" className="font-bold cursor-pointer header__navigation__projects-button" aria-label={BUTTON_ARIA_LABEL_TEXT} onClick={() => toggleMenu()}>
                <span className={`${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} header-navigation__projects-span`}>{SPAN_TEXT}</span>
             </button>
-            <form className="flex relative header-navigation__projects-form" action="">
+            <form
+               className="flex relative header-navigation__projects-form"
+               onSubmit={(event) => {
+                  event.preventDefault();
+                  executeCommand(inputValue);
+               }}
+            >
                <input type="text" maxLength={18} ref={inputRef} aria-label={INPUT_ARIA_LABEL_TEXT} onChange={handleInputChange()} className={`min-w-2.5 w-auto max-w-[13.125rem] ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} caret-transparent outline-none header-navigation__projects-search`} />
                <span ref={cursorRef} aria-hidden="true" className="flex absolute -z-1 w-2.5 h-4 mt-1 rounded-xs custom-ping-animation bg-red-500 header-navigation__projects-cursor-pointer"></span>
             </form>
