@@ -9,5 +9,12 @@ interface Project {
 
 const SPAN_TEXT: string = "~/documents/Projects $";
 
-export { NAV_ARIA_LABEL_TEXT, BUTTON_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT, SPAN_TEXT };
+const COMMANDS_LIST: string[] = ["ls", "cd"];
+
+interface HeaderNavigationProps {
+   headerIsVisible: boolean;
+}
+
+export { NAV_ARIA_LABEL_TEXT, BUTTON_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT, SPAN_TEXT, COMMANDS_LIST };
 export type { Project };
+export type { HeaderNavigationProps };
