@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="12.025"
+   viewBox="0 -960 651.99997 480.99998"
+   width="16.299999"
+   fill="#edf2fb"
+   version="1.1"
+   id="svg796"
+   sodipodi:docname="check_icon_dark_mode.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs800" />
+  <sodipodi:namedview
+     id="namedview798"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="33.541667"
+     inkscape:cx="8.1540373"
+     inkscape:cy="6.0372671"
+     inkscape:window-width="1854"
+     inkscape:window-height="1011"
+     inkscape:window-x="66"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg796" />
+  <path
+     d="M 228,-479 0,-707 l 57,-57 171,171 367,-367 57,57 z"
+     id="path794"
+     style="fill:#abc4ff;fill-opacity:1" />
+</svg>
