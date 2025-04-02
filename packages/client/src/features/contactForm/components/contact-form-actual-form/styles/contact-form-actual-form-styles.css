@@ -50,25 +50,50 @@
    opacity: 1;
 }
 
-.contact-form__actual-form-input-field input.light:hover,
+.contact-form__actual-form-input-field input.light:not(.hasErrors):hover,
 .contact-form__actual-form-input-field textarea.light:hover {
    border-bottom: #ABC4FF 1px solid;
 }
 
-.contact-form__actual-form-input-field input.light:focus,
+.contact-form__actual-form-input-field input.light.hasErrors:hover {
+   border-bottom: 1px solid #FF0000;
+}
+
+.contact-form__actual-form-input-field input.light:not(.hasErrors):focus,
 .contact-form__actual-form-input-field textarea.light:focus {
    border-bottom: #ABC4FF 1px solid;
    opacity: 1;
 }
 
-.contact-form__actual-form-input-field input.dark:hover,
+.contact-form__actual-form-input-field input.light.hasErrors:focus {
+   border-bottom: 1px solid #FF0000;
+}
+
+.contact-form__actual-form-input-field input.light.hasErrors {
+   border-bottom: 1px solid #ff000040;
+}
+
+.contact-form__actual-form-input-field input.dark:not(.hasErrors):hover,
 .contact-form__actual-form-input-field textarea.dark:hover {
    border-bottom: #EDF2FB 1px solid;
 }
 
-.contact-form__actual-form-input-field input.dark:focus,
+.contact-form__actual-form-input-field input.dark.hasErrors:hover {
+   border-bottom: 1px solid #FF0000;
+}
+
+.contact-form__actual-form-input-field input.dark:not(.hasErrors):focus,
 .contact-form__actual-form-input-field textarea.dark:focus {
    border-bottom: #EDF2FB 1px solid;
+   opacity: 1;
+}
+
+.contact-form__actual-form-input-field input.dark.hasErrors:focus {
+   border-bottom: 1px solid #FF0000;
+}
+
+.contact-form__actual-form-input-field input.dark.hasErrors {
+   border-bottom: 1px solid #ff000040;
    opacity: 1;
 }
 
