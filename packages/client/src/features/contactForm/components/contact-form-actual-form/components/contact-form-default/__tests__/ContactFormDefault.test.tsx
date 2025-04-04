@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import ContactFormDefault from "../ContactFormDefault";
 import { setupLightMode, resetModes, user } from "./test-utils/testUtils";
 
-describe("ContactFormActualForm tests", () => {
+describe("ContactFormForm tests", () => {
    beforeAll(() => {
       vi.mock("../../../../../../../utils/hooks/useTheme");
    });
