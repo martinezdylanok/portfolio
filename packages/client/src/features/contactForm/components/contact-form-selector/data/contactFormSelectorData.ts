@@ -14,8 +14,8 @@ const colors = {
 };
 
 export interface ContactFormSelectorProps {
-   activeState: { active: "first" | "second" };
-   activeStateChange: { handleActiveStateChange: (newActiveState: "first" | "second") => void };
+   activeForm: "firstForm" | "secondForm";
+   handleActiveFormUpdate: (newActiveForm: "firstForm" | "secondForm") => void;
 }
 
 export { CONTACT_FORM_SELECTOR_ARIA_LABEL, CONTACT_FORM_SELECTOR_FIRST_ARIA_LABEL, CONTACT_FORM_SELECTOR_SECOND_ARIA_LABEL, CONTACT_FORM_SELECTOR_FIRST_TEXT, CONTACT_FORM_SELECTOR_SECOND_TEXT, colors };
