@@ -20,8 +20,4 @@ const resetModes = () => {
 
 const mockHandleActiveStateChange = vi.fn();
 
-const defaultProps = {
-   activeState: { active: "first" as const },
-};
-
-export { setupLightMode, setupDarkMode, resetModes, mockHandleActiveStateChange, defaultProps };
+export { setupLightMode, setupDarkMode, resetModes, mockHandleActiveStateChange };
