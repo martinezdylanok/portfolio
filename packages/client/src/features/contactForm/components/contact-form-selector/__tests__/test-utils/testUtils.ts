@@ -1,4 +1,5 @@
 import { useThemeContext } from "../../../../../../utils/hooks/useTheme";
+import userEvent from "@testing-library/user-event";
 
 const setupLightMode = () => {
    vi.mocked(useThemeContext).mockReturnValue({
@@ -20,9 +21,6 @@ const resetModes = () => {
 
 const mockHandleActiveStateChange = vi.fn();
 
-const defaultProps = {
-   activeState: { active: "first" as const },
-   activeStateChange: { handleActiveStateChange: mockHandleActiveStateChange },
-};
+const user = userEvent.setup();
 
-export { setupLightMode, setupDarkMode, resetModes, mockHandleActiveStateChange, defaultProps };
+export { setupLightMode, setupDarkMode, resetModes, mockHandleActiveStateChange, user };
