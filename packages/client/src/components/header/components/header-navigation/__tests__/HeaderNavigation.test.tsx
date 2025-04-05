@@ -2,7 +2,6 @@ import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import HeaderNavigation from "../HeaderNavigation";
 import { NAV_ARIA_LABEL_TEXT, WRAPPER_ARIA_LABEL_TEXT, SPAN_TEXT, FORM_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT } from "../data/headerNavigationData";
 import { setupLightMode, resetModes, setupDarkMode, mockProjects } from "./test-utils/test-utils";
-import userEvent from "@testing-library/user-event";
 
 describe("HeaderNavigation Component tests", () => {
    const isVisible = true;
