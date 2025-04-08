@@ -12,7 +12,7 @@ const ProjectsList = () => {
    useEffect(() => {
       const fetchProjects = async () => {
          try {
-            const response = await fetch("http://localhost:3000/projects"); // TODO: Simplify this URL
+            const response = await fetch("http://localhost:3000/api/projects"); // TODO: Simplify this URL
             if (!response.ok) {
                throw new Error("Failed to fetch projects");
             }
