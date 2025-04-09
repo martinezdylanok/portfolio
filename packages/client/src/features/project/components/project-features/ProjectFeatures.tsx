@@ -1,10 +1,10 @@
 import ProjectFeaturesContainer from "./components/project-features-container/ProjectFeaturesContainer";
-import { PROJECT_FEATURES_ARIA_LABEL } from "./data/projectFeaturesData";
+import { PROJECT_FEATURES_ARIA_LABEL, ProjectFeaturesProps } from "./data/projectFeaturesData";
 
-const ProjectFeatures = () => {
+const ProjectFeatures = ({ project }: ProjectFeaturesProps) => {
    return (
       <section className="project__features" aria-label={PROJECT_FEATURES_ARIA_LABEL}>
-         <ProjectFeaturesContainer />
+         <ProjectFeaturesContainer project={project} />
       </section>
    );
 };
