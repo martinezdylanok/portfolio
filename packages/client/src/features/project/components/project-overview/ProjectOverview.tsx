@@ -1,10 +1,10 @@
 import ProjectOverviewContainer from "./components/project-overview-container/ProjectOverviewContainer";
-import { PROJECT_OVERVIEW_ARIA_LABEL } from "./data/projectOverviewData";
+import { PROJECT_OVERVIEW_ARIA_LABEL, ProjectOverviewProps } from "./data/projectOverviewData";
 
-const ProjectOverview = () => {
+const ProjectOverview = ({ project }: ProjectOverviewProps) => {
    return (
       <section className="project__overview" aria-label={PROJECT_OVERVIEW_ARIA_LABEL}>
-         <ProjectOverviewContainer />
+         <ProjectOverviewContainer project={project} />
       </section>
    );
 };
