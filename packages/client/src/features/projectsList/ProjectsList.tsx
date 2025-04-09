@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router";
 import { useThemeContext } from "../../utils/hooks/useTheme";
 import { DUMMY_LOGO_IMAGE_URL, DUMMY_LOGO_IMAGE_URL_1, PROJECTS_LIST_CONTAINER_ARIA_LABEL_TEXT, PROJECT_LOGO_ALT_TEXT, PROJECT_SHOWCASE_IMAGE_ALT_TEXT, Project } from "./data/projectsListData";
 import "./styles/projects-list-styles.css";
@@ -33,8 +34,8 @@ const ProjectsList = () => {
                {projects.map((project, index) => {
                   const isOddProject = isOdd(index); /*TODO: MAKE THIS LOGIC POSSIBLE WITH PROPS FOR SUB-COMPONENTS*/
                   return (
-                     /* TODO: if a can handle keys like this, also refactor this li element to be a sub-component */
-                     <a key={project.project_id} className="projects-list__link" href={`/projects/${project.project_name}`} aria-label={`View ${project.project_name}`}>
+                     /* REFACTOR: this li element to be a sub-component */
+                     <Link key={project.project_id} className="projects-list__link" to={`/projects/${project.project_name}`} aria-label={`View ${project.project_name}`}>
                         <li className={`grid grid-cols-2 p-10 min-h-screen border-0 rounded-xs transition duration-500 ease-in-out ${mode === "light" ? "bg-[#D7E3FC] hover:bg-[#CCDBFD]" : "bg-[#C1D3FE] hover:bg-[#CCDBFD]"} projects-list__list-item`}>
                            <div className={`flex flex-col justify-between ${isOddProject ? "order-2" : "order-1"} projects-list__first-wrapper`} aria-label={`Project ${project.project_name} details`}>
                               <img src={DUMMY_LOGO_IMAGE_URL_1} className={`size-[5.938rem] ${isOddProject ? "self-end" : "self-start"}`} alt={PROJECT_LOGO_ALT_TEXT} />
@@ -48,7 +49,7 @@ const ProjectsList = () => {
                               <img src={DUMMY_LOGO_IMAGE_URL} className="size-[30rem] transition-all duration-800" alt={PROJECT_SHOWCASE_IMAGE_ALT_TEXT} />
                            </div>
                         </li>
-                     </a>
+                     </Link>
                   );
                })}
                ;
