@@ -3,7 +3,7 @@ import { PROJECT_MAIN_COVER_ARIA_LABEL, ProjectMainCoverProps } from "./data/pro
 
 const ProjectMainCover = ({ project }: ProjectMainCoverProps) => {
    return (
-      <section className="project__main-cover" aria-label={PROJECT_MAIN_COVER_ARIA_LABEL}>
+      <section className="max-w-[80%] mx-auto mb-50 project__main-cover" aria-label={PROJECT_MAIN_COVER_ARIA_LABEL}>
          <ProjectMainCoverContainer project={project} />
       </section>
    );
