@@ -13,7 +13,7 @@ const ProjectMainCoverContent = ({ project }: ProjectMainCoverContentProps) => {
    return (
       <div className="max-w-1/2 main-cover__content" aria-label={PROJECT_MAIN_COVER_CONTENT_ARIA_LABEL}>
          {secondPart && <h2 className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} mb-6`}>{secondPart}</h2>}
-         <h3 className={`text-8xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} font-bold mb-12 main-cover__project-title`}>{firstPart}</h3>
+         <h2 className={`text-8xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} font-bold mb-12 main-cover__project-title`}>{firstPart}</h2>
          <p className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} text-left main-cover__project-description`}>{project.project_description}</p>
       </div>
    );
