@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NAV_ARIA_LABEL_TEXT, WRAPPER_ARIA_LABEL_TEXT, SPAN_TEXT, FORM_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT } from "./data/headerNavigationData";
-import type { Project } from "./data/headerNavigationData";
-import type { HeaderNavigationProps } from "./data/headerNavigationData";
+import type { ProjectInterface, HeaderNavigationProps } from "./data/headerNavigationData";
 import "./styles/custom-ping-animation.css";
 import "./styles/navbar-animations.css";
 import { useThemeContext } from "../../../../utils/hooks/useTheme";
 
 const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
    const { mode } = useThemeContext();
-   const [projects, setProjects] = useState<Project[]>([]);
+   const [projects, setProjects] = useState<ProjectInterface[]>([]);
    const [projectsAreVisible, setProjectsAreVisible] = useState(false);
    const [projectsAreClosing, setProjectsAreClosing] = useState(false);
    const [inputValue, setInputValue] = useState("");
@@ -18,14 +17,21 @@ const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
    useEffect(() => {
       const fetchProjects = async () => {
          try {
-            const response = await fetch("http://localhost:3000/projects"); // TODO: Simplify this URL
+            const response = await fetch("http://localhost:3000/api/projects/");
+
             if (!response.ok) {
-               throw new Error("Failed to fetch projects");
+               throw new Error(`Failed to fetch projects: ${response.status}`);
             }
-            const data: Project[] = await response.json();
-            setProjects(data);
+
+            const projectsData = await response.json();
+
+            if (projectsData && projectsData.success && Array.isArray(projectsData.data)) {
+               setProjects(projectsData.data);
+            } else {
+               console.error("Unexpected API response format:", projectsData);
+            }
          } catch (error) {
-            console.error("Eror fetching projects: ", error);
+            console.error("Error fetching projects:", error);
          }
       };
 
