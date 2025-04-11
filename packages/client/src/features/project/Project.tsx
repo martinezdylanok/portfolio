@@ -26,7 +26,7 @@ const Project = () => {
          }
 
          try {
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            // await new Promise((resolve) => setTimeout(resolve, 2000));
 
             const response = await fetch(`http://localhost:3000/api/projects/${projectName}`);
 
@@ -65,7 +65,7 @@ const Project = () => {
    }
 
    return (
-      <div className="project__container" aria-label={PROJECT_ARIA_LABEL}>
+      <div className="pt-25 project__container" aria-label={PROJECT_ARIA_LABEL}>
          <ProjectMainCover project={project} />
          <ProjectOverview project={project} />
          <ProjectFeatures project={project} />
