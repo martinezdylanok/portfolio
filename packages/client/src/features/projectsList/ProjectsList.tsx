@@ -1,24 +1,30 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { useThemeContext } from "../../utils/hooks/useTheme";
-import { DUMMY_LOGO_IMAGE_URL, DUMMY_LOGO_IMAGE_URL_1, PROJECTS_LIST_CONTAINER_ARIA_LABEL_TEXT, PROJECT_LOGO_ALT_TEXT, PROJECT_SHOWCASE_IMAGE_ALT_TEXT, Project } from "./data/projectsListData";
+import { DUMMY_LOGO_IMAGE_URL, DUMMY_LOGO_IMAGE_URL_1, PROJECTS_LIST_CONTAINER_ARIA_LABEL_TEXT, PROJECT_LOGO_ALT_TEXT, PROJECT_SHOWCASE_IMAGE_ALT_TEXT } from "./data/projectsListData";
 import "./styles/projects-list-styles.css";
 import { isOdd } from "./data/isOdd";
+import type { ProjectInterface } from "./data/projectsListData";
 
 const ProjectsList = () => {
    const { mode } = useThemeContext();
-   const [projects, setProjects] = useState<Project[]>([]);
+   const [projects, setProjects] = useState<ProjectInterface[]>([]);
 
    /* REFACTOR: into a React hook, HeaderNavigation also uses it */
    useEffect(() => {
       const fetchProjects = async () => {
          try {
             const response = await fetch("http://localhost:3000/api/projects"); // TODO: Simplify this URL
+
             if (!response.ok) {
-               throw new Error("Failed to fetch projects");
+               throw new Error(`Failed to fetch projects: ${response.status}`);
             }
-            const project: Project[] = await response.json();
-            setProjects(project);
+            const projectsData = await response.json();
+            if (projectsData && projectsData.success && Array.isArray(projectsData.data)) {
+               setProjects(projectsData.data);
+            } else {
+               console.error("Unexpected API response format:", projectsData);
+            }
          } catch (error) {
             console.error("Eror fetching projects: ", error);
          }
@@ -52,7 +58,6 @@ const ProjectsList = () => {
                      </Link>
                   );
                })}
-               ;
             </ul>
          </div>
       </main>
