@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
+import { useThemeContext } from "../../utils/hooks/useTheme";
 import ProjectFeatures from "./components/project-features/ProjectFeatures";
 import ProjectMainCover from "./components/project-main-cover/ProjectMainCover";
 import ProjectOverview from "./components/project-overview/ProjectOverview";
@@ -10,6 +11,7 @@ import type { ProjectInterface } from "./data/projectData";
 
 const Project = () => {
    const { projectName } = useParams();
+   const { mode } = useThemeContext();
    const [project, setProject] = useState<ProjectInterface | null>(null);
    const [loading, setLoading] = useState(true);
 
@@ -18,7 +20,14 @@ const Project = () => {
       setLoading(true);
 
       const fetchProjects = async () => {
+         if (!projectName) {
+            setLoading(false);
+            return;
+         }
+
          try {
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+
             const response = await fetch(`http://localhost:3000/api/projects/${projectName}`);
 
             if (!response.ok) {
@@ -27,12 +36,16 @@ const Project = () => {
                   setLoading(false);
                   return;
                }
-
-               throw new Error(`Failed to fetch project: ${response.status}`);
             }
 
             const projectData = await response.json();
-            setProject(projectData);
+            if (projectData && projectData.success && projectData.data) {
+               setProject(projectData.data);
+            } else {
+               console.error("Unexpected API response format:", projectData);
+
+               setProject(null);
+            }
          } catch (error) {
             console.error("Error fetching projects:", error);
          } finally {
@@ -44,11 +57,11 @@ const Project = () => {
    }, [projectName]);
 
    if (loading) {
-      return <div>Loading project...</div>;
+      return <div className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>Loading project...</div>;
    }
 
    if (!project) {
-      return <div>Project not found</div>;
+      return <div className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>404 ERROR: PROJECT NOT FOUND</div>;
    }
 
    return (
