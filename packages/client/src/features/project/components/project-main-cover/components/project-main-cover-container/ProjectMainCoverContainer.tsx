@@ -4,7 +4,7 @@ import { PROJECT_MAIN_COVER_CONTAINER_ARIA_LABEL, ProjectMainCoverContainerProps
 
 const ProjectMainCoverContainer = ({ project }: ProjectMainCoverContainerProps) => {
    return (
-      <div className="main-cover__container" aria-label={PROJECT_MAIN_COVER_CONTAINER_ARIA_LABEL}>
+      <div className="flex main-cover__container" aria-label={PROJECT_MAIN_COVER_CONTAINER_ARIA_LABEL}>
          <ProjectMainCoverContent project={project} />
          <ProjectMainCoverLogos />
       </div>
