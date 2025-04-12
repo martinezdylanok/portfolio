@@ -1,5 +1,5 @@
 const PROJECT_RESULTS_CONTENT_ARIA_LABEL: string = "Project results content";
-const PROJECT_RESULTS_CONTENT_TITLE: string = "Final results";
+const PROJECT_RESULTS_CONTENT_TITLE: string = "FINAL RESULTS";
 
 interface ProjectInterface {
    project_id: number;
