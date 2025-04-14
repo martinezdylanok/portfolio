@@ -4,7 +4,7 @@ import { PROJECT_RELATED_CONTAINER_ARIA_LABEL } from "./data/projectRelatedConta
 
 const ProjectRelatedContainer = () => {
    return (
-      <div className="project__related-container" aria-label={PROJECT_RELATED_CONTAINER_ARIA_LABEL}>
+      <div className="max-w-[80%] mx-auto pt-25 project__related-container" aria-label={PROJECT_RELATED_CONTAINER_ARIA_LABEL}>
          <ProjectRelatedContainerContent />
          <ProjectRelatedContainerVideos />
       </div>
