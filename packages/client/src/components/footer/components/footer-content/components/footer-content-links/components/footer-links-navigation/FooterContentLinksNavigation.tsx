@@ -1,5 +1,5 @@
 import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
-import { FOOTER_CONTENT_LINKS_NAVIGATION__ARIA_LABEL, FOOTER_CONTENT_LINKS_NAVIGATION__SPAN_TEXT, FOOTER_CONTENT_LINKS_NAVIGATION__LINKS } from "./data/footerContentLinksNavigationData";
+import { FOOTER_CONTENT_LINKS_NAVIGATION__ARIA_LABEL, FOOTER_CONTENT_LINKS_NAVIGATION__LINKS, FOOTER_CONTENT_LINKS_NAVIGATION__SPAN_TEXT } from "./data/footerContentLinksNavigationData";
 
 const FooterContentLinksSocial = () => {
    const { mode } = useThemeContext();
