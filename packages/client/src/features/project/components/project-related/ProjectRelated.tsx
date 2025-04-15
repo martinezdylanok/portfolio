@@ -9,7 +9,7 @@ const ProjectRelated = () => {
    const bgColors = mode === "light" ? "bg-[#D7E3FC]" : "bg-[#C1D3FE]";
 
    return (
-      <section className={`h-96 mb-50 ${bgColors} project__related`} aria-label={PROJECT_RELATED_ARIA_LABEL}>
+      <section className={`mb-50 ${bgColors} project__related`} aria-label={PROJECT_RELATED_ARIA_LABEL}>
          <ProjectRelatedContainer />
       </section>
    );
