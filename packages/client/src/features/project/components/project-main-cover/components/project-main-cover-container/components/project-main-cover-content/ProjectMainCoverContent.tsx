@@ -1,5 +1,5 @@
-import { PROJECT_MAIN_COVER_CONTENT_ARIA_LABEL, ProjectMainCoverContentProps } from "./data/projectMainCoverContentData";
 import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
+import { PROJECT_MAIN_COVER_CONTENT_ARIA_LABEL, ProjectMainCoverContentProps } from "./data/projectMainCoverContentData";
 
 const ProjectMainCoverContent = ({ project }: ProjectMainCoverContentProps) => {
    const { mode } = useThemeContext();
