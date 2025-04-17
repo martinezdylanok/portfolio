@@ -57,4 +57,5 @@ const mockProjects = [
    },
 ];
 
-export { setupLightMode, setupDarkMode, resetModes, mockProjects };
+export { mockProjects, resetModes, setupDarkMode, setupLightMode };
+
