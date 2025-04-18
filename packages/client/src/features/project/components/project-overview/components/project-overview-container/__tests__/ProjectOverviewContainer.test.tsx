@@ -14,9 +14,10 @@ describe("ProjectOverviewContainer tests", () => {
    afterAll(() => {
       resetModes();
    });
+
    test("renders ProjectOverviewContainer element", () => {
       render(<ProjectOverviewContainer project={mockProjects[0]} />);
-      const ProjectOverviewContainerElement = screen.getByLabelText("Overview container");
-      expect(ProjectOverviewContainerElement).toBeInTheDocument();
+      const projectOverviewContainer = screen.getByLabelText("Overview container");
+      expect(projectOverviewContainer).toBeInTheDocument();
    });
 });
