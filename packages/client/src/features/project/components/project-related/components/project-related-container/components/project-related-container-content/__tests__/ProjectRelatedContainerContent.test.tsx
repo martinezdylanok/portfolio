@@ -1,22 +1,71 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import ProjectRelatedContainerContent from "../ProjectRelatedContainerContent";
+import { resetModes, setupLightMode } from "./test-utils/testUtils";
 
 describe("ProjectRelatedContainerContent tests", () => {
+   beforeAll(() => {
+      vi.mock("../../../../../../../../../utils/hooks/useTheme.tsx");
+   });
+
+   beforeEach(() => {
+      setupLightMode();
+   });
+
+   afterAll(() => {
+      resetModes();
+   });
+
    test("renders ProjectRelatedContainerContent element", () => {
-      render(<ProjectRelatedContainerContent />);
-      const element = screen.getByLabelText("Related projects container content");
-      expect(element).toBeInTheDocument();
+      render(
+         <MemoryRouter>
+            <ProjectRelatedContainerContent />
+         </MemoryRouter>,
+      );
+      const relatedContainerContent = screen.getByLabelText("Related projects container content");
+      expect(relatedContainerContent).toBeInTheDocument();
    });
 
    test("renders ProjectRelatedContainerContent title", () => {
-      render(<ProjectRelatedContainerContent />);
-      const title = screen.getByRole("heading", { level: 2, name: "Other projects" });
-      expect(title).toBeInTheDocument();
+      render(
+         <MemoryRouter>
+            <ProjectRelatedContainerContent />
+         </MemoryRouter>,
+      );
+      const relatedContainerContentTitle = screen.getByRole("heading");
+      expect(relatedContainerContentTitle).toHaveTextContent("OTHER ADVENTURES");
+      expect(relatedContainerContentTitle).toBeInTheDocument();
+   });
+
+   test("renders ProjectRelatedContainerContent link", () => {
+      render(
+         <MemoryRouter>
+            <ProjectRelatedContainerContent />
+         </MemoryRouter>,
+      );
+      expect(screen.getByLabelText("See all projects")).toBeInTheDocument();
    });
 
    test("renders ProjectRelatedContainerContent subtitle", () => {
-      render(<ProjectRelatedContainerContent />);
-      const subtitle = screen.getByRole("heading", { level: 3, name: "See all" });
-      expect(subtitle).toBeInTheDocument();
+      render(
+         <MemoryRouter>
+            <ProjectRelatedContainerContent />
+         </MemoryRouter>,
+      );
+      const relatedContainerContentLink = screen.getByLabelText("See all projects");
+      const relatedContainerContentSubtitle = screen.getByText("See all projects");
+      expect(relatedContainerContentLink).toContainElement(relatedContainerContentSubtitle);
+   });
+
+   test("renders ProjectRelatedContainerContent subtitle underline with aria-hidden property", () => {
+      render(
+         <MemoryRouter>
+            <ProjectRelatedContainerContent />
+         </MemoryRouter>,
+      );
+
+      const relatedContainerContentSubtitle = screen.getByText("See all projects");
+      const relatedContainerContentUnderline = relatedContainerContentSubtitle.querySelector('span[aria-hidden="true"]') as HTMLElement | null;
+      expect(relatedContainerContentSubtitle).toContainElement(relatedContainerContentUnderline);
    });
 });
