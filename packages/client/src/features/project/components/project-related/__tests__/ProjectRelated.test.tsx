@@ -1,10 +1,29 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import ProjectRelated from "../ProjectRelated";
+import { resetModes, setupLightMode } from "./test-utils/testUtils";
 
 describe("ProjectRelated component tests", () => {
-   test("renders ProjectRelated element", () => {
-      render(<ProjectRelated />);
-      const element = screen.getByLabelText("Related projects");
-      expect(element).toBeInTheDocument();
+   beforeAll(() => {
+      vi.mock("../../../../../utils/hooks/useTheme.tsx");
+   });
+
+   beforeEach(() => {
+      setupLightMode();
+   });
+
+   afterAll(() => {
+      resetModes();
+   });
+
+   test("renders ProjectRelated container element", () => {
+      render(
+         <MemoryRouter>
+            <ProjectRelated />;
+         </MemoryRouter>,
+      );
+
+      const relatedContainer = screen.getByLabelText("Related projects");
+      expect(relatedContainer).toBeInTheDocument();
    });
 });
