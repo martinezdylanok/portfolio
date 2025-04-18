@@ -23,7 +23,7 @@ describe("ProjectRelated component tests", () => {
          </MemoryRouter>,
       );
 
-      const relatedContainer = screen.getByLabelText("Related projects");
-      expect(relatedContainer).toBeInTheDocument();
+      const relatedElement = screen.getByLabelText("Related projects");
+      expect(relatedElement).toBeInTheDocument();
    });
 });
