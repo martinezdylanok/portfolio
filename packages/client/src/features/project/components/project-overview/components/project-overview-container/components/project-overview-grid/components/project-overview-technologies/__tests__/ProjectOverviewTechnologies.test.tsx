@@ -17,8 +17,8 @@ describe("ProjectOverviewTechnologies tests", () => {
 
    test("renders ProjectOverviewTechnoligies element", () => {
       render(<ProjectOverviewTechnologies project={mockProjects[0]} />);
-      const element = screen.getByLabelText("Project overview technologies");
-      expect(element).toBeInTheDocument();
+      const projectOverviewTechnologies = screen.getByLabelText("Project overview technologies");
+      expect(projectOverviewTechnologies).toBeInTheDocument();
    });
 
    test("renders ProjectOverviewTechnoligies title element", () => {
