@@ -1,4 +1,6 @@
 export const PROJECT_FEATURES_CONTAINER_ARIA_LABEL: string = "Features container";
+export const PROJECT_FEATURES_CONTAINER_TITLE_TEXT: string = "FEATURES & ITS CHALLENGES";
+export const PROJECT_FEATURES_CONTAINER_IMG_ALT_LABEL: string = "Projects showcase video";
 
 interface ProjectInterface {
    project_id: number;
