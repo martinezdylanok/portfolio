@@ -1,4 +1,5 @@
 export const PROJECT_OVERVIEW_CONTENT_ARIA_LABEL: string = "Project overview content";
+export const PROJECT_OVERVIEW_CONTENT_TITLE_TEXT: string = "OVERVIEW";
 
 // REFACTOR: Make this interface to be used globally so there is no need to declare it locally.
 
