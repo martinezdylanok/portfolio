@@ -1,22 +1,35 @@
 import { render, screen } from "@testing-library/react";
 import ProjectOverviewContent from "../ProjectOverviewContent";
+import { mockProjects, resetModes, setupLightMode } from "./data-utils/dataUtilts";
 
 describe("ProjectOverviewContent tests", () => {
+   beforeAll(() => {
+      vi.mock("../../../../../../../../../utils/hooks/useTheme.tsx");
+   });
+
+   beforeEach(() => {
+      setupLightMode();
+   });
+
+   afterAll(() => {
+      resetModes();
+   });
+
    test("renders ProjectOverviewContent element", () => {
-      render(<ProjectOverviewContent />);
-      const ProjectOverviewElement = screen.getByLabelText("Project overview content");
-      expect(ProjectOverviewElement).toBeInTheDocument();
+      render(<ProjectOverviewContent project={mockProjects[0]} />);
+      const projectOverviewContent = screen.getByLabelText("Project overview content");
+      expect(projectOverviewContent).toBeInTheDocument();
    });
 
    test("renders Project overview subtitle", () => {
-      render(<ProjectOverviewContent />);
-      const ProjectOverviewSubtitle = screen.getByRole("heading", { level: 2 });
-      expect(ProjectOverviewSubtitle).toBeInTheDocument();
+      render(<ProjectOverviewContent project={mockProjects[0]} />);
+      const overviewTitle = screen.getByRole("heading");
+      expect(overviewTitle).toHaveTextContent("OVERVIEW");
+      expect(overviewTitle).toBeInTheDocument();
    });
 
    test("renders Project overview paragraph", () => {
-      render(<ProjectOverviewContent />);
-      const ProjectOverviewParagraph = screen.getByRole("paragraph");
-      expect(ProjectOverviewParagraph).toBeInTheDocument();
+      render(<ProjectOverviewContent project={mockProjects[0]} />);
+      expect(screen.getByText(mockProjects[0].project_overview_description)).toBeInTheDocument();
    });
 });
