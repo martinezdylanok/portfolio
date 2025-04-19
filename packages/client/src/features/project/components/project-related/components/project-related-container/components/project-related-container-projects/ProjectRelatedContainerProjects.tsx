@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
 import type { ProjectInterface } from "./data/projectRelatedContainerProjectsData.ts";
-import { PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL } from "./data/projectRelatedContainerProjectsData.ts";
+import { PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL, PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT, PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER } from "./data/projectRelatedContainerProjectsData.ts";
 
 const ProjectRelatedContainerProjects = () => {
    const [projects, setProjects] = useState<ProjectInterface[]>([]);
@@ -55,18 +55,20 @@ const ProjectRelatedContainerProjects = () => {
 
    return (
       <div className="project__related-projects" aria-label={PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL}>
-         <ul className="flex justify-between project__related-projects-list">
+         <ul className="flex justify-between project__related-projects-list" data-testid="related-projects-list">
             {projects.map((project) => {
                const { firstPart, secondPart } = getProjectNameParts(project.project_name);
                //TODO: Add placeholders in the DATA file.
                return (
                   <Link key={project.project_id} to={`/projects/${project.project_name}`}>
-                     <li className="project__related-project">
+                     <li className="project__related-project" data-testid="related-project">
                         <div className="project__related-project-upper-part">
-                           <img className="size-[20rem]" src="../../../../../../../../../public/success_icon_dark_mode.svg" alt="Project image" />
+                           <img className="size-[20rem]" src="../../../../../../../../../public/success_icon_dark_mode.svg" alt={PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT} />
                         </div>
-                        <div className="flex flex-col project__related-project-lower-part">
-                           <span className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} mb-6`}>{secondPart || "A look into the project"}</span>
+                        <div className="flex flex-col project__related-project-lower-part" data-testid="related-project-lower-part">
+                           <span className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} mb-6`} data-testid="project-second-part-name">
+                              {secondPart || PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER}
+                           </span>
                            <h3 className={`text-4xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} font-bold`}>{firstPart}</h3>
                         </div>
                      </li>
