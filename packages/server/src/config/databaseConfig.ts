@@ -1,15 +1,25 @@
-import pkg from "pg";
 import dotenv from "dotenv";
+import path from "path";
+import pkg from "pg";
 import PoolConfigInterface from "./interfaces/databaseConfigInterface.js";
-dotenv.config();
+
+const envPath = process.env.NODE_ENV === "development" ? path.resolve(process.cwd(), ".env.development") : path.resolve(process.cwd(), ".env");
+
+console.log(`[databaseConfig] Loading environment variables from: ${envPath}`);
+const dotenvResult = dotenv.config({ path: envPath });
+
+if (dotenvResult.error) {
+   console.error(`[databaseConfig] Error loading .env file from ${envPath}:`, dotenvResult.error);
+   throw new Error(`Failed to load environment variables from ${envPath}`);
+}
 
 const { Pool } = pkg;
 
 const poolConfig: PoolConfigInterface = {
-   host: process.env.DB_HOST as string,
-   user: process.env.DB_USER as string,
-   password: process.env.DB_PASSWORD as string,
-   database: process.env.DB_NAME as string,
+   host: process.env.DB_HOST,
+   user: process.env.DB_USER,
+   password: process.env.DB_PASSWORD,
+   database: process.env.DB_NAME,
    port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 5432,
    max: process.env.DB_MAX ? parseInt(process.env.DB_MAX, 10) : 10,
    idleTimeoutMillis: process.env.DB_IDLE_TIMEOUT ? parseInt(process.env.DB_IDLE_TIMEOUT, 10) : 30000,
