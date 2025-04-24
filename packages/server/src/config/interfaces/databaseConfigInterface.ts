@@ -1,12 +1,12 @@
 interface PoolConfigInterface {
-   host: string;
-   user: string;
-   password: string;
-   database: string;
+   host?: string;
+   user?: string;
+   password?: string;
+   database?: string;
    port?: number;
    max?: number;
    idleTimeoutMillis?: number;
-   ssl?: any;
+   ssl?: boolean | { rejectUnauthorized: boolean };
 }
 
 export default PoolConfigInterface;
