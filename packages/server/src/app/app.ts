@@ -1,5 +1,5 @@
-import server from "./server.js";
 import dotenv from "dotenv";
+import server from "./server.js";
 
 dotenv.config();
 

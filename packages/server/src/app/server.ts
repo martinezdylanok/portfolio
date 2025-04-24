@@ -1,5 +1,5 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import projectRoutes from "../routes/projectRoutes/projectRoutes.js";
@@ -8,7 +8,6 @@ import { corsOptions } from "./data/serverData.js";
 const server = express();
 
 /* Middlewares */
-server.use(cors());
 server.use(express.json());
 server.use(cors(corsOptions));
 
