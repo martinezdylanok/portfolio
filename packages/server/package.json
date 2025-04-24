@@ -4,9 +4,9 @@
    "version": "0.1.0",
    "type": "module",
    "scripts": {
-      "dev": "ts-node src/app/app.ts",
+      "dev": "npm run build && cross-env NODE_ENV=development node --watch dist/app/app.js",
       "build": "tsc -p tsconfig.node.json",
-      "start": "node --watch dist/app/app.js",
+      "start": "node dist/app/app.js",
       "lint": "eslint .",
       "test": "vitest --config vitest.config.ts"
    },
@@ -22,6 +22,8 @@
       "@types/express": "^5.0.0",
       "@types/pg": "^8.11.11",
       "@types/supertest": "^6.0.2",
-      "supertest": "^7.0.0"
+      "cross-env": "^7.0.3",
+      "supertest": "^7.0.0",
+      "ts-node": "^10.9.2"
    }
 }
