@@ -4,4 +4,4 @@ export interface FetchResult<T> {
    error: Error | null;
 }
 
-export const API_BASE_URL = import.meta.env.HOST;
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
