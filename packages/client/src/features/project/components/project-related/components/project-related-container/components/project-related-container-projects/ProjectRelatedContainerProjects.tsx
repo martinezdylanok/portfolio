@@ -1,79 +1,55 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import useFetchData from "../../../../../../../../utils/hooks/useFetchData/useFetchData.tsx";
 import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
+import ProjectRelatedContainerProjectsProject from "./components/project-related-container-projects-project/ProjectRelatedContainerProjectsProject.tsx";
 import type { ProjectInterface } from "./data/projectRelatedContainerProjectsData.ts";
-import { PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL, PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT, PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER } from "./data/projectRelatedContainerProjectsData.ts";
+import { PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL, getProjectNameParts, getRandomProjects } from "./data/projectRelatedContainerProjectsData.ts";
 
 const ProjectRelatedContainerProjects = () => {
-   const [projects, setProjects] = useState<ProjectInterface[]>([]);
    const { mode } = useThemeContext();
+   const { data: allProjects, loading, error } = useFetchData<ProjectInterface[]>("/projects");
+   const [relatedProjects, setRelatedProjects] = useState<ProjectInterface[]>([]);
 
-   const getRandomProjects = (projectsArray: ProjectInterface[], count: number): ProjectInterface[] => {
-      const shuffled = [...projectsArray];
-
-      // Fisher-Yates shuffle algorithm
-      for (let i = shuffled.length - 1; i > 0; i--) {
-         const j = Math.floor(Math.random() * (i + 1));
-         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-
-      return shuffled.slice(0, Math.min(count, shuffled.length));
-   };
-
-   const getProjectNameParts = (projectName: string): { firstPart: string; secondPart: string } => {
-      const projectNameParts = projectName.split(":");
-
-      const firstPart = projectNameParts[0]?.toUpperCase() || "";
-      const secondPart = projectNameParts[1]?.trim() || "";
-
-      return { firstPart, secondPart };
-   };
-
-   /* REFACTOR: into a React hook, HeaderNavigation also uses it */
    useEffect(() => {
-      const fetchProjects = async () => {
-         try {
-            const response = await fetch("http://localhost:3000/api/projects"); // TODO: Simplify this URL
+      if (!loading && !error && allProjects && Array.isArray(allProjects) && allProjects.length > 0) {
+         const randomProjects = getRandomProjects(allProjects, 2);
+         setRelatedProjects(randomProjects);
+      } else if (!loading && !error && !allProjects) {
+         setRelatedProjects([]);
+      }
+   }, [allProjects, loading, error]);
 
-            if (!response.ok) {
-               throw new Error(`Failed to fetch projects: ${response.status}`);
-            }
-            const projectsData = await response.json();
-            if (projectsData && projectsData.success && Array.isArray(projectsData.data)) {
-               const randomProjects = getRandomProjects(projectsData.data, 2);
-               setProjects(randomProjects);
-            } else {
-               console.error("Unexpected API response format:", projectsData);
-            }
-         } catch (error) {
-            console.error("Error fetching projects: ", error);
-         }
-      };
+   if (loading) {
+      return (
+         <span className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`} aria-label="Loading projects">
+            Loading projects...
+         </span>
+      );
+   }
 
-      fetchProjects();
-   }, []);
+   if (error) {
+      return (
+         <span className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`} aria-label="Error message">
+            Error loading projects: {error.message}
+         </span>
+      );
+   }
+
+   if (relatedProjects.length === 0) {
+      return (
+         <span className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`} aria-label="Error message">
+            No projects data available or unexpected format.
+         </span>
+      );
+   }
 
    return (
       <div className="project__related-projects" aria-label={PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL}>
          <ul className="flex justify-between project__related-projects-list" data-testid="related-projects-list">
-            {projects.map((project) => {
+            {relatedProjects.map((project) => {
                const { firstPart, secondPart } = getProjectNameParts(project.project_name);
                //TODO: Add placeholders in the DATA file.
-               return (
-                  <Link key={project.project_id} to={`/projects/${project.project_name}`}>
-                     <li className="project__related-project" data-testid="related-project">
-                        <div className="project__related-project-upper-part">
-                           <img className="size-[20rem]" src="../../../../../../../../../public/success_icon_dark_mode.svg" alt={PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT} />
-                        </div>
-                        <div className="flex flex-col project__related-project-lower-part" data-testid="related-project-lower-part">
-                           <span className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} mb-6`} data-testid="project-second-part-name">
-                              {secondPart || PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER}
-                           </span>
-                           <h3 className={`text-4xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} font-bold`}>{firstPart}</h3>
-                        </div>
-                     </li>
-                  </Link>
-               );
+               return <ProjectRelatedContainerProjectsProject key={project.project_id} firstPart={firstPart} secondPart={secondPart} project={project} />;
             })}
          </ul>
       </div>
