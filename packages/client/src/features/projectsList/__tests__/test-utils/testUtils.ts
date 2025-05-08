@@ -57,5 +57,7 @@ const mockProjects = [
    },
 ];
 
-export { mockProjects, resetModes, setupDarkMode, setupLightMode };
+const MOCKED_ERROR_MESSAGE = "Internal Server Error";
+
+export { MOCKED_ERROR_MESSAGE, mockProjects, resetModes, setupDarkMode, setupLightMode };
 
