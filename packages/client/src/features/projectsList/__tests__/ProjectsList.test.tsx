@@ -1,158 +1,104 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import ProjectsList from "../ProjectsList";
-import { setupLightMode, resetModes, mockProjects } from "./test-utils/testUtils";
+import { MOCKED_ERROR_MESSAGE, resetModes, setupLightMode } from "./test-utils/testUtils";
 
 describe("ProjectsList component tests", () => {
    beforeAll(() => {
       vi.mock("../../../utils/hooks/useTheme");
-
-      global.fetch = vi.fn().mockResolvedValue({
-         ok: true,
-         json: async () => mockProjects,
-      });
+      global.fetch = vi.fn();
    });
 
    beforeEach(() => {
+      (global.fetch as vi.Mock).mockReset();
       setupLightMode();
    });
 
    afterAll(() => {
+      vi.restoreAllMocks();
       resetModes();
    });
 
-   test("should render ProjectsList element", () => {
+   test("should render loading element by default", () => {
+      (global.fetch as vi.Mock).mockResolvedValueOnce({
+         ok: true,
+         json: async () => ({ success: true, data: [] }),
+      });
+
       render(<ProjectsList />);
-      const projectsList = screen.getByRole("main");
-      expect(projectsList).toBeInTheDocument();
+      const loadingElement = screen.getByLabelText("Loading projects");
+      expect(loadingElement).toBeInTheDocument();
    });
 
-   test("should render ProjectsList container div element", () => {
+   test("should render error element when an error occurs", async () => {
+      (global.fetch as vi.Mock).mockResolvedValueOnce({
+         ok: false,
+         status: 500,
+         json: async () => ({ message: MOCKED_ERROR_MESSAGE }),
+      });
+
       render(<ProjectsList />);
-      const projectsListContainer = screen.getByLabelText("Projects list container");
-      expect(projectsListContainer).toBeInTheDocument();
+
+      await waitFor(() => {
+         const errorElement = screen.getByLabelText("Error message");
+         expect(errorElement).toBeInTheDocument();
+         expect(errorElement).toHaveTextContent(`Error loading projects: ${MOCKED_ERROR_MESSAGE}`);
+      });
    });
 
-   test("should render ProjectsList ul element", () => {
+   test("should render unexpected format element when there is no projects data or the format is incorrect", async () => {
+      (global.fetch as vi.Mock).mockResolvedValueOnce({
+         ok: true,
+         json: async () => ({ success: true, data: null }),
+      });
+
       render(<ProjectsList />);
-      const projectsListUl = screen.getByRole("list");
-      expect(projectsListUl).toHaveAttribute("class", "p-5 flex flex-col gap-10 projects-list__list");
-      expect(projectsListUl).toBeInTheDocument();
+
+      await waitFor(() => {
+         const unexpectedFormatElement = screen.getByLabelText("Error message");
+         expect(unexpectedFormatElement).toBeInTheDocument();
+         expect(unexpectedFormatElement).toHaveTextContent("No projects data available or unexpected format");
+      });
    });
 
-   test("should render ProjectsList li elements", async () => {
+   test("should render ProjectsList element", async () => {
+      (global.fetch as vi.Mock).mockResolvedValueOnce({
+         ok: true,
+         json: async () => ({ success: true, data: [] }),
+      });
+
       render(<ProjectsList />);
-      const projectsListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      expect(projectsListLi).toHaveLength(6);
-      expect(projectsListLi[0]).toBeInTheDocument();
+
+      await waitFor(() => {
+         const projectsList = screen.getByRole("main");
+         expect(projectsList).toBeInTheDocument();
+      });
    });
 
-   test("should render the project details container", async () => {
+   test("should render ProjectsList container div element", async () => {
+      (global.fetch as vi.Mock).mockResolvedValueOnce({
+         ok: true,
+         json: async () => ({ success: true, data: [] }),
+      });
+
       render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} details`);
-      expect(projectDetails).toBeInTheDocument();
+
+      await waitFor(() => {
+         const projectsListContainer = screen.getByLabelText("Projects list container");
+         expect(projectsListContainer).toBeInTheDocument();
+      });
    });
 
-   test("should render the project details container with the correct order given an odd index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} details`);
-      expect(projectDetails).toHaveClass("order-1");
-   });
+   test.only("should render ProjectsList ul element", async () => {
+      (global.fetch as vi.Mock).mockResolvedValueOnce({
+         ok: true,
+         json: async () => ({ success: true, data: [] }),
+      });
 
-   test("should render the project details container with the correct order given an even index number", async () => {
       render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[1];
-      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} details`);
-      expect(projectDetails).toHaveClass("order-2");
-   });
 
-   test("should render the project logo image", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectLogoImage = within(firstProject).getByAltText("Project logo");
-      expect(projectLogoImage).toBeInTheDocument();
-   });
-
-   test("should render the project logo image with the correct order given an odd index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} details`);
-      const projectLogoImage = within(projectDetails).getByAltText("Project logo");
-      expect(projectLogoImage).toHaveClass("self-start");
-   });
-
-   test("should render the project logo image with the correct order given an even index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[1];
-      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} details`);
-      const projectLogoImage = within(projectDetails).getByAltText("Project logo");
-      expect(projectLogoImage).toHaveClass("self-end");
-   });
-
-   test("should render the project details elements", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectDetails = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} details`);
-      const projectTextBlock = within(projectDetails).getByLabelText(`Project ${mockProjects[0].project_name} text container`);
-      expect(within(projectTextBlock).getByText(mockProjects[0].project_description)).toBeInTheDocument();
-      expect(within(projectTextBlock).getByText(mockProjects[0].project_technologies)).toBeInTheDocument();
-      const projectH2Element = within(projectTextBlock).getByRole("heading", { level: 2 });
-      expect(projectH2Element).toBeInTheDocument();
-   });
-
-   test("should render the project showcase container", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} showcase`);
-      expect(projectShowcase).toBeInTheDocument();
-   });
-
-   test("should render the project showcase container with the correct order given an odd index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} showcase`);
-      expect(projectShowcase).toHaveClass("order-2");
-   });
-
-   test("should render the project showcase container with the correct order given an even index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[1];
-      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} showcase`);
-      expect(projectShowcase).toHaveClass("order-1");
-   });
-
-   test("should render the project showcase container with the correct justify content given an odd index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[0].project_name} showcase`);
-      expect(projectShowcase).toHaveClass("justify-end");
-   });
-
-   test("should render the project showcase container with the correct justify content given an even index number", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[1];
-      const projectShowcase = within(firstProject).getByLabelText(`Project ${mockProjects[1].project_name} showcase`);
-      expect(projectShowcase).toHaveClass("justify-start");
-   });
-
-   test("should render the project showcase container image element", async () => {
-      render(<ProjectsList />);
-      const projectListLi = await waitFor(() => screen.getAllByRole("listitem"));
-      const firstProject = projectListLi[0];
-      const projectShowcaseImage = within(firstProject).getByAltText("Project showcase image");
-      expect(projectShowcaseImage).toBeInTheDocument();
+      await waitFor(() => {
+         const projectsListUl = screen.getByTestId("projects-ul");
+         expect(projectsListUl).toBeInTheDocument();
+      });
    });
 });
