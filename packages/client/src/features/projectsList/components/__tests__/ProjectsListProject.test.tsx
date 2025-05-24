@@ -4,7 +4,7 @@ import { themeContext } from "../../../../utils/themeContext/themeContext";
 import ProjectsListProject from "../ProjectsListProject";
 import { mockProjects, resetModes, setupLightMode } from "./test-utils/testUtils";
 
-describe("ProjectsList component tests", () => {
+describe("ProjectsListProject component tests", () => {
    beforeAll(() => {
       vi.mock("../../../../utils/hooks/useTheme.tsx");
       global.fetch = vi.fn();
