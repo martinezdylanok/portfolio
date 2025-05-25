@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import { act } from "react";
 import ProjectsList from "../ProjectsList";
 import { MOCKED_ERROR_MESSAGE, resetModes, setupLightMode } from "./test-utils/testUtils";
 
@@ -18,15 +19,29 @@ describe("ProjectsList component tests", () => {
       resetModes();
    });
 
-   test("should render loading element by default", () => {
-      (global.fetch as vi.Mock).mockResolvedValueOnce({
-         ok: true,
-         json: async () => ({ success: true, data: [] }),
+   test("should render loading element by default", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
       });
 
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
       render(<ProjectsList />);
+
       const loadingElement = screen.getByLabelText("Loading projects");
       expect(loadingElement).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({ success: true, data: [] }),
+         });
+
+         await new Promise(process.nextTick);
+      });
    });
 
    test("should render error element when an error occurs", async () => {
@@ -88,7 +103,7 @@ describe("ProjectsList component tests", () => {
       });
    });
 
-   test.only("should render ProjectsList ul element", async () => {
+   test("should render ProjectsList ul element", async () => {
       (global.fetch as vi.Mock).mockResolvedValueOnce({
          ok: true,
          json: async () => ({ success: true, data: [] }),
