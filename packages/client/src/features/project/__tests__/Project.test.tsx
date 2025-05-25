@@ -1,72 +1,90 @@
 import { act, render, screen } from "@testing-library/react";
-import { MemoryRouter, useParams } from "react-router";
+import { Link, MemoryRouter, useParams } from "react-router";
 import Project from "../Project";
 import { mockProjects, resetModes, setupLightMode } from "./test-utils/testUtils.ts";
+
+vi.mock("react-router", () => ({
+   ...vi.importActual("react-router"),
+   useParams: vi.fn(),
+   Link: vi.fn(),
+}));
 
 describe("Project component tests", () => {
    beforeAll(() => {
       vi.mock("../../../utils/hooks/useTheme.tsx");
-      vi.mock("react-router", async () => {
-         const actual = await vi.importActual<typeof import("react-router")>("react-router");
-         return {
-            ...actual,
-            useParams: vi.fn().mockReturnValue({}),
-         };
-      });
-
-      vi.useFakeTimers();
    });
 
    beforeEach(() => {
       setupLightMode();
-      vi.clearAllMocks();
-      vi.mocked(useParams).mockReturnValue({});
+      global.fetch = vi.fn(async () => {
+         return Promise.resolve({
+            ok: true,
+            status: 200,
+            json: async () => ({ success: true, data: {} }),
+         });
+      }) as vi.Mock;
    });
 
    afterAll(() => {
       resetModes();
-      vi.useRealTimers();
    });
 
-   test("renders the loading span element given a project name", async () => {
-      vi.mocked(useParams).mockReturnValue({ projectName: "test-project" });
+   test("renders the project loading span element by default", async () => {
+      vi.mocked(useParams).mockReturnValue({ projectName: "project 01" });
 
-      global.fetch = vi.fn().mockImplementation(() => {
-         return new Promise((resolve) => {
-            resolve({
-               ok: true,
-               json: async () => ({ success: true, data: mockProjects[0] }),
-            });
-         });
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
       });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
 
       render(<Project />);
 
-      const loadingProjectSpan = screen.getByLabelText("Loading project");
-      expect(loadingProjectSpan).toBeInTheDocument();
+      const loadingElement = screen.getByLabelText("Loading project");
+      expect(loadingElement).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               status: 200,
+               data: {
+                  project_name: "Test Project: Part One",
+               },
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
    });
 
-   test("renders the project not found span element when not given a project name", async () => {
+   test("renders the project error span when not given a project name", async () => {
+      vi.mocked(useParams).mockReturnValue({ projectName: "" });
+
       render(<Project />);
 
-      const projectNotFoundSpan = screen.getByLabelText("Project not found error");
-      expect(projectNotFoundSpan).toBeInTheDocument();
+      const projectErrorSpan = await screen.findByLabelText("Error message");
+
+      expect(projectErrorSpan).toBeInTheDocument();
+      expect(projectErrorSpan).toHaveTextContent("No projects data available or unexpected format.");
+      expect(screen.queryByLabelText("Loading proejcts")).not.toBeInTheDocument();
    });
 
-   test("renders the project not found span element when given a wrong project name", async () => {
-      vi.mocked(useParams).mockReturnValue({ projectName: "wrong-project" });
+   test("renders the project error span element when given a wrong project name", async () => {
+      vi.mocked(useParams).mockReturnValue({ projectName: "Wrong project" });
 
-      global.fetch = vi.fn().mockImplementation(() => {
-         return new Promise((resolve) => {
-            setTimeout(() => {
-               resolve({
-                  ok: false,
-                  status: 404,
-                  json: async () => ({ success: false }),
-               });
-            }, 200);
-         });
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
       });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
 
       render(<Project />);
 
@@ -74,26 +92,33 @@ describe("Project component tests", () => {
       expect(loadingProjectSpan).toBeInTheDocument();
 
       await act(async () => {
-         await vi.runAllTimersAsync();
+         resolveFetch({
+            ok: false,
+            status: 404,
+            json: async () => ({
+               message: "Project not found",
+            }),
+         });
+
+         await new Promise(process.nextTick);
       });
 
-      const projectNotFoundSpan = screen.getByLabelText("Project not found error");
-      expect(projectNotFoundSpan).toBeInTheDocument();
+      const projectErrorSpan = screen.getByLabelText("Error message");
+      expect(projectErrorSpan).toHaveTextContent("Project not found");
+      expect(projectErrorSpan).toBeInTheDocument();
    });
 
    test("renders the project not found span element when returned an unexpected API response format", async () => {
-      vi.mocked(useParams).mockReturnValue({ projectName: "Whatever" });
+      vi.mocked(useParams).mockReturnValue({ projectName: "project 01" });
 
-      global.fetch = vi.fn().mockImplementation(() => {
-         return new Promise((resolve) => {
-            setTimeout(() => {
-               resolve({
-                  ok: true,
-                  json: async () => ({ success: true }),
-               });
-            }, 200);
-         });
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
       });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
 
       render(<Project />);
 
@@ -101,48 +126,80 @@ describe("Project component tests", () => {
       expect(loadingProjectSpan).toBeInTheDocument();
 
       await act(async () => {
-         await vi.runAllTimersAsync();
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               message: "Unexpected API response format",
+            }),
+         });
+
+         await new Promise(process.nextTick);
       });
 
-      const projectNotFoundSpan = screen.getByLabelText("Project not found error");
-      expect(projectNotFoundSpan).toBeInTheDocument();
+      const projectErrorSpan = screen.getByLabelText("Error message");
+      expect(projectErrorSpan).toHaveTextContent("Unexpected API response format.");
+      expect(projectErrorSpan).toBeInTheDocument();
    });
 
-   test("renders the project not found span element when fetch throws error", async () => {
-      vi.mocked(useParams).mockReturnValue({ projectName: "test-project" });
+   test(`renders the project not found span element when returned "API returned success: false"`, async () => {
+      vi.mocked(useParams).mockReturnValue({ projectName: "project 01" });
 
-      global.fetch = vi.fn().mockImplementation(() => Promise.reject(new Error("Network error")));
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<Project />);
+
+      const loadingProjectSpan = screen.getByLabelText("Loading project");
+      expect(loadingProjectSpan).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: false,
+               message: "API success returned: false",
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
+
+      const projectErrorSpan = screen.getByLabelText("Error message");
+      expect(projectErrorSpan).toHaveTextContent("API success returned: false");
+      expect(projectErrorSpan).toBeInTheDocument();
+   });
+
+   test("renders the project container element for a valid project", async () => {
+      vi.mocked(useParams).mockReturnValue({ projectName: "Project 1" });
+
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
 
       render(<Project />);
 
       await act(async () => {
-         await vi.runAllTimersAsync();
-      });
-
-      const projectNotFoundSpan = screen.getByLabelText("Project not found error");
-      expect(projectNotFoundSpan).toBeInTheDocument();
-   });
-
-   test("renders the project container element", async () => {
-      vi.mocked(useParams).mockReturnValue({ projectName: "Project 1" });
-
-      global.fetch = vi.fn().mockImplementation(() => {
-         return new Promise((resolve) => {
-            resolve({
-               ok: true,
-               json: async () => ({ success: true, data: mockProjects[0] }),
-            });
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               status: 200,
+               data: {
+                  project_name: "Project 01",
+               },
+            }),
          });
-      });
-
-      render(
-         <MemoryRouter>
-            <Project />
-         </MemoryRouter>,
-      );
-
-      await act(async () => {
-         await vi.runAllTimersAsync();
       });
 
       const projectContainer = screen.getByLabelText("Project container");
