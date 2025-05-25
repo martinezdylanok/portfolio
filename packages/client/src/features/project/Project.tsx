@@ -17,7 +17,7 @@ const Project = () => {
 
    if (loading) {
       return (
-         <span className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`} aria-label="Loading projects">
+         <span className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`} aria-label="Loading project">
             Loading projects...
          </span>
       );
@@ -26,7 +26,7 @@ const Project = () => {
    if (error) {
       return (
          <span className={`text-center text-2xl font-semibold pt-48 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`} aria-label="Error message">
-            Error loading projects: {error.message}
+            Error loading project: {error.message}
          </span>
       );
    }
