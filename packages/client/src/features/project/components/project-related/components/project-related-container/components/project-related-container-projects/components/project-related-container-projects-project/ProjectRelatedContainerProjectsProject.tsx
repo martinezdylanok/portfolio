@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useThemeContext } from "../../../../../../../../../../utils/hooks/useTheme";
-import type { relatedProjectsProjectProps } from "../data/projectRelatedContainerProjectsProjectData";
-import { PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT, PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER } from "../data/projectRelatedContainerProjectsProjectData";
+import type { relatedProjectsProjectProps } from "./data/projectRelatedContainerProjectsProjectData";
+import { PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT, PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER } from "./data/projectRelatedContainerProjectsProjectData";
 
 const ProjectRelatedContainerProjectsProject = ({ firstPart, secondPart, project }: relatedProjectsProjectProps) => {
    const { mode } = useThemeContext();
