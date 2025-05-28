@@ -1,7 +1,7 @@
 import { act, render, screen } from "@testing-library/react";
-import { Link, MemoryRouter, useParams } from "react-router";
+import { useParams } from "react-router";
 import Project from "../Project";
-import { mockProjects, resetModes, setupLightMode } from "./test-utils/testUtils.ts";
+import { resetModes, setupLightMode } from "./test-utils/testUtils.ts";
 
 vi.mock("react-router", () => ({
    ...vi.importActual("react-router"),
