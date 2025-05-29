@@ -80,17 +80,6 @@ const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
    const executeCommand = (command: string) => {
       const normalizedCommand = command.trim().toLowerCase();
 
-      if (!projects && (normalizedCommand.startsWith("cd") || normalizedCommand === "ls")) {
-         if (loading) {
-            console.warn("Projects are still loading. Please try again shortly.");
-         } else if (error) {
-            console.error("Failed to load projects. Cannot execute command.");
-         } else {
-            console.warn("Projects data is not available. Cannot execute command.");
-         }
-         return;
-      }
-
       switch (normalizedCommand) {
          case "ls":
             setProjectsAreVisible(true);
@@ -123,6 +112,7 @@ const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
             break;
       }
    };
+
    return (
       <nav className="relative header__navigation" aria-label={NAV_ARIA_LABEL_TEXT}>
          <div className="flex font-mono gap-1 w-[24.264rem] header__navigation-wrapper" aria-label={WRAPPER_ARIA_LABEL_TEXT}>
@@ -140,20 +130,31 @@ const HeaderNavigation = ({ headerIsVisible }: HeaderNavigationProps) => {
                <span ref={cursorRef} data-testid="cursor-span" aria-hidden="true" className={`flex absolute -z-1 w-2.5 h-4 mt-1 rounded-xs custom-ping-animation bg-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} header-navigation__projects-cursor-pointer`}></span>
             </form>
          </div>
-         {projectsAreVisible && !loading && !error && projects && projects.length > 0 && (
-            <ul aria-labelledby="projects-menu-button" className={`absolute left-[-17rem] origin-top font-mono ${mode === "light" ? "bg-[#B6CCFE]" : "bg-[#E2EAFC]"} header-navigation__list visible ${projectsAreClosing ? "closing" : ""}`}>
-               {projects.map((project) => (
-                  <li key={project.project_id} className={`p-5 hover:bg-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} hover:cursor-pointer header-navigation__list-item`}>
-                     <a href={`/projects/${project.project_name}`} className={` ${mode === "light" ? "text-[#E2EAFC]" : "text-[#B6CCFE]"} header-navigation__list-link`}>
-                        {project.project_name}
-                     </a>
-                  </li>
-               ))}
-            </ul>
-         )}
-         {projectsAreVisible && loading && <div className={`absolute left-[-17rem] origin-top font-mono p-5 ${mode === "light" ? "bg-[#B6CCFE] text-[#E2EAFC]" : "bg-[#E2EAFC] text-[#B6CCFE]"}`}>Loading projects...</div>}
-         {projectsAreVisible && !loading && error && <div className={`absolute left-[-17rem] origin-top font-mono p-5 ${mode === "light" ? "bg-[#B6CCFE] text-red-700" : "bg-[#E2EAFC] text-red-500]"}`}>Error: {error.message}</div>}
-         {projectsAreVisible && !loading && !error && projects && projects.length === 0 && <div className={`absolute left-[-17rem] origin-top font-mono p-5 ${mode === "light" ? "bg-[#B6CCFE] text-[#E2EAFC]" : "bg-[#E2EAFC] text-[#B6CCFE]"}`}>No projects found.</div>}
+         {projectsAreVisible &&
+            (loading ? (
+               <div className={`absolute left-[-17rem] origin-top font-mono p-5 ${mode === "light" ? "bg-[#B6CCFE] text-[#E2EAFC]" : "bg-[#E2EAFC] text-[#B6CCFE]"}`} aria-label="Loading projects">
+                  Loading projects...
+               </div>
+            ) : error ? (
+               <div className={`absolute left-[-17rem] origin-top font-mono p-5 ${mode === "light" ? "bg-[#B6CCFE] text-red-700" : "bg-[#E2EAFC] text-red-500]"}`} aria-label="Error message">
+                  Error: {error.message}
+               </div>
+            ) : projects === null || projects.length === 0 ? (
+               <div className={`absolute left-[-17rem] origin-top font-mono p-5 ${mode === "light" ? "bg-[#B6CCFE] text-[#E2EAFC]" : "bg-[#E2EAFC] text-[#B6CCFE]"}`} aria-label="Error message">
+                  No projects data available or unexpected format.
+               </div>
+            ) : (
+               // This block implies !loading, !error, and projects is a non-empty array
+               <ul aria-labelledby="projects-menu-button" className={`absolute left-[-17rem] origin-top font-mono ${mode === "light" ? "bg-[#B6CCFE]" : "bg-[#E2EAFC]"} header-navigation__list visible ${projectsAreClosing ? "closing" : ""}`}>
+                  {projects.map((project) => (
+                     <li key={project.project_id} className={`p-5 hover:bg-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} hover:cursor-pointer header-navigation__list-item`}>
+                        <a href={`/projects/${project.project_name}`} className={` ${mode === "light" ? "text-[#E2EAFC]" : "text-[#B6CCFE]"} header-navigation__list-link`}>
+                           {project.project_name}
+                        </a>
+                     </li>
+                  ))}
+               </ul>
+            ))}
       </nav>
    );
 };

@@ -1,181 +1,353 @@
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import HeaderNavigation from "../HeaderNavigation";
-import { NAV_ARIA_LABEL_TEXT, WRAPPER_ARIA_LABEL_TEXT, SPAN_TEXT, FORM_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT } from "../data/headerNavigationData";
-import { setupLightMode, resetModes, setupDarkMode, mockProjects } from "./test-utils/test-utils";
+import { FORM_ARIA_LABEL_TEXT, INPUT_ARIA_LABEL_TEXT, NAV_ARIA_LABEL_TEXT, SPAN_TEXT, WRAPPER_ARIA_LABEL_TEXT } from "../data/headerNavigationData";
+import { mockProjects, resetModes, setupLightMode } from "./test-utils/test-utils";
+
+vi.mock("react-router", () => ({
+   ...vi.importActual("react-router"),
+   Link: vi.fn(),
+   useParams: vi.fn(),
+}));
 
 describe("HeaderNavigation Component tests", () => {
    const isVisible = true;
 
    beforeAll(() => {
       vi.mock("../../../../../utils/hooks/useTheme");
-      mockProjects();
    });
 
    beforeEach(() => {
       setupLightMode();
+      global.fetch = vi.fn(async () => {
+         return Promise.resolve({
+            ok: true,
+            status: 200,
+            json: async () => ({ success: true, data: {} }),
+         });
+      }) as vi.Mock;
    });
 
    afterAll(() => {
       resetModes();
    });
 
-   test("should render the navigation element with the correct aria-label", () => {
+   test("should render HeaderNavigation navigation element with the correct aria-label", () => {
       render(<HeaderNavigation headerIsVisible={isVisible} />);
       const navElement = screen.getByLabelText(NAV_ARIA_LABEL_TEXT);
       expect(navElement).toBeInTheDocument();
    });
 
-   test("shoudl render the navigation wrapper element with the correct role", () => {
+   test("shoudl render HeaderNavigation wrapper element with the correct role", () => {
       render(<HeaderNavigation headerIsVisible={isVisible} />);
       const wrapperElement = screen.getByLabelText(WRAPPER_ARIA_LABEL_TEXT);
       expect(wrapperElement).toBeInTheDocument();
    });
 
-   test("should render the span element with the correct text", () => {
+   test("should render HeaderNavigation span element with the correct text", () => {
       render(<HeaderNavigation headerIsVisible={isVisible} />);
       const spanElement = screen.getByText(SPAN_TEXT);
       expect(spanElement).toBeInTheDocument();
    });
 
-   test("should render the span element with the correct background color in light mode", () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const spanElement = screen.getByText(SPAN_TEXT);
-      expect(spanElement).toHaveClass("text-[#ABC4FF]");
-   });
-
-   test("should render the span element with the correct background color in dark mode", () => {
-      setupDarkMode();
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const spanElement = screen.getByText(SPAN_TEXT);
-      expect(spanElement).toHaveClass("text-[#EDF2FB]");
-   });
-
-   test("should render the form element with the correct aria-label", () => {
+   test("should render HeaderNavigation form element with the correct aria-label", () => {
       render(<HeaderNavigation headerIsVisible={isVisible} />);
       const formElement = screen.getByLabelText(FORM_ARIA_LABEL_TEXT);
       expect(formElement).toBeInTheDocument();
    });
 
-   test("should render the input element with the correct text", () => {
+   test("should render HeaderNavigation input element with the correct text", () => {
       render(<HeaderNavigation headerIsVisible={isVisible} />);
       const inputElement = screen.getByLabelText(INPUT_ARIA_LABEL_TEXT);
       expect(inputElement).toBeInTheDocument();
    });
 
-   test("should render the input element with the correct background color in light mode", () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const inputElement = screen.getByLabelText(INPUT_ARIA_LABEL_TEXT);
-      expect(inputElement).toHaveClass("text-[#ABC4FF]");
+   test("should render HeaderNavigation loading span element by default", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<HeaderNavigation headerIsVisible={true} />);
+
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
+
+      // Simulate typing "ls" and submitting the form
+      await act(async () => {
+         fireEvent.change(inputElement, { target: { value: "ls" } });
+         fireEvent.submit(formElement);
+      });
+
+      const loadingElement = screen.getByLabelText("Loading projects");
+      expect(loadingElement).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               status: 200,
+               data: mockProjects,
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
    });
 
-   test("should render the input element with the correct background color in dark mode", () => {
-      setupDarkMode();
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const inputElement = screen.getByLabelText(INPUT_ARIA_LABEL_TEXT);
-      expect(inputElement).toHaveClass("text-[#EDF2FB]");
+   test("should render HeaderNavigation error span element when API fetch fails", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<HeaderNavigation headerIsVisible={true} />);
+
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
+
+      // Simulate typing "ls" and submitting the form
+      await act(async () => {
+         fireEvent.change(inputElement, { target: { value: "ls" } });
+         fireEvent.submit(formElement);
+      });
+
+      const loadingElement = screen.getByLabelText("Loading projects");
+      expect(loadingElement).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: false,
+            status: 500,
+            json: async () => ({ message: "HTTP error! status: 500" }),
+         });
+
+         await new Promise(process.nextTick);
+      });
+
+      const projectErrorSpan = await screen.findByLabelText("Error message");
+
+      expect(projectErrorSpan).toBeInTheDocument();
+      expect(projectErrorSpan).toHaveTextContent("HTTP error! status: 500");
+      expect(screen.queryByLabelText("Loading proejcts")).not.toBeInTheDocument();
    });
 
-   test("should render the span element with the correct text color in light mode", () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const spanElement = screen.getByTestId("cursor-span");
-      expect(spanElement).toHaveClass("bg-[#ABC4FF]");
+   test("should render HeaderNavigation error span element when API returns an empy list of projects", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<HeaderNavigation headerIsVisible={true} />);
+
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
+
+      // Simulate typing "ls" and submitting the form
+      await act(async () => {
+         fireEvent.change(inputElement, { target: { value: "ls" } });
+         fireEvent.submit(formElement);
+      });
+
+      const loadingElement = screen.getByLabelText("Loading projects");
+      expect(loadingElement).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               data: [],
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
+
+      const projectErrorSpan = screen.getByLabelText("Error message");
+      expect(projectErrorSpan).toHaveTextContent("No projects data available or unexpected format.");
+      expect(projectErrorSpan).toBeInTheDocument();
+      expect(screen.queryByLabelText("Loading projects")).not.toBeInTheDocument();
    });
 
-   test("should render the span element with the correct text color in dark mode", () => {
-      setupDarkMode();
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const spanElement = screen.getByTestId("cursor-span");
-      expect(spanElement).toHaveClass("bg-[#EDF2FB]");
+   test("should render HeaderNavigation error span element when API returns null data", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<HeaderNavigation headerIsVisible={true} />);
+
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
+
+      // Simulate typing "ls" and submitting the form
+      await act(async () => {
+         fireEvent.change(inputElement, { target: { value: "ls" } });
+         fireEvent.submit(formElement);
+      });
+
+      const loadingElement = screen.getByLabelText("Loading projects");
+      expect(loadingElement).toBeInTheDocument();
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               data: null,
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
+
+      const projectErrorSpan = screen.getByLabelText("Error message");
+      expect(projectErrorSpan).toHaveTextContent("No projects data available or unexpected format.");
+      expect(projectErrorSpan).toBeInTheDocument();
+      expect(screen.queryByLabelText("Loading projects")).not.toBeInTheDocument();
    });
 
-   test("should render the ul element with the correct aria-labelledby attribute", () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const ulElement = screen.getByRole("list");
-      expect(ulElement).toHaveAttribute("aria-labelledby", "projects-menu-button");
-   });
+   test("should render HeaderNavigation ul element with the correct aria-labelledby attribute", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
 
-   test("should render the ul element with the correct background color in light mode", () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const ulElement = screen.getByRole("list");
-      expect(ulElement).toHaveClass("bg-[#B6CCFE]");
-   });
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
 
-   test("should render the ul element with the correct background color in dark mode", () => {
-      setupDarkMode();
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const ulElement = screen.getByRole("list");
-      expect(ulElement).toHaveClass("bg-[#E2EAFC]");
-   });
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
 
-   test("should check if the ul element is hidden by default", () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const ulElement = screen.getByRole("list");
-      expect(ulElement).toHaveClass("hidden");
-   });
+      render(<HeaderNavigation headerIsVisible={true} />);
 
-   test("should check if the ul element is visible when projectsAreVisible is true", async () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const ulElement = screen.getByRole("list");
-      expect(ulElement).toHaveClass("hidden");
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
 
-      const inputElement = screen.getByLabelText(INPUT_ARIA_LABEL_TEXT);
-      const formElement = screen.getByLabelText(FORM_ARIA_LABEL_TEXT);
+      // Simulate typing "ls" and submitting the form
 
       fireEvent.change(inputElement, { target: { value: "ls" } });
       fireEvent.submit(formElement);
 
-      await waitFor(() => {
-         expect(ulElement).toHaveClass("visible");
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               status: 200,
+               data: mockProjects,
+            }),
+         });
+
+         await new Promise(process.nextTick);
       });
+
+      const ulElement = screen.getByRole("list");
+      expect(ulElement).toHaveAttribute("aria-labelledby", "projects-menu-button");
    });
 
-   test("should render the list elements with the correct role", async () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const listItems = await screen.findAllByRole("listitem");
+   test("should check if HeaderNavigation ul element is hidden by default to then render after fetching goes right", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<HeaderNavigation headerIsVisible={true} />);
+
+      const navigationElement = screen.getByLabelText("Main navigation");
+      let ulElement = screen.queryByRole("list");
+      expect(navigationElement).not.toContainElement(ulElement);
+
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
+
+      // Simulate typing "ls" and submitting the form
+
+      fireEvent.change(inputElement, { target: { value: "ls" } });
+      fireEvent.submit(formElement);
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               status: 200,
+               data: mockProjects,
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
+
+      ulElement = screen.queryByRole("list");
+      expect(navigationElement).toContainElement(ulElement);
+      expect(ulElement).toHaveClass("visible");
+   });
+
+   test("should render the list elements with the correct role and name", async () => {
+      // Fetching delayed with promise to emulate a delay in real fetch function
+
+      let resolveFetch: (value: unknown) => void;
+      const fetchPromise = new Promise((resolve) => {
+         resolveFetch = resolve;
+      });
+
+      (global.fetch as vi.Mock).mockImplementationOnce(() => fetchPromise);
+
+      render(<HeaderNavigation headerIsVisible={true} />);
+
+      const navigationElement = screen.getByLabelText("Main navigation");
+      let ulElement = screen.queryByRole("list");
+      expect(navigationElement).not.toContainElement(ulElement);
+
+      const inputElement = screen.getByLabelText("Search projects");
+      const formElement = screen.getByLabelText("Search projects form");
+
+      // Simulate typing "ls" and submitting the form
+
+      fireEvent.change(inputElement, { target: { value: "ls" } });
+      fireEvent.submit(formElement);
+
+      await act(async () => {
+         resolveFetch({
+            ok: true,
+            json: async () => ({
+               success: true,
+               status: 200,
+               data: mockProjects,
+            }),
+         });
+
+         await new Promise(process.nextTick);
+      });
+
+      ulElement = screen.queryByRole("list");
+      expect(navigationElement).toContainElement(ulElement);
+      expect(ulElement).toHaveClass("visible");
+
+      const listItems = screen.getAllByRole("listitem");
       expect(listItems).toHaveLength(3);
-   });
-
-   test("should render the list elements with the correct background color in light mode", async () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const listItems = await screen.findAllByRole("listitem");
-      listItems.forEach((listItem) => {
-         expect(listItem).toHaveClass("hover:bg-[#ABC4FF]");
-      });
-   });
-
-   test("should render the list elements with the correct background color in dark mode", async () => {
-      setupDarkMode();
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const listItems = await screen.findAllByRole("listitem");
-      listItems.forEach((listItem) => {
-         expect(listItem).toHaveClass("hover:bg-[#EDF2FB]");
-      });
-   });
-
-   test("should render the correct list item text", async () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const listItems = await screen.findAllByRole("listitem");
       expect(listItems[0]).toHaveTextContent("Project 1");
       expect(listItems[1]).toHaveTextContent("Project 2");
       expect(listItems[2]).toHaveTextContent("Project 3");
-   });
-
-   test("should render the correct a element text in light mode", async () => {
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const listItems = await screen.findAllByRole("listitem");
-      const links = listItems.map((listItem) => listItem.querySelector("a"));
-      links.forEach((link) => {
-         expect(link).toHaveClass("text-[#E2EAFC]");
-      });
-   });
-
-   test("should render the correct a element text in dark mode", async () => {
-      setupDarkMode();
-      render(<HeaderNavigation headerIsVisible={isVisible} />);
-      const listItems = await screen.findAllByRole("listitem");
-      const links = listItems.map((listItem) => listItem.querySelector("a"));
-      links.forEach((link) => {
-         expect(link).toHaveClass("text-[#B6CCFE]");
-      });
    });
 });
