@@ -1,5 +1,5 @@
-import { FOOTER_SCROLL_UP_ARIA_LABEL, FOOTER_ARROW_ICON_LIGHT_MODE, FOOTER_ARROW_ICON_DARK_MODE, FOOTER_SCROLL_UP_ARROW_ICON_ALT_TEXT, FOOTER_SCROLL_UP_TEXT, scrollToTop } from "./data/footerContentScrollUpData";
 import { useThemeContext } from "../../../../../../utils/hooks/useTheme";
+import { FOOTER_ARROW_ICON_DARK_MODE, FOOTER_ARROW_ICON_LIGHT_MODE, FOOTER_SCROLL_UP_ARIA_LABEL, FOOTER_SCROLL_UP_ARROW_ICON_ALT_TEXT, FOOTER_SCROLL_UP_TEXT, scrollToTop } from "./data/footerContentScrollUpData";
 
 const FooterContentScrollUp = () => {
    const { mode } = useThemeContext();
@@ -11,7 +11,7 @@ const FooterContentScrollUp = () => {
                {FOOTER_SCROLL_UP_TEXT}
                <span className="absolute left-0 bottom-0 h-[1px] bg-current w-0 group-hover:w-full transition-all duration-300"></span>
             </span>
-            <img src={` ${mode === "light" ? FOOTER_ARROW_ICON_DARK_MODE : FOOTER_ARROW_ICON_LIGHT_MODE}`} alt={FOOTER_SCROLL_UP_ARROW_ICON_ALT_TEXT} className="footer__scroll-up-image" />
+            <img src={`${mode === "light" ? FOOTER_ARROW_ICON_DARK_MODE : FOOTER_ARROW_ICON_LIGHT_MODE}`} alt={FOOTER_SCROLL_UP_ARROW_ICON_ALT_TEXT} className="footer__scroll-up-image group-hover:animate-bounce transition-all duration-300-" />
          </a>
       </div>
    );
