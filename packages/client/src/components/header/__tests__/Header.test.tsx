@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import Header from "../Header";
-import { setupLightMode, resetModes, setupDarkMode, getPageYOffset } from "./test-utils/test-utils";
 import { act } from "react";
+import Header from "../Header";
+import { getPageYOffset, resetModes, setupDarkMode, setupLightMode } from "./test-utils/test-utils";
 
 describe("Header component tests", () => {
    beforeAll(() => {
@@ -48,12 +48,12 @@ describe("Header component tests", () => {
 
       getPageYOffset();
 
-      act(() => {
+      act(async () => {
          window.dispatchEvent(new Event("scroll"));
-      });
 
-      await waitFor(() => {
-         expect(header).toHaveClass("-translate-y-full");
+         await waitFor(() => {
+            expect(header).toHaveClass("-translate-y-full");
+         });
       });
    });
 });
