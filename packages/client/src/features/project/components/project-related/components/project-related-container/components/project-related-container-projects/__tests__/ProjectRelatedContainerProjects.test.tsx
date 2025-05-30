@@ -58,7 +58,7 @@ describe("ProjectRelatedContainerProjects tests", () => {
       });
    });
 
-   test("renders ProjectRelatedContainerProjects error span when API fetch fails", async () => {
+   test("renders ProjectRelatedContainerProjects error span element when API fetch fails", async () => {
       // Fetching delayed with promise to emulate a delay in real fetch function
 
       let resolveFetch: (value: unknown) => void;
