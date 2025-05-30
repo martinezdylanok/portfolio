@@ -1,34 +1,13 @@
-import { useState, useEffect, useRef } from "react";
-import HeaderLogo from "./components/header-logo/HeaderLogo";
-import HeaderNavigation from "./components/header-navigation/HeaderNavigation";
-import HeaderModeSwitcher from "./components/header-mode-switcher/HeaderModeSwitcher";
+import { useHeaderVisibility } from "../../utils/hooks/useHeaderVisibility/useHeaderVisibility";
 import { useThemeContext } from "../../utils/hooks/useTheme";
+import HeaderLogo from "./components/header-logo/HeaderLogo";
+import HeaderModeSwitcher from "./components/header-mode-switcher/HeaderModeSwitcher";
+import HeaderNavigation from "./components/header-navigation/HeaderNavigation";
 import { HEADER_ARIA_LABEL } from "./data/headerData";
 
 const Header = () => {
    const { mode } = useThemeContext();
-   const [isVisible, setIsVisible] = useState(true);
-   const previousScrollPosition = useRef(0);
-
-   useEffect(() => {
-      const handleScroll = () => {
-         const currentScrollPosition = window.pageYOffset;
-
-         if (previousScrollPosition.current > currentScrollPosition) {
-            setIsVisible(true);
-         } else {
-            setIsVisible(false);
-         }
-
-         previousScrollPosition.current = currentScrollPosition;
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => {
-         window.removeEventListener("scroll", handleScroll);
-      };
-   });
+   const isVisible = useHeaderVisibility();
 
    return (
       <header
