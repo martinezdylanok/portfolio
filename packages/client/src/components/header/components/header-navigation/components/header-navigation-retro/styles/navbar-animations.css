@@ -16,11 +16,11 @@
    }
 }
 
-.header-navigation__list.visible { 
+.header-navigation-retro__list.visible { 
    display: flex;
    animation: open-menu 0.5s ease 1 alternate;
 }
  
-.header-navigation__list.closing {
+.header-navigation-retro__list.closing {
    animation: close-menu 0.5s ease 1 alternate;
 }
