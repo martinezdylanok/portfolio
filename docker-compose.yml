@@ -1,0 +1,63 @@
+services:
+  database-dev:
+    image: postgres:15-alpine # LTS version, lightweight (alpine)
+    container_name: portfolio_database-dev
+    restart: unless-stopped
+    env_file:
+      - .env.dev
+    volumes:
+      - database_data-dev:/var/lib/postgresql/data # Route inside the container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-user} -d ${DB_NAME:-portfolio_db-dev}"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - portfolio_network-dev
+  server-dev:
+    build:
+      context: ./packages/server
+      dockerfile: Dockerfile
+      target: development
+    container_name: portfolio_server-dev
+    restart: unless-stopped
+    env_file:
+      - .env.dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/projects"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      database-dev:
+        condition: service_healthy
+    networks:
+      - portfolio_network-dev
+  client-dev:
+    build:
+      context: ./packages/client
+      dockerfile: Dockerfile
+      target: development
+      args:
+        API_BASE_URL: http://localhost:3000/api
+    container_name: portfolio_client-dev
+    restart: unless-stopped
+    env_file:
+      - .env.dev
+    environment:
+      - VITE_API_BASE_URL=http://localhost:3000/api
+    ports:
+    - "5173:5173"
+    depends_on:
+      - server-dev
+    networks:
+      - portfolio_network-dev
+    
+volumes:
+  database_data-dev:
+
+networks:
+  portfolio_network-dev:
+    driver: bridge
