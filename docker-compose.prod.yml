@@ -1,0 +1,61 @@
+services:
+  database-prod:
+    image: postgres:15-alpine # LTS version, lightweight (alpine)
+    container_name: portfolio_database-prod
+    restart: unless-stopped
+    env_file:
+      - .env.prod
+    volumes:
+      - database_data-prod:/var/lib/postgresql/data # Route inside the container
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-dylan} -d ${DB_NAME:-portfolio_db-prod}"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    networks:
+      - portfolio_network-prod
+  server-prod:
+    build:
+      context: ./packages/server
+      dockerfile: Dockerfile
+      target: production
+    container_name: portfolio_server-prod
+    restart: unless-stopped
+    env_file:
+      - .env.prod
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://martinezdylan.dev/api/projects"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    depends_on:
+      database-prod:
+        condition: service_healthy
+    networks:
+      - portfolio_network-prod
+  client:
+    build:
+      context: ./packages/client
+      dockerfile: Dockerfile
+      target: production
+      args:
+        API_BASE_URL: https://martinezdylan.dev/api
+    container_name: portfolio_client-prod
+    restart: unless-stopped
+    ports:
+    - "80:80"
+    - "443:443"
+    depends_on:
+      server-prod:
+        condition: service_healthy
+    networks:
+      - portfolio_network-prod
+    
+volumes:
+  database_data-prod:
+
+networks:
+  portfolio_network-prod:
+    driver: bridge
