@@ -1,16 +1,4 @@
-import dotenv from "dotenv";
-import path from "path";
 import server from "./server.js";
-
-// --- Load environment variables consistently ---
-const envPath = process.env.NODE_ENV === "development" ? path.resolve(process.cwd(), ".env.development") : path.resolve(process.cwd(), ".env");
-
-console.log(`[App] Loading environment variables from: ${envPath}`);
-const dotenvResult = dotenv.config({ path: envPath });
-
-if (dotenvResult.error) {
-   console.error(`[App] Error loading .env file from ${envPath}:`, dotenvResult.error);
-}
 
 const PORT: number = process.env.SERVER_PORT ? parseInt(process.env.SERVER_PORT, 10) : 3000;
 
