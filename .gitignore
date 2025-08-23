@@ -1,4 +1,9 @@
-# Logs
+# DEPENDENCIES & PACKAGE MANAGERS
+node_modules
+yarn.lock
+pnpm-lock.yaml
+
+# LOGS & DEBUG FILES
 logs
 *.log
 npm-debug.log*
@@ -7,23 +12,48 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# BUILD OUTPUTS & DISTRIBUTION
 dist
 dist-ssr
+packages/*/dist/
+packages/*/build/
+
+# ENVIRONMENT & CONFIGURATION
 *.local
 .env
 .env.*
+.env.local
+.env.development
+.env.production
+.env.test
 
-# Editor directories and files
+# TESTING & COVERAGE
+coverage/
+.nyc_output/
+*.lcov
+
+# DATABASE FILES
+*.db
+*.sqlite
+*.sqlite3
+
+# EDITOR & IDE FILES
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.sublime-project
+*.sublime-workspace
 
-# Personal file
+# OPERATING SYSTEM FILES
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# PERSONAL & PROJECT SPECIFIC
 FORLEARNING.md
