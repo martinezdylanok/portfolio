@@ -25,7 +25,7 @@ services:
     env_file:
       - .env.prod
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://martinezdylan.dev/api/projects"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/projects"]
       interval: 5s
       timeout: 5s
       retries: 3
@@ -47,6 +47,12 @@ services:
     ports:
     - "80:80"
     - "443:443"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
       server-prod:
         condition: service_healthy
