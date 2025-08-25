@@ -36,7 +36,7 @@ check_prerequisites() {
     fi
     
     # Check if Dockerfile exists
-    if [ ! -f "packages/client/Dockerfile" ] || [ ! -f "packages/server/Dockerfile" ]; then
+    if [ ! -f "docker/client/Dockerfile" ] || [ ! -f "docker/server/Dockerfile" ]; then
         echo -e "${RED}❌ Error: Dockerfiles not found in packages!${NC}"
         exit 1
     fi
