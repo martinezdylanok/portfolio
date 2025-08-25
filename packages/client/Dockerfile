@@ -39,8 +39,4 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-  CMD curl -f http://localhost/health && nginx -t || exit 1
-
 CMD ["nginx", "-g", "daemon off;"]
