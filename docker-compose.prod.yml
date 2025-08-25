@@ -47,15 +47,8 @@ services:
     ports:
     - "80:80"
     - "443:443"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/health"]
-      interval: 20s
-      timeout: 15s
-      retries: 8
-      start_period: 60s
     depends_on:
-      server-prod:
-        condition: service_healthy
+      - server-prod
     networks:
       - portfolio_network-prod
     
