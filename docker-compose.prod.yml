@@ -35,7 +35,7 @@ services:
         condition: service_healthy
     networks:
       - portfolio_network-prod
-  client:
+  client-prod:
     build:
       context: ./packages/client
       dockerfile: Dockerfile
