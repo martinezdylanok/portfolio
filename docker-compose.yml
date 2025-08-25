@@ -18,7 +18,7 @@ services:
   server-dev:
     build:
       context: ./packages/server
-      dockerfile: ./docker/server/Dockerfile
+      dockerfile: ../docker/server/Dockerfile
       target: development
     container_name: portfolio_server-dev
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
   client-dev:
     build:
       context: ./packages/client
-      dockerfile: ./docker/client/Dockerfile
+      dockerfile: ../docker/client/Dockerfile
       target: development
       args:
         API_BASE_URL: http://localhost:3000/api
