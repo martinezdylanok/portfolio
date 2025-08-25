@@ -18,7 +18,7 @@ services:
   server-prod:
     build:
       context: ./packages/server
-      dockerfile: ../docker/server/Dockerfile
+      dockerfile: ./docker/server/Dockerfile
       target: production
     container_name: portfolio_server-prod
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
   client-prod:
     build:
       context: ./packages/client
-      dockerfile: ../docker/client/Dockerfile
+      dockerfile: ./docker/client/Dockerfile
       target: production
       args:
         VITE_API_BASE_URL: https://martinezdylan.dev/api
