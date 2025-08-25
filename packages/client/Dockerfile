@@ -37,9 +37,6 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Create nginx user
-RUN adduser -D -s /bin/sh nginx || true
-
 EXPOSE 80
 
 # Health check
