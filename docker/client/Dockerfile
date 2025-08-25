@@ -34,9 +34,12 @@ RUN apk --no-cache add curl
 # Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx configuration from docker/nginx folder
+COPY ../docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80
+# Create ssl directory
+RUN mkdir -p /etc/nginx/ssl
+
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
