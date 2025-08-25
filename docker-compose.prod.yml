@@ -41,7 +41,7 @@ services:
       dockerfile: Dockerfile
       target: production
       args:
-        API_BASE_URL: https://martinezdylan.dev/api
+        VITE_API_BASE_URL: https://martinezdylan.dev/api
     container_name: portfolio_client-prod
     restart: unless-stopped
     ports:
@@ -49,10 +49,10 @@ services:
     - "443:443"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
     depends_on:
       server-prod:
         condition: service_healthy
