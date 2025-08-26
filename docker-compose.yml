@@ -17,8 +17,8 @@ services:
       - portfolio_network-dev
   server-dev:
     build:
-      context: ./packages/server
-      dockerfile: ../../docker/server/Dockerfile
+      context: .
+      dockerfile: docker/server/Dockerfile
       target: development
     container_name: portfolio_server-dev
     restart: unless-stopped
@@ -37,8 +37,8 @@ services:
       - portfolio_network-dev
   client-dev:
     build:
-      context: ./packages/client
-      dockerfile: ../../docker/client/Dockerfile
+      context: .
+      dockerfile: docker/client/Dockerfile
       target: development
       args:
         API_BASE_URL: http://localhost:3000/api
