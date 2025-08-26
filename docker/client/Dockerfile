@@ -1,9 +1,9 @@
 # Multi-stage Dockerfile for Client (Development + Production)
 FROM node:24-alpine as builder
 WORKDIR /app
-COPY package*.json ./
+COPY packages/client/package*.json ./
 RUN npm install
-COPY . ./
+COPY packages/client/ ./
 
 # Build arguments for environment variables
 ARG VITE_API_BASE_URL
@@ -14,9 +14,9 @@ RUN npm run build
 # Development stage
 FROM node:24-alpine as development
 WORKDIR /app
-COPY package*.json ./
+COPY packages/client/package*.json ./
 RUN npm install
-COPY . ./
+COPY packages/client ./
 
 # Build arguments for development stage
 ARG VITE_API_BASE_URL
