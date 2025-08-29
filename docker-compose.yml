@@ -1,12 +1,15 @@
 services:
   database-dev:
-    image: postgres:15-alpine # LTS version, lightweight (alpine)
+    image: postgres:15-alpine
     container_name: portfolio_database-dev
     restart: unless-stopped
     env_file:
       - .env.dev
     volumes:
       - database_data-dev:/var/lib/postgresql/data # Route inside the container
+      - ./docker/database/init:/docker-entrypoint-initdb.d # Mount scripts for development: easier to modify/test
+      - ./docker/database/migrations:/migrations
+      - ./docker/database/seeds:/seeds
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-user} -d ${DB_NAME:-portfolio_db-dev}"]
       interval: 5s
