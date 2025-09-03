@@ -27,12 +27,12 @@ services:
     restart: unless-stopped
     env_file:
       - .env.prod
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/projects"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+    #healthcheck: # Not in usage for the moment
+    #  test: ["CMD", "curl", "-f", "http://localhost:3000/api/projects"]
+    #  interval: 5s
+    #  timeout: 5s
+    #  retries: 3
+    #  start_period: 60s
     depends_on:
       database-prod:
         condition: service_healthy
@@ -54,7 +54,8 @@ services:
       - /etc/letsencrypt/live/martinezdylan.dev/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
       - /etc/letsencrypt/live/martinezdylan.dev/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
     depends_on:
-      - server-prod
+      server-prod:
+        condition: service_healthy
     networks:
       - portfolio_network-prod
     
