@@ -10,7 +10,7 @@ export interface ProjectInterface {
    project_technologies: string;
 }
 
-const SPAN_TEXT: string = "~/documents/Projects $";
+const SPAN_TEXT: string = "~/dylan/portfolio/projects $";
 
 const COMMANDS_LIST: string[] = ["ls", "cd"];
 

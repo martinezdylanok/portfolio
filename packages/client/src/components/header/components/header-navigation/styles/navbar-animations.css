@@ -16,11 +16,15 @@
    }
 }
 
-.header-navigation-retro__list.visible { 
-   display: flex;
+.header-navigation-default__list.visible {
+  animation: open-menu 1s ease 1 alternate;
+}
+
+.header-navigation-retro__list.visible{ 
    animation: open-menu 0.5s ease 1 alternate;
 }
  
-.header-navigation-retro__list.closing {
+.header-navigation-retro__list.closing,
+.header-navigation-default__list.closing {
    animation: close-menu 0.5s ease 1 alternate;
 }
