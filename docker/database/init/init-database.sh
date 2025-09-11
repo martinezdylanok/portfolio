@@ -15,8 +15,8 @@ done
 
 echo "PostgreSQL is ready. Checking database state..."
 
-# Check if projects table exists
-TABLE_EXISTS=$(psql -t -c "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = 'projects');" -U "$POSTGRES_USER" -d "$POSTGRES_DB" 2>/dev/null || echo "f")
+# Check if projects table exists by trying to query it
+TABLE_EXISTS=$(psql -t -c "SELECT 1 FROM projects LIMIT 1;" -U "$POSTGRES_USER" -d "$POSTGRES_DB" 2>/dev/null && echo "t" || echo "f")
 
 if [ "$TABLE_EXISTS" = "f" ]; then
     echo "Projects table doesn't exist. Running full initialization..."

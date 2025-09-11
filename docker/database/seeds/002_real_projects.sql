@@ -46,7 +46,7 @@ INSERT INTO projects (
     'The culmination of this project is a well-developed online store that empowers Camila to successfully sell her products across Europe. The streamlined design and intuitive navigation contribute to a positive user experience, ultimately driving sales and expanding her business reach.'
 ),
 (
-    'ISSAS: Alla Italiana ',
+    'ISSAS: Alla Italiana',
     NULL,
     NULL,
     'The core objective of the ISSAS project was to translate Monica''s unique style and fashion values into a digital experience. The goal was to create a website that would not just showcase her work, but also embody her aesthetic sensibilities, effectively mirroring her brand identity.',
