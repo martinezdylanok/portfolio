@@ -27,20 +27,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
    };
 
-   /* Toggle mode function with retro mode in it.
-   const toggleMode = () => {
-      setMode((prevMode) => {
-         if (prevMode === "light") {
-            return "dark";
-         } else if (prevMode === "dark") {
-            return "retro";
-         } else { 
-            return "light";
-         }
-      });
-   };
-   */
-
    const contextValue: ThemeContextType = {
       mode,
       toggleMode,
