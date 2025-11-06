@@ -1,4 +1,6 @@
 const PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL: string = "Related projects container projects";
+const PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT: string = "Project image";
+const PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER: string = "A look into the project";
 
 const getRandomProjects = (projectsArray: ProjectInterface[], count: number): ProjectInterface[] => {
    const shuffled = [...projectsArray];
@@ -28,4 +30,4 @@ export interface ProjectInterface {
    project_technologies: string;
 }
 
-export { getProjectNameParts, getRandomProjects, PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL };
+export { getProjectNameParts, getRandomProjects, PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL, PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT, PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER };
