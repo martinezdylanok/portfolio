@@ -7,7 +7,7 @@
    version="1.1"
    id="svg20617"
    sodipodi:docname="arrow_icon_light_mode.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,16 +25,16 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="35.083333"
-     inkscape:cx="2.1235154"
-     inkscape:cy="10.019002"
-     inkscape:window-width="1854"
-     inkscape:window-height="1011"
-     inkscape:window-x="66"
-     inkscape:window-y="32"
-     inkscape:window-maximized="1"
+     inkscape:cx="2.1092637"
+     inkscape:cy="10.004751"
+     inkscape:window-width="1472"
+     inkscape:window-height="895"
+     inkscape:window-x="0"
+     inkscape:window-y="61"
+     inkscape:window-maximized="0"
      inkscape:current-layer="svg20617" />
   <path
      d="m 240,-807 -184,183 -56,-56 280,-280 280,280 -56,57 -184,-184 v 287 h -80 z m 0,487 v -120 h 80 v 120 z m 0,160 v -80 h 80 v 80 z"
      id="path20615"
-     style="fill:#edf2fb;fill-opacity:1" />
+     style="fill:#333333;fill-opacity:1" />
 </svg>
