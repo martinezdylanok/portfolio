@@ -1,35 +1,69 @@
 # Portfolio
 
-The nexus of my programming explorations.
+**The nexus of my programming explorations** — a central hub for all my projects, experiments, and ideas.
 
-## Table of contents
+---
+
+## 📑 Table of Contents
+
 1. [Overview](#overview)
-2. [The process](#the-process)
-3. [Try it!](#try-it)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Try It!](#try-it)
+5. [Future Plans](#future-plans)
 
-## Overview
+---
 
-## The process
+## 🪞 Overview
 
-### ORIGIN
+### The Original Plan
 
 ![Original design image](assets/images/original-design-image/original-design.webp)
 
-A seamless fusion of minimalist design and complex storytelling, embodied in a website.
+A seamless fusion of **minimalist design** and **complex storytelling** — reimagining how to present work, ideas, and growth through visual order and narrative flow.
 
-### Current wims... for now
+> *A portfolio that doesn’t just show — it tells.*
 
-- Speed, speed, speed: It needs to load fast, faster than fast.
-- Swiss Grid System: It's just... beautiful.
-- Accessibility: To be used for anyone, anywhere.
-- Three modes: Dark, light, and retro.
-- User authentication.
-- CLI: Easter egg, he-he.
+---
 
-### A deeper look into it
+## ⚙️ Features
 
-![Chart showing the folder structure](assets/images/charts/Folder%20structure%20and%20normal%20workflow.png)
+- ⚡ **Speed-Optimized:** Built with performance and fast load times in mind.  
+- 🧩 **Swiss Grid System:** Clean, consistent, and visually harmonious.  
+- ♿ **Accessibility First:** Usable by anyone, anywhere, on any device.  
+- 🌗 **Dual Modes:** Fully supported dark and light themes.  
+- 🧠 **Complex Logic:** Dynamic architecture designed for future scalability.  
+- 💻 **CLI Easter Egg:** A hidden terminal for the curious developer.  
 
-![Chart showing the workflow](assets/images/charts/Project%20workflow.png)
+---
 
-## Try it!
+## 🧰 Tech Stack
+
+**Frontend:** React
+**Backend** Express, Node.js, PostgreSQL 
+**Styling:** Tailwind CSS  
+**Deployment:** Digital Ocean => AWS in the near future  
+**Tooling:** ESLint, Prettier, GitHub Actions  
+**Design System:** Swiss Grid-inspired layout  
+
+---
+
+## 🚀 Try It!
+
+Check out the live version:
+
+👉 **[martinezdylan.dev](https://www.martinezdylan.dev)**
+
+---
+
+## 🧭 Future Plans
+
+- Integrate a personal blog or changelog section.  
+- Add interactive project visualizations (3D / graph view).  
+- Expand CLI with new commands and custom prompts.  
+- Introduce animations using Framer Motion.  
+- Improve Lighthouse accessibility score to 100.  
+
+---
+
+> © 2025 Dylan Martínez

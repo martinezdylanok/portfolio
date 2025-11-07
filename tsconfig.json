@@ -1,7 +1,11 @@
 {
   "files": [],
   "references": [
-    { "path": "./packages/client/tsconfig.app.json" },
-    { "path": "./packages/server/tsconfig.node.json" }
-  ]
+    { "path": "packages/client/tsconfig.app.json" },
+    { "path": "packages/server/tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  }
 }
+
