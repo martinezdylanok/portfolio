@@ -10,12 +10,12 @@ services:
       - ./docker/database/init:/docker-entrypoint-initdb.d # Mount scripts for development: easier to modify/test
       - ./docker/database/migrations:/migrations
       - ./docker/database/seeds:/seeds
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-user} -d ${DB_NAME:-portfolio_db-dev}"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+    #healthcheck:
+    #  test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-user} -d ${DB_NAME:-portfolio_db-dev}"]
+    #  interval: 5s
+    #  timeout: 5s
+    #  retries: 3
+    #  start_period: 15s
     networks:
       - portfolio_network-dev
   server-dev:
@@ -27,15 +27,16 @@ services:
     restart: unless-stopped
     env_file:
       - .env.dev
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/projects"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+    ports:
+      - "3000:3000"
+    #healthcheck:
+    #  test: ["CMD", "curl", "-f", "http://localhost:3000/api/projects"]
+    #  interval: 5s
+    #  timeout: 5s
+    #  retries: 3
+    #  start_period: 15s
     depends_on:
-      database-dev:
-        condition: service_healthy
+      - database-dev
     networks:
       - portfolio_network-dev
   client-dev:
@@ -49,19 +50,22 @@ services:
     restart: unless-stopped
     env_file:
       - .env.dev
+    volumes:
+      - ./packages/client:/app
+      - /app/node_modules
     environment:
       - VITE_API_BASE_URL=http://localhost:3000/api
+      - CHOKIDAR_USEPOLLING=true
     ports:
     - "5173:5173"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5173/"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+    #healthcheck:
+    #  test: ["CMD", "curl", "-f", "http://localhost:5173/"]
+    #  interval: 10s
+    #  timeout: 5s
+    #  retries: 3
+    #  start_period: 10s
     depends_on:
-      server-dev:
-        condition: service_healthy
+      - server-dev
     networks:
       - portfolio_network-dev
     

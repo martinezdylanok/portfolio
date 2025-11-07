@@ -1,9 +1,9 @@
 import js from "@eslint/js";
-import globals from "globals";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
-import eslintPluginPrettier from "eslint-plugin-prettier";
 import vitest from "@vitest/eslint-plugin";
+import eslintPluginPrettier from "eslint-plugin-prettier";
+import globals from "globals";
 
 export default [
    {
@@ -17,6 +17,7 @@ export default [
          globals: {
             ...globals.browser,
             ...globals.node,
+            vi: true,
          },
       },
       plugins: {

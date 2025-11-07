@@ -34,8 +34,8 @@ if [ "$TABLE_EXISTS" = "f" ]; then
 else
     echo "Projects table exists. Checking if seeds need to be updated..."
     
-    # Check if we have the expected seed projects
-    EXPECTED_PROJECTS=("Belen Abdon: Building a Personal Brand" "BV Architecture: A Dynamic Showcase of Design" "En Marte: Crafting a Seamless E-commerce Experience" "ISSAS: Alla Italiana")
+     # Check if we have the expected seed projects (must match seeds exactly)
+    EXPECTED_PROJECTS=("Portfolio Platform: Full‑Stack Showcase" "Belen Abdon: Building a Brand" "BV Architecture: Design in Motion" "En Marte: From Another Planet" "ISSAS: Alla Italiana")
     
     NEEDS_UPDATE=false
     MISSING_PROJECTS=()
