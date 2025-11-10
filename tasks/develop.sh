@@ -3,7 +3,7 @@
 # Portfolio Development Setup Script
 # This script automates the entire development environment setup
 
-PROJECT_PATH="$HOME/Documents/Projects/portfolio"
+PROJECT_PATH="$HOME/Developer/Projects/portfolio"
 PROJECT_NAME="portfolio"
 
 echo "🚀 Starting ${PROJECT_NAME} development environment setup..."
