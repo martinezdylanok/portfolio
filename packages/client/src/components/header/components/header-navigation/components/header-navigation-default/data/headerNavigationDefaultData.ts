@@ -5,6 +5,14 @@ export interface ProjectInterface {
    project_technologies: string;
 }
 
-const WRAPPER_ARIA_LABEL_TEXT: string = "Default navigation wrapper";
+const NAV_ARIA_LABEL_TEXT: string = "Header navigation";
 
-export { WRAPPER_ARIA_LABEL_TEXT };
+const LIST_ARIA_LABEL_TEXT: string = "Default navigation list";
+
+const HEADER_DEFAULT_NAVIGATION_LINKS = [
+   { LABEL: "ABOUT", HREF: "/about", ARIA_LABEL: "About link" },
+   { LABEL: "PROJECTS", HREF: "/projects", ARIA_LABEL: "Projects link" },
+   { LABEL: "CONTACT", HREF: "/contact", ARIA_LABEL: "Contact link" },
+];
+
+export { HEADER_DEFAULT_NAVIGATION_LINKS, LIST_ARIA_LABEL_TEXT, NAV_ARIA_LABEL_TEXT };
