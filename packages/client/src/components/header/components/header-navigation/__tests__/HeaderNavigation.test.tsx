@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import HeaderNavigation from "../HeaderNavigation";
 import { NAV_ARIA_LABEL_TEXT } from "../data/headerNavigationData";
 import { resetModes, setupLightMode, setupRetroMode } from "./test-utils/test-utils";

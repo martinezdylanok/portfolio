@@ -1,0 +1,26 @@
+@keyframes open-menu {
+   0% {
+     transform: scaleY(0);
+   }
+   100% {
+     transform: scaleY(1);
+   }
+}
+ 
+@keyframes close-menu {
+   0% {
+     transform: scaleY(1);
+   }
+   100% {
+     transform: scaleY(0);
+   }
+}
+
+.header-default-navigation__list.visible {
+  animation: open-menu 1s ease 1 alternate;
+}
+
+
+.header-default-navigation__list.closing {
+   animation: close-menu 0.5s ease 1 alternate;
+}

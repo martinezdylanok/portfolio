@@ -16,7 +16,7 @@
    }
 }
 
-.header-navigation-default__list.visible {
+.header-default-navigation__list.visible {
   animation: open-menu 1s ease 1 alternate;
 }
 
@@ -25,6 +25,6 @@
 }
  
 .header-navigation-retro__list.closing,
-.header-navigation-default__list.closing {
+.header-default-navigation__list.closing {
    animation: close-menu 0.5s ease 1 alternate;
 }

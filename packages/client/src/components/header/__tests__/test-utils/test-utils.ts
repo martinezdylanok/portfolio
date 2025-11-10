@@ -1,4 +1,4 @@
-import { useThemeContext } from "../../../../utils/hooks/useTheme";
+import { useThemeContext } from "../../../../utils/hooks/useThemeContext/useThemeContext";
 
 const setupLightMode = () => {
    vi.mocked(useThemeContext).mockReturnValue({
@@ -25,4 +25,5 @@ const getPageYOffset = () => {
    });
 };
 
-export { setupLightMode, setupDarkMode, resetModes, getPageYOffset };
+export { getPageYOffset, resetModes, setupDarkMode, setupLightMode };
+
