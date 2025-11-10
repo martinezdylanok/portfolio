@@ -48,6 +48,9 @@ check_prerequisites() {
 deploy_production() {
     echo -e "${BLUE}📦 Pulling latest changes from repository...${NC}"
     git pull origin main
+
+    echo -e "${BLUE}📦 Installing workspace dependencies...${NC}"
+    npm ci --include-workspace-root
     
     echo -e "${BLUE}🔨 Building production app...${NC}"
     npm run build
