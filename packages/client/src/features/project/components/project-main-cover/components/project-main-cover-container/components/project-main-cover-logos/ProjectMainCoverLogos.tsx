@@ -1,22 +1,39 @@
-import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
-import { PROJECT_MAIN_COVER_COMPANY_LOGO_ALT_TEXT, PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL, PROJECT_MAIN_COVER_OWN_LOGO_ALT_TEXT } from "./data/projectMainCoverLogosData";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { PROJECT_MAIN_COVER_BUSINESS_LOGO_ALT_TEXT, PROJECT_MAIN_COVER_BUSINESS_SECONDARY_LOGO_ALT_TEXT, PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL, ProjectMainCoverLogosProps } from "./data/projectMainCoverLogosData";
 
-const ProjectMainCoverLogos = () => {
-   const { mode } = useThemeContext();
+const ProjectMainCoverLogos = ({ project }: ProjectMainCoverLogosProps) => {
+   const [isHovered, setIsHovered] = useState(false);
 
-   // REFACTOR: Make these be in the tailwind config.
-   const borderColorClass = mode === "light" ? "border-[#EDF2FB80]" : "border-[#ABC4FF80]";
-   const bgColorClass = mode === "light" ? "bg-[#ABC4FF]" : "bg-[#EDF2FB]";
+   const idPadded = String(project.project_id).padStart(2, "0");
+   const businessLogo = `/project/business-logos/${idPadded}/logo.webp`;
+   const businessSecondaryLogo = `/project/business-secondary-logos/${idPadded}/logo.webp`;
 
    // TODO: Add custom image depending on the project
    return (
-      <div className="flex w-1/2 items-center justify-end relative main-cover__logos" aria-label={PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL}>
-         <div className={`size-75 flex flex-col justify-center items-center overflow-hidden border border-solid ${borderColorClass} ${bgColorClass} rounded-[50%] z-1 relative left-20 main-cover__company-logo`}>
-            <img className="h-[40%] w-[80%] object-contain" src="/project/dummy_logo_01.svg" alt={PROJECT_MAIN_COVER_COMPANY_LOGO_ALT_TEXT} />
-         </div>
-         <div className={`size-75 flex flex-col justify-center items-center overflow-hidden border border-solid ${borderColorClass} ${bgColorClass} rounded-[50%] main-cover__own-logo`}>
-            <img className="h-[40%] w-[80%] object-contain" src="/project/dm_logo_dark_mode.svg" alt={PROJECT_MAIN_COVER_OWN_LOGO_ALT_TEXT} />
-         </div>
+      <div className="project__main-cover-logos flex items-center row-start-1 col-start-2 relative" aria-label={PROJECT_MAIN_COVER_LOGOS_ARIA_LABEL}>
+         <motion.a href={project.project_external_url ?? undefined} target="_blank" rel="noopener noreferrer" onHoverStart={() => setIsHovered(true)} onHoverEnd={() => setIsHovered(false)} whileHover={{ scale: 1.1, borderWidth: 2 }} animate={{ borderWidth: 1 }} transition={{ scale: { duration: 0.5 }, borderWidth: { duration: 0.2 } }} className="project__main-cover-logos-company-logo size-75 cursor-pointer flex flex-col justify-center items-center overflow-hidden border border-solid border-border-default bg-page rounded-[50%] relative z-10 left-12">
+            <img
+               className="project__main-cover-logos-company-logo-image h-[40%] w-[80%] object-contain"
+               src={businessLogo}
+               onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/error_icon.svg";
+               }}
+               alt={PROJECT_MAIN_COVER_BUSINESS_LOGO_ALT_TEXT}
+            />
+         </motion.a>
+         <motion.div initial={{ right: 152 }} animate={{ right: isHovered ? 57 : 152 }} transition={{ duration: 0.5 }} className="project__main-cover-logos-own-logo size-50 flex flex-col justify-center items-center overflow-hidden border border-solid border-border-subtle bg-heading rounded-[50%] relative">
+            <img
+               className="project__main-cover-logos-own-logo-image h-full w-full"
+               src={businessSecondaryLogo}
+               onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/error_icon.svg";
+               }}
+               alt={PROJECT_MAIN_COVER_BUSINESS_SECONDARY_LOGO_ALT_TEXT}
+            />
+         </motion.div>
       </div>
    );
 };

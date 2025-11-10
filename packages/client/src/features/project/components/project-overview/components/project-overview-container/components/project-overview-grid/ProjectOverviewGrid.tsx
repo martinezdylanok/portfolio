@@ -1,19 +1,12 @@
-import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
 import ProjectOverviewDuration from "./components/project-overview-duration/ProjectOverviewDuration";
 import ProjectOverviewTechnologies from "./components/project-overview-technologies/ProjectOverviewTechnologies";
 import { PROJECT_OVERVIEW_GRID_ARIA_LABEL, ProjecOverviewGridProps } from "./data/projectOverviewGridData";
 
 const ProjectOverviewGrid = ({ project }: ProjecOverviewGridProps) => {
-   const { mode } = useThemeContext();
-
-   // REFACTOR: Make these be in the tailwind config.
-   // TODO: inspect colors to match perfectly text color of ProjectOverviewDuration and ProejctOverViewTechnologies
-   const borderColorClass = mode === "light" ? "border-[#B6CCFE80]" : "border-[#E2EAFC80]";
-
    return (
-      <div className="flex gap-2.5 h-fit w-1/2 project__overview-grid" aria-label={PROJECT_OVERVIEW_GRID_ARIA_LABEL}>
+      <div className="project__overview-grid row-start-3 col-start-1 flex gap-12 mt-12 break-all h-fit" aria-label={PROJECT_OVERVIEW_GRID_ARIA_LABEL}>
          <ProjectOverviewTechnologies project={project} />
-         <div className={`mx-6 max-h-full w-[2px] self-stretch border border-solid ${borderColorClass}`} data-testid="divider" aria-hidden="true"></div>
+         <div className="project__overview-grid-divider max-h-full w-[2px] self-stretch border border-solid border-border-subtle" data-testid="divider" aria-hidden="true"></div>
          <ProjectOverviewDuration project={project} />
       </div>
    );

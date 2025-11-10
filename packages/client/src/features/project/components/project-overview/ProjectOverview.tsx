@@ -3,7 +3,7 @@ import { PROJECT_OVERVIEW_ARIA_LABEL, ProjectOverviewProps } from "./data/projec
 
 const ProjectOverview = ({ project }: ProjectOverviewProps) => {
    return (
-      <section className="max-w-[80%] mx-auto mb-50 project__overview" aria-label={PROJECT_OVERVIEW_ARIA_LABEL}>
+      <section className="project__overview min-w-screen bg-page" aria-label={PROJECT_OVERVIEW_ARIA_LABEL}>
          <ProjectOverviewContainer project={project} />
       </section>
    );

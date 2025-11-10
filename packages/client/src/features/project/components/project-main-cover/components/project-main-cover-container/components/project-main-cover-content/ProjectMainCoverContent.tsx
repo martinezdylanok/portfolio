@@ -1,26 +1,25 @@
-import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
+import { motion } from "framer-motion";
 import { PROJECT_MAIN_COVER_CONTENT_ARIA_LABEL, ProjectMainCoverContentProps } from "./data/projectMainCoverContentData";
+import { parseProjectName } from "./utils/parseProjectName";
+import { useProjectMainCoverScrollAnimations } from "./utils/useProjectMainCoverScrollAnimations";
+
+// TODO: Implement y, progress and opacity based on container instead of fixed pixels.
 
 const ProjectMainCoverContent = ({ project }: ProjectMainCoverContentProps) => {
-   const { mode } = useThemeContext();
-
-   const projectNameParts = project.project_name.split(":");
-
-   const firstPartName = projectNameParts[0]?.toUpperCase() || "";
-
-   const secondPartName = projectNameParts[1]?.trim() || "";
+   const { y, opacity } = useProjectMainCoverScrollAnimations();
+   const { firstPart, secondPart } = parseProjectName(project.project_name);
 
    return (
-      <div className="max-w-1/2 main-cover__content" aria-label={PROJECT_MAIN_COVER_CONTENT_ARIA_LABEL}>
-         {secondPartName && (
-            <h2 className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} mb-6`} data-testid="Second part name">
-               {secondPartName}
-            </h2>
+      <div className="project__main-cover-content flex flex-col col-start-1 row-start-1" aria-label={PROJECT_MAIN_COVER_CONTENT_ARIA_LABEL}>
+         {secondPart && (
+            <motion.h3 style={{ y, opacity }} className="project__main-cover-content-subtitle font-bold text-2xl text-heading" data-testid="Second part name">
+               {secondPart}
+            </motion.h3>
          )}
-         <h2 className={`text-8xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} font-bold mb-12 main-cover__project-title`} data-testid="First part name">
-            {firstPartName}
-         </h2>
-         <p className={`text-2xl text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} text-left main-cover__project-description`} data-testid="Project description">
+         <motion.h2 className="project__main-cover-content-title text-8xl text-heading font-bold mb-12.5" data-testid="First part name">
+            {firstPart}
+         </motion.h2>
+         <p className="project__main-cover-content-description font-normal text-xl text-justify text-body" data-testid="Project description">
             {project.project_description}
          </p>
       </div>

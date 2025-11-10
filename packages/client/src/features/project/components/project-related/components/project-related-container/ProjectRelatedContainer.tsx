@@ -4,7 +4,7 @@ import { PROJECT_RELATED_CONTAINER_ARIA_LABEL } from "./data/projectRelatedConta
 
 const ProjectRelatedContainer = () => {
    return (
-      <div className="max-w-[90%] mx-auto py-25 project__related-container" aria-label={PROJECT_RELATED_CONTAINER_ARIA_LABEL}>
+      <div className="flex flex-col project__related-container" aria-label={PROJECT_RELATED_CONTAINER_ARIA_LABEL}>
          <ProjectRelatedContainerContent />
          <ProjectRelatedContainerProjects />
       </div>
