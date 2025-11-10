@@ -1,9 +1,135 @@
 @import "tailwindcss";
+@font-face {
+   font-family: "HankenGrotesk";
+   src: url("../assets/fonts/HankenGrotesk/HankenGrotesk-VariableFont_wght.ttf") format("truetype");
+   font-weight: 100 900;
+   font-style: normal;
+   font-display: swap;
+}
 
+@font-face {
+   font-family: "HankenGrotesk";
+   src: url("../assets/fonts/HankenGrotesk/HankenGrotesk-Italic-VariableFont_wght.ttf") format("truetype");
+   font-weight: 100 900;
+   font-style: italic;
+   font-display: swap;
+}
+
+@theme {
+   --font-hanken-grotesk: "HankenGrotesk", "sans-serif";
+   --font-sans: var(--font-hanken-grotesk);
+   --color-page: var(--bg-page);
+   --color-section: var(--bg-section);
+   --color-card: var(--bg-card);
+   --color-card-hover: var(--bg-card-hover);
+   --color-overlay: var(--bg-overlay);
+   --color-heading: var(--text-heading);
+   --color-body: var(--text-body);
+   --color-muted: var(--text-muted);
+   --color-accent: var(--text-accent);
+   --color-border-default: var(--border-default);
+   --color-border-subtle: var(--border-subtle);
+   --color-border-strong: var(--border-strong);
+   --color-focus: var(--color-focus);
+   --color-active: var(--color-active);
+   --color-disabled: var(--color-disabled);
+   --color-status-success: var(--color-status-success);
+   --color-status-error: var(--color-status-error);
+   --color-status-warning: var(--color-status-warning);
+}
+
+@layer base {
+   html {
+     scroll-behavior: smooth;
+     background-color: var(--bg-page);
+   }
+ }
+
+/* PALETTE: CONCRETE (Blue/Orange) */
 :root[data-theme="light"] {
-   background-color: #EDF2FB;
-}
-
-:root[data-theme="dark"] {
-   background-color: #ABC4FF;
-}
+   /* RAW COLORS */
+   --palette-primary: #FFFFFF;          /* main page background */
+   --palette-secondary: #FAFAFA;        /* cards / inner sections */
+   --palette-tertiary: #E0E0E0;         /* borders, disabled */
+   --palette-text-primary: #111111;     /* body text */
+   --palette-text-secondary: #333333;   /* headings AAAAAAA */
+   --palette-text-tertiary: #A0A0A0;    /* muted text */
+   --palette-accent: #1949E6;           /* blue accent */
+   --palette-accent-active: #1949E6;    /* darker blue active state */
+   --palette-hover: #F2F2F2;            /* hover background */
+   --palette-overlay: #00000080;        /* semi-transparent overlay */
+   --palette-status-success: #4CAF50;   /* green */
+   --palette-status-error: #F44336;     /* red */
+   --palette-status-warning: #FFC107;   /* yellow */
+ 
+   /* SEMANTIC TOKENS */
+   --bg-page: var(--palette-primary);
+   --bg-section: var(--palette-secondary);
+   --bg-card: var(--palette-secondary);
+   --bg-card-hover: var(--palette-hover);
+   --bg-overlay: var(--palette-overlay);
+ 
+   --text-heading: var(--palette-text-secondary);
+   --text-body: var(--palette-text-primary);
+   --text-muted: var(--palette-text-tertiary);
+   --text-accent: var(--palette-accent);
+ 
+   /* Borders */
+   --border-subtle: var(--palette-tertiary);
+   --border-default: color-mix(in srgb, var(--palette-tertiary), var(--palette-text-primary) 20%);
+   --border-strong: var(--palette-accent);
+ 
+   /* States */
+   --color-focus: var(--palette-link);
+   --color-active: var(--palette-accent-active);
+   --color-disabled: var(--palette-tertiary);
+ 
+   /* Status */
+   --color-status-success: var(--palette-status-success);
+   --color-status-error: var(--palette-status-error);
+   --color-status-warning: var(--palette-status-warning);
+ }
+ 
+ :root[data-theme="dark"] {
+   /* RAW COLORS */
+   --palette-primary: #252525;          /* main page background */
+   --palette-secondary: #161616;        /* cards / inner sections */
+   --palette-tertiary: #585858;         /* borders, disabled */
+   --palette-text-primary: #FFFFFF;     /* body text */
+   --palette-text-secondary: #E0E0E0;   /* headings AAAAAA */
+   --palette-text-tertiary: #A0A0A0;    /* muted text */
+   --palette-accent: rgb(245,139,107);  /* orange accent */
+   --palette-accent-active: #D84315;    /* darker orange */
+   --palette-hover: #2A2A2A;            /* hover background */
+   --palette-overlay: #000000BF;        /* darker overlay */
+   --palette-status-success: #66BB6A;   /* green */
+   --palette-status-error: #EF5350;     /* red */
+   --palette-status-warning: #FFD54F;   /* yellow */
+ 
+   /* SEMANTIC TOKENS */
+   --bg-page: var(--palette-primary);
+   --bg-section: var(--palette-secondary);
+   --bg-card: var(--palette-secondary);
+   --bg-card-hover: var(--palette-hover);
+   --bg-overlay: var(--palette-overlay);
+ 
+   --text-heading: var(--palette-text-secondary);
+   --text-body: var(--palette-text-primary);
+   --text-muted: var(--palette-text-tertiary);
+   --text-accent: var(--palette-accent);
+ 
+   /* Borders */
+   --border-subtle: var(--palette-tertiary);
+   --border-default: color-mix(in srgb, var(--palette-tertiary), var(--palette-text-primary) 25%);
+   --border-strong: var(--palette-accent);
+ 
+   /* States */
+   --color-focus: var(--palette-link);
+   --color-active: var(--palette-accent-active);
+   --color-disabled: var(--palette-tertiary);
+ 
+   /* Status */
+   --color-status-success: var(--palette-status-success);
+   --color-status-error: var(--palette-status-error);
+   --color-status-warning: var(--palette-status-warning);
+ }
