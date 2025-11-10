@@ -1,4 +1,4 @@
-import { useThemeContext } from "../../../../utils/hooks/useTheme";
+import { useThemeContext } from "../../../../utils/hooks/useThemeContext/useThemeContext";
 
 const setupLightMode = () => {
    vi.mocked(useThemeContext).mockReturnValue({
@@ -19,4 +19,4 @@ const resetModes = () => {
    vi.resetAllMocks();
 };
 
-export { setupLightMode, setupDarkMode, resetModes };
+export { resetModes, setupDarkMode, setupLightMode };
