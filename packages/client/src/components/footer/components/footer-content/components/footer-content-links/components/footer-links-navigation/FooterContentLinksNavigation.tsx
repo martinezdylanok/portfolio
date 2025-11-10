@@ -1,36 +1,22 @@
-import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
 import { FOOTER_CONTENT_LINKS_NAVIGATION__ARIA_LABEL, FOOTER_CONTENT_LINKS_NAVIGATION__LINKS, FOOTER_CONTENT_LINKS_NAVIGATION__SPAN_TEXT } from "./data/footerContentLinksNavigationData";
 
-const FooterContentLinksSocial = () => {
-   const { mode } = useThemeContext();
-
+const FooterContentLinksNavigation = () => {
    return (
-      <nav className="flex flex-col gap-2.5 justify-center footer-content__social" aria-label={FOOTER_CONTENT_LINKS_NAVIGATION__ARIA_LABEL}>
-         <span className={`text-xl font-bold underline decoration-1 ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"} footer-content__span `}>{FOOTER_CONTENT_LINKS_NAVIGATION__SPAN_TEXT}</span>
-         <ul className="flex flex-col gap-2.5">
-            {FOOTER_CONTENT_LINKS_NAVIGATION__LINKS.map((link: string, index: number) =>
-               link === "Home" ? (
-                  <a href="." key={index}>
-                     <li>
-                        <span className={`relative group font-semibold cursor-pointer ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"}`}>
-                           {link}
-                           <span className={`absolute left-0 bottom-0 h-[1px] bg-current w-0 group-hover:w-full transition-all duration-300`}></span>
-                        </span>
-                     </li>
+      <nav className="footer-content__links-navigation flex flex-col gap-2.5 justify-center" aria-label={FOOTER_CONTENT_LINKS_NAVIGATION__ARIA_LABEL}>
+         <span className="footer-content__links-navigation-span text-xl font-bold text-heading">{FOOTER_CONTENT_LINKS_NAVIGATION__SPAN_TEXT}</span>
+         <ul className="footer-content__links-navigation-list flex flex-col gap-2.5">
+            {FOOTER_CONTENT_LINKS_NAVIGATION__LINKS.map((link, index) => (
+               <li key={index} className="footer-content__links-navigation-list-item">
+                  <a href={link.HREF} className="footer-content__links-navigation-link">
+                     <span className="footer-content__links-navigation-link-text relative group text-sm font-bold cursor-pointer text-heading">
+                        {link.LABEL}
+                        <span className="footer-content__links-navigation-link-underline absolute left-0 bottom-0 h-[1px] bg-current w-0 group-hover:w-full transition-all duration-300"></span>
+                     </span>
                   </a>
-               ) : (
-                  <a href={`#${link.toLowerCase()}`} key={index}>
-                     <li>
-                        <span className={`relative group font-semibold cursor-pointer ${mode === "light" ? "text-[#ABC4FF]" : "text-[#EDF2FB]"}`}>
-                           {link}
-                           <span className={`absolute left-0 bottom-0 h-[1px] bg-current w-0 group-hover:w-full transition-all duration-300`}></span>
-                        </span>
-                     </li>
-                  </a>
-               ),
-            )}
+               </li>
+            ))}
          </ul>
       </nav>
    );
 };
-export default FooterContentLinksSocial;
+export default FooterContentLinksNavigation;

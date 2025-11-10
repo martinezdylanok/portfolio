@@ -1,4 +1,4 @@
 const FOOTER_CONTENT_SOCIAL__ARIA_LABEL: string = "Footer social container";
-const FOOTER_CONTENT_SOCIAL__SPAN_TEXT: string = "Follow me on";
+const FOOTER_CONTENT_SOCIAL__SPAN_TEXT: string = "FOLLOW ME";
 
 export { FOOTER_CONTENT_SOCIAL__ARIA_LABEL, FOOTER_CONTENT_SOCIAL__SPAN_TEXT };
