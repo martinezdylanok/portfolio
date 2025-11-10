@@ -27,8 +27,7 @@ if [ "$TABLE_EXISTS" = "f" ]; then
     
     # Run seed files
     echo "Running seed files..."
-    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /seeds/001_initial_seed.sql
-    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /seeds/002_real_projects.sql
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /seeds/001_real_projects.sql
     
     echo "Database initialization complete!"
 else
@@ -62,8 +61,7 @@ else
         
         # Run seed files
         echo "Running seed files..."
-        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /seeds/001_initial_seed.sql
-        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /seeds/002_real_projects.sql
+        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -f /seeds/001_real_projects.sql
         
         echo "Database re-seeded successfully!"
         
