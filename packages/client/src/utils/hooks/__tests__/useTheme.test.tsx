@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import { useThemeContext } from "../useTheme";
-import { surpressConsoleError, restoreConsoleError } from "./test-utils/testUtils";
+import { useThemeContext } from "../useThemeContext/useThemeContext";
+import { restoreConsoleError, surpressConsoleError } from "./test-utils/testUtils";
 
 describe("useThemeContext hook", () => {
    beforeAll(() => {
