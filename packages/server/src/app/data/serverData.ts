@@ -1,10 +1,9 @@
-const clientOriginDev = process.env.CLIENT_ORIGIN_DEV;
-const clientOriginProd = process.env.CLIENT_ORIGIN_PROD;
+const clientOrigin = process.env.CLIENT_ORIGIN;
 
-const allowedOrigins: string[] = [clientOriginDev, clientOriginProd].filter((origin): origin is string => typeof origin === "string" && origin.length > 0);
+const allowedOrigins: string[] = [clientOrigin].filter((origin): origin is string => typeof origin === "string" && origin.length > 0);
 
 if (allowedOrigins.length === 0) {
-   console.warn("[ServerData] WARNING: No CLIENT_ORIGIN_DEV or CLIENT_ORIGIN_PROD found in environment variables. CORS might block requests.");
+   console.warn("[ServerData] WARNING: No CLIENT_ORIGIN found in environment variables. CORS might block requests.");
 }
 
 console.log(`[ServerData] CORS Allowed Origins configured: ${allowedOrigins.join(", ")}`);
