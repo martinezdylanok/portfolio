@@ -40,7 +40,7 @@ const useFetchData = <T = unknown,>(apiPath: string | null): FetchResult<T> => {
                try {
                   errorBody = await response.json();
                } catch (e) {
-                  /* Ignore */
+                  console.log(e);
                }
                const errorMessage = (errorBody as { message?: string })?.message || `HTTP error! status: ${response.status}`;
                throw new Error(errorMessage);
@@ -56,12 +56,15 @@ const useFetchData = <T = unknown,>(apiPath: string | null): FetchResult<T> => {
                console.warn("Unexpected API response format. Expected { success: boolean, data: T }.", apiResponse);
                throw new Error("Unexpected API response format.");
             }
-         } catch (error: any) {
-            if (error.name === "AbortError") {
+         } catch (error: unknown) {
+            if (error instanceof Error && error.name === "AbortError") {
                console.log("Fetch aborted");
-            } else {
+            } else if (error instanceof Error) {
                console.error("Failed to fetch data:", error);
                setError(error);
+            } else {
+               console.error("Failed to fetch data:", error);
+               setError(new Error(String(error)));
             }
          } finally {
             if (!signal.aborted) {
