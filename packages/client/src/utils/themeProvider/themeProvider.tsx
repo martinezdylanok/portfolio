@@ -3,11 +3,11 @@ import { ThemeContextType, ThemeMode } from "../themeContext/data/themeContextDa
 import { themeContext } from "../themeContext/themeContext";
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-   const [mode, setMode] = useState<ThemeMode>(() => {
+   const [theme, setTheme] = useState<ThemeMode>(() => {
       if (typeof window === "undefined") return "light";
 
-      const savedMode = localStorage.getItem("themeMode") as ThemeMode;
-      if (savedMode === "light" || savedMode === "dark" || savedMode === "retro") return savedMode;
+      const savedTheme = localStorage.getItem("theme") as ThemeMode;
+      if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
 
       if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
          return "dark";
@@ -18,18 +18,18 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
    useEffect(() => {
       if (typeof window !== "undefined") {
-         document.documentElement.setAttribute("data-theme", mode);
-         localStorage.setItem("themeMode", mode);
+         document.documentElement.setAttribute("data-theme", theme);
+         localStorage.setItem("theme", theme);
       }
-   }, [mode]);
+   }, [theme]);
 
-   const toggleMode = () => {
-      setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+   const toggleTheme = () => {
+      setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
    };
 
    const contextValue: ThemeContextType = {
-      mode,
-      toggleMode,
+      theme,
+      toggleTheme,
    };
 
    return <themeContext.Provider value={contextValue}>{children}</themeContext.Provider>;
