@@ -54,7 +54,7 @@ services:
       - /etc/letsencrypt/live/martinezdylan.dev/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
       - /etc/letsencrypt/live/martinezdylan.dev/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
     depends_on:
-      - server-prod:
+      - server-prod
     networks:
       - portfolio_network-prod
     
