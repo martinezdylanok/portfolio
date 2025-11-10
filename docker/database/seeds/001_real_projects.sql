@@ -1,5 +1,6 @@
 -- Project 1: Belen Abdon: Building a Brand
 INSERT INTO projects (
+    project_id,
     project_name,
     project_logo_1,
     project_logo_2,
@@ -28,6 +29,7 @@ INSERT INTO projects (
     project_final_results_stat_03,
     project_external_url
 ) VALUES (
+    1,
     'Belen Abdon: Building a Brand',
     NULL,
     NULL,
@@ -59,6 +61,7 @@ INSERT INTO projects (
 
 -- Project 2: BV Architecture: Design in Motion
 INSERT INTO projects (
+    project_id,
     project_name,
     project_logo_1,
     project_logo_2,
@@ -87,6 +90,7 @@ INSERT INTO projects (
     project_final_results_stat_03,
     project_external_url
 ) VALUES (
+    2,
     'BV Architecture: Design in Motion',
     NULL,
     NULL,
@@ -118,6 +122,7 @@ INSERT INTO projects (
 
 -- Project 3: En Marte: From Another Planet
 INSERT INTO projects (
+    project_id,
     project_name,
     project_logo_1,
     project_logo_2,
@@ -146,6 +151,7 @@ INSERT INTO projects (
     project_final_results_stat_03,
     project_external_url
 ) VALUES (
+    3,
     'En Marte: From Another Planet',
     NULL,
     NULL,
@@ -177,6 +183,7 @@ INSERT INTO projects (
 
 -- Project 4: ISSAS: Alla Italiana
 INSERT INTO projects (
+    project_id,
     project_name,
     project_logo_1,
     project_logo_2,
@@ -205,6 +212,7 @@ INSERT INTO projects (
     project_final_results_stat_03,
     project_external_url
 ) VALUES (
+    4,
     'ISSAS: Alla Italiana',
     NULL,
     NULL,
@@ -236,6 +244,7 @@ INSERT INTO projects (
 
 -- Project 5: P-E-M: Breaking the Chains
 INSERT INTO projects (
+    project_id,
     project_name,
     project_logo_1,
     project_logo_2,
@@ -264,6 +273,7 @@ INSERT INTO projects (
     project_final_results_stat_03,
     project_external_url
 ) VALUES (
+    5,
     'P-E-M: Breaking the Chains',
     NULL,
     NULL,
