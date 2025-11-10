@@ -18,8 +18,6 @@
 
 ### The Original Plan
 
-![Original design image](assets/images/original-design-image/original-design.webp)
-
 A seamless fusion of **minimalist design** and **complex storytelling** — reimagining how to present work, ideas, and growth through visual order and narrative flow.
 
 > *A portfolio that doesn’t just show — it tells.*
