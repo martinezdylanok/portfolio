@@ -7,7 +7,7 @@ vi.mock("react-router", () => {
    const actual = vi.importActual("react-router") as object;
    return {
       ...actual,
-      Link: vi.fn(({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: any }) => (
+      Link: vi.fn(({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: unknown }) => (
          <a href={to} {...props}>
             {children}
          </a>
@@ -45,7 +45,7 @@ describe("ProjectRelatedContainerProjects tests", () => {
 
       const listItem = screen.getByRole("listitem");
       expect(listItem).toBeInTheDocument();
-      expect(listItem).toHaveClass("project__related-project");
+      expect(listItem).toHaveClass("project__related-container-projects-project");
       expect(listItem).toHaveAttribute("data-testid", "related-project");
    });
 

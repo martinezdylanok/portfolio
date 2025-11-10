@@ -1,4 +1,5 @@
 const PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL: string = "Related projects container projects";
+import type { ProjectInterface } from "../../../../../../../data/projectData";
 
 const getRandomProjects = (projectsArray: ProjectInterface[], count: number): ProjectInterface[] => {
    const shuffled = [...projectsArray];
@@ -20,12 +21,5 @@ const getProjectNameParts = (projectName: string): { firstPart: string; secondPa
 
    return { firstPart, secondPart };
 };
-
-export interface ProjectInterface {
-   project_id: number;
-   project_name: string;
-   project_description: string;
-   project_technologies: string;
-}
 
 export { getProjectNameParts, getRandomProjects, PROJECT_RELATED_CONTAINER_PROJECTS_ARIA_LABEL };

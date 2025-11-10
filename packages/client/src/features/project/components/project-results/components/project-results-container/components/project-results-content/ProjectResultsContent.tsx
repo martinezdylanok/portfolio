@@ -1,34 +1,67 @@
-import { useThemeContext } from "../../../../../../../../utils/hooks/useTheme";
-import { PROJECT_RESULTS_CONTENT_ARIA_LABEL, PROJECT_RESULTS_CONTENT_TITLE, ProjectResultsContentProps } from "./data/projectResultsContentData";
+import { motion } from "framer-motion";
+import { PROJECT_RESULTS_CONTENT_ARIA_LABEL, PROJECT_RESULTS_CONTENT_SPAN, PROJECT_RESULTS_CONTENT_TITLE, ProjectResultsContentProps } from "./data/projectResultsContentData";
+import { useProjectResultsBodyAnimations } from "./utils/useProjectResultsBodyAnimations";
+import { useProjectResultsScrollAnimations } from "./utils/useProjectResultsScrollAnimations";
 
 const ProjectResultsContent = ({ project }: ProjectResultsContentProps) => {
-   const { mode } = useThemeContext();
+   const { containerRef, transforms } = useProjectResultsScrollAnimations();
+   const { initial, whileInView, transition, viewport } = useProjectResultsBodyAnimations();
 
-   // TODO: Put these definitions into tailwind's config
-   const lighestColors = mode === "light" ? "text-[#ABC4FF40]" : "text-[#EDF2FB40]";
-   const lightColors = mode === "light" ? "text-[#ABC4FF80]" : "text-[#EDF2FB80]";
-
-   //TODO: Create stats for results in the database and fetch it here.
    return (
-      <div className="grid grid-cols-2 grid-rows-2 project__results-content" aria-label={PROJECT_RESULTS_CONTENT_ARIA_LABEL}>
-         <p className={`mt-12 text-2xl col-start-1 row-start-2 text-justify text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"} project__results-paragraph`} data-testid="results-content-paragraph">
-            {project.project_final_results}
-         </p>
-         <div className={`flex gap-20 text-2xl col-start-2 col-end-3 row-start-2 place-self-center text-justify project__results`} data-testid="results-content-container">
-            <div className="flex flex-col project_results-inner-container" data-testid="results-content-inner-container">
-               <span className={`mb-6 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>CTR</span>
-               <span className={`text-2xl font-semibold text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>12%</span>
-            </div>
-            <div className="flex flex-col project_results-inner-container" data-testid="results-content-inner-container">
-               <span className={`mb-6 text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>Number of new clients</span>
-               <span className={`text-2xl font-semibold text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>245</span>
-            </div>
+      <div ref={containerRef} className="project__results-content flex flex-col" aria-label={PROJECT_RESULTS_CONTENT_ARIA_LABEL}>
+         <div className="project__results-content-header flex flex-col gap-3 mb-25 text-center" data-testid="results-content-header">
+            <motion.span style={{ fontSize: transforms[0].fontSize, filter: transforms[0].blur }} className="project__results-content-header-title self-center font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_TITLE.split(" ")[0]} <br /> {PROJECT_RESULTS_CONTENT_TITLE.split(" ")[1]}
+            </motion.span>
+            <motion.span style={{ fontSize: transforms[1].fontSize, filter: transforms[1].blur }} className="project__results-content-header-span font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_SPAN}
+            </motion.span>
+
+            <motion.span style={{ fontSize: transforms[2].fontSize, filter: transforms[2].blur }} className="project__results-content-header-span font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_SPAN}
+            </motion.span>
+            <motion.span style={{ fontSize: transforms[3].fontSize, filter: transforms[3].blur }} className="project__results-content-header-span font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_SPAN}
+            </motion.span>
+            <motion.span style={{ fontSize: transforms[4].fontSize, filter: transforms[4].blur }} className="project__results-content-header-span font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_SPAN}
+            </motion.span>
+            <motion.span style={{ fontSize: transforms[5].fontSize, filter: transforms[5].blur }} className="project__results-content-header-span font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_SPAN}
+            </motion.span>
+            <motion.span style={{ fontSize: transforms[6].fontSize, filter: transforms[6].blur }} className="project__results-content-header-span font-hanken-grotesk font-bold leading-none text-heading">
+               {PROJECT_RESULTS_CONTENT_SPAN}
+            </motion.span>
+            <motion.h2 className="project__results-content-header-final font-hanken-grotesk text-8xl font-bold leading-none text-heading">{PROJECT_RESULTS_CONTENT_SPAN}</motion.h2>
          </div>
-         <div className="flex flex-col col-start-2 row-start-1 project__results-header" data-testid="results-content-header">
-            <span className={`text-8xl -mb-6 -z-2 font-bold ${lighestColors}`}>{PROJECT_RESULTS_CONTENT_TITLE}</span>
-            <span className={`text-8xl -mb-6 -z-1 font-bold ${lightColors}`}>{PROJECT_RESULTS_CONTENT_TITLE}</span>
-            <h2 className={`text-8xl font-bold text-${mode === "light" ? "[#ABC4FF]" : "[#EDF2FB]"}`}>{PROJECT_RESULTS_CONTENT_TITLE}</h2>
-         </div>
+         <motion.div initial={initial} whileInView={whileInView} transition={transition} viewport={viewport} className="project__results-content-body flex flex-col gap-25">
+            <div className="project__results-content-body-paragraphs grid gap-6">
+               <p className="project__results-content-paragraph text-xl h-fit text-justify font-hanken-grotesk font-normal col-start-1 row-start-1 text-body" data-testid="results-content-paragraph">
+                  {project.project_final_results_description_part_01}
+               </p>
+               <p className="project__results-content-paragraph text-xl h-fit text-justify font-hanken-grotesk font-normal col-start-2 row-start-2 text-body" data-testid="results-content-paragraph">
+                  {project.project_final_results_description_part_02}
+               </p>
+            </div>
+            <div className={`project__results-content-stats grid ${project.project_final_results_stat_03 ? "grid-cols-3" : "grid-cols-2"}`} data-testid="results-content-container">
+               <div className="project__results-content-stat flex flex-col" data-testid="results-content-inner-container">
+                  <span className="project__results-content-stat-title mb-6 text-xl font-hanken-grotesk font-medium text-muted">{project.project_final_results_stat_01_title}</span>
+                  <h3 className="project__results-content-stat-value text-2xl font-hanken-grotesk font-bold text-body">{project.project_final_results_stat_01}</h3>
+               </div>
+
+               <div className={`project__results-content-stat flex flex-col ${project.project_final_results_stat_03 ? "text-start" : "text-end"}`} data-testid="results-content-inner-container">
+                  <span className="project__results-content-stat-title mb-6 text-xl font-hanken-grotesk font-medium text-muted">{project.project_final_results_stat_02_title}</span>
+                  <h3 className="project__results-content-stat-value text-2xl font-hanken-grotesk font-bold text-body">{project.project_final_results_stat_02}</h3>
+               </div>
+
+               {project.project_final_results_stat_03 && (
+                  <div className="project__results-content-stat flex flex-col" data-testid="results-content-inner-container">
+                     <span className="project__results-content-stat-title mb-6 text-xl font-hanken-grotesk font-medium text-muted">{project.project_final_results_stat_03_title}</span>
+                     <h3 className="project__results-content-stat-value text-2xl font-hanken-grotesk font-bold text-body">{project.project_final_results_stat_03}</h3>
+                  </div>
+               )}
+            </div>
+         </motion.div>
       </div>
    );
 };
