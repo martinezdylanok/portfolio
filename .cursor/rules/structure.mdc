@@ -1,0 +1,76 @@
+---
+description: Project Structure Rules
+globs:
+alwaysApply: true
+---
+
+# 📐 Project Architecture and Structure Rules
+
+This document outlines the custom folder structure, conceptual labels, domain separation, and naming conventions for the project.
+
+---
+
+## I. Core Directory Structure (Physical Layout)
+
+These are the top-level, physical directories and their purpose for file compilation and delivery.
+
+| Directory | Accessibility | Purpose |
+| :--- | :--- | :--- |
+| **PUBLIC** | Web Accessible Root | Contains files directly accessible via the web (e.g., `index.html`). |
+| **SRC** | Source Code | Contains raw source files that require processing (optimization/compilation). |
+| **DIST/BUILD** | Final Output | Contains the compiled and optimized files delivered to the end-user. |
+
+---
+
+## II. Conceptual Workflow Labels (Code Flow/Dependency)
+
+Folders are categorized by the flow of code exports/imports, defining dependencies.
+
+| Label | Export Rule | Import Rule | Conceptual Purpose |
+| :--- | :--- | :--- | :--- |
+| **SHARED** | Exports to **App** and **Features** | Imports from nowhere | Low-level, reusable utilities and components. |
+| **FEATURES** | Exports only to **App** | Imports from **SHARED** | Specific, encapsulated business logic/functionality. |
+| **APP** | Does **not** export code | Imports from **SHARED** and **FEATURES** | Main setup, configuration, and orchestration. |
+
+**Example Label Mapping:**
+* **SHARED:** `Lib`, `Api`, `Database`, `Components`, `Utils`
+* **FEATURES:** `Products`, `Users`, `Sales`, (any specific module)
+* **APP:** `Database config`, `Server config`, main setup files
+
+---
+
+## III. Common Folder Naming and Content (Semantic Rules)
+
+These semantic names define the *type* of content within a folder.
+
+* **App:** Main application setup, configuration, and entry points.
+* **Components:** UI-related generic pieces of code used across multiple application parts.
+* **Data:** Mock data, API fetching logic (functions/classes), variables, and objects storing data.
+* **Features:** Small, specific pieces of code that perform a single, encapsulated action/functionality.
+* **Utils:** State and side-effect management logic (e.g., React Hooks, Context providers).
+* **Lib:** Framework-agnostic, independent helper code or libraries.
+* **Api:** All API interaction code (endpoints, request definitions, serialization).
+* **Tasks:** Small scripts and code for repetitive or administrative tasks.
+
+---
+
+## IV. Component and File Organization Rules (Naming Conventions)
+
+These rules ensure a logical and navigable project structure using standard conventions.
+
+| Rule ID | Item Type | Naming Convention | Example |
+| :---: | :---: | :---: | :--- |
+| **R14** | **Directories/Folders** | `kebab-case` | `src/components/user-card/` |
+| **R15** | **Component Files/Classes** | `PascalCase` | `UserProfile.js`, `class UserProfile { ... }` |
+| **R16** | **Utility/General Files** | `camelCase` or `kebab-case` | `src/utils/formatDate.js` |
+| **R17** | **Constants** | `SCREAMING_SNAKE_CASE` | `export const MAX_ITEMS = 10;` |
+| **R18** | **Co-location** | Match component name | Component-specific files (e.g., styles, tests) should live within the component's folder (e.g., `UserCard/UserCard.css`). |
+
+---
+
+## V. Client/Server Division (Domain Separation)
+
+The project is logically divided into client-side and server-side domains.
+
+* **Client (Front-end):** UI components, user-interaction logic, features, presentation.
+* **Server (Back-end):** Database config, controllers, routing, server configuration, API business logic.

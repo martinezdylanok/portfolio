@@ -1,0 +1,14 @@
+---
+description: Project Tech stack
+alwaysApply: true
+---
+The global tech stack used in this project is:
+- TypeScript
+- React
+- Node.js
+- Express
+- PostgreSQL
+- Docker
+- Vite
+- Vitest
+- Tailwind
