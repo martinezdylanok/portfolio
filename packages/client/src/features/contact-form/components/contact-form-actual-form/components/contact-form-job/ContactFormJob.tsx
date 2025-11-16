@@ -21,7 +21,7 @@ const ContactFormJob = ({ activeForm }: ContactFormJobFormProps) => {
       <div className={`contact-form__actual-form-job contact-form__actual-form-job--${activeForm === "secondForm" ? "active" : "inactive"}`} aria-disabled={activeForm === "secondForm" ? "false" : "true"} aria-label={CONTACT_FORM_JOB_FORM_ARIA_LABEL}>
          <h3 className="contact-form__actual-form-job-title pt-12 text-2xl font-hanken-grotesk font-bold whitespace-pre-line text-muted">{CONTACT_FORM_JOB_FORM_H3_TEXT}</h3>
          <form className="contact-form__actual-form-job-form" data-testid="form" noValidate action="/form-sent" method="POST" onSubmit={handleSubmit(onSubmit)}>
-            <div className="contact-form__actual-form-job-fields my-24 grid grid-cols-2 gap-12">
+            <div className="contact-form__actual-form-job-fields my-24 grid grid-cols-2 gap-24">
                <div className="contact-form__actual-form-job-input-field relative">
                   <label htmlFor="name" className="contact-form__actual-form-job-label"></label>
                   <input
@@ -42,15 +42,15 @@ const ContactFormJob = ({ activeForm }: ContactFormJobFormProps) => {
                   />
                   {errors.name && (
                      <>
-                        <span id="name-error-message" className="contact-form__actual-form-job-error-message absolute top-10 left-0 text-red-500">
+                        <span id="name-error-message" className="contact-form__actual-form-job-error-message absolute top-10 left-0 text-status-error">
                            {errors.name.message}
                         </span>
-                        <img src="/public/error_icon.svg" alt="Name error icon" className="contact-form__actual-form-job-error-icon absolute top-0 left-full"></img>
+                        <img src={theme === "light" ? "/form/error_icon_light_mode.svg" : "/form/error_icon_dark_mode.svg"} alt="Name error icon" className="contact-form__actual-form-job-error-icon absolute bottom-1/2 left-full"></img>
                      </>
                   )}
                   {!errors.name && touchedFields.name && (
                      <>
-                        <img src={theme === "light" ? "/success_icon_dark_mode.svg" : "/success_icon_light_mode.svg"} className="contact-form__actual-form-job-success-icon absolute top-0 left-full" alt="Name success icon" />
+                        <img src={theme === "light" ? "/form/success_icon_light_mode.svg" : "/form/success_icon_dark_mode.svg"} className="contact-form__actual-form-job-success-icon absolute bottom-1/2 left-full" alt="Name success icon" />
                      </>
                   )}
                </div>
@@ -75,15 +75,15 @@ const ContactFormJob = ({ activeForm }: ContactFormJobFormProps) => {
                   />
                   {errors.phone && (
                      <>
-                        <span id="phone-error-message" className="contact-form__actual-form-job-error-message absolute top-10 left-0 text-red-500">
+                        <span id="phone-error-message" className="contact-form__actual-form-job-error-message absolute top-10 left-0 text-status-error">
                            {errors.phone.message}
                         </span>
-                        <img src="/public/error_icon.svg" alt="Phone error icon" className="contact-form__actual-form-job-error-icon absolute top-0 left-full"></img>
+                        <img src={theme === "light" ? "/error_icon_light_mode.svg" : "/error_icon_dark_mode.svg"} alt="Phone error icon" className="contact-form__actual-form-job-error-icon absolute bottom-1/2 left-full"></img>
                      </>
                   )}
                   {!errors.phone && touchedFields.phone && (
                      <>
-                        <img src={theme === "light" ? "/success_icon_dark_mode.svg" : "/success_icon_light_mode.svg"} className="contact-form__actual-form-job-success-icon absolute top-0 left-full" alt="Phone success icon" />
+                        <img src={theme === "light" ? "/success_icon_light_mode.svg" : "/success_icon_dark_mode.svg"} className="contact-form__actual-form-job-success-icon absolute bottom-1/2 left-full" alt="Phone success icon" />
                      </>
                   )}
                </div>
@@ -105,15 +105,15 @@ const ContactFormJob = ({ activeForm }: ContactFormJobFormProps) => {
                   />
                   {errors.email && (
                      <>
-                        <span id="email-error-message" className="contact-form__actual-form-job-error-message absolute top-10 left-0 text-red-500">
+                        <span id="email-error-message" className="contact-form__actual-form-job-error-message absolute top-10 left-0 text-status-error">
                            {errors.email.message}
                         </span>
-                        <img src="/public/error_icon.svg" alt="Email error icon" className="contact-form__actual-form-job-error-icon absolute top-0 left-full"></img>
+                        <img src={theme === "light" ? "/error_icon_light_mode.svg" : "/error_icon_dark_mode.svg"} alt="Email error icon" className="contact-form__actual-form-job-error-icon absolute bottom-1/2 left-full"></img>
                      </>
                   )}
                   {!errors.email && touchedFields.email && (
                      <>
-                        <img src={theme === "light" ? "/success_icon_dark_mode.svg" : "/success_icon_light_mode.svg"} className="contact-form__actual-form-job-success-icon absolute top-0 left-full" alt="Email success icon" />
+                        <img src={theme === "light" ? "/success_icon_light_mode.svg" : "/success_icon_dark_mode.svg"} className="contact-form__actual-form-job-success-icon absolute bottom-1/2 left-full" alt="Email success icon" />
                      </>
                   )}
                </div>
@@ -123,7 +123,7 @@ const ContactFormJob = ({ activeForm }: ContactFormJobFormProps) => {
                </div>
             </div>
             <div className="contact-form__actual-form-job-send-button flex justify-center pb-12">
-               <button className="contact-form__actual-form-job-submit-button text-2xl font-bold w-1/5 p-2.5 border-0 cursor-pointer rounded-full hover:w-1/4" type="submit">
+               <button className="contact-form__actual-form-job-submit-button text-2xl font-hanken-grotesk font-bold w-1/5 p-2.5 border-0 cursor-pointer rounded-full hover:w-1/4" type="submit">
                   {CONTACT_FORM_JOB_FORM_SEND_BUTTON_TEXT}
                </button>
             </div>

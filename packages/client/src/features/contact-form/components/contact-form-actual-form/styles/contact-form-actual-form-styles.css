@@ -1,80 +1,106 @@
-.contact-form__actual-form-wrapper {
-   background-color: var(--bg-page);
-}
+@layer components {
+   .contact-form__actual-form-wrapper {
+      background-color: var(--bg-page);
+   }
 
-.contact-form__actual-form-active,
-.contact-form__actual-form-inactive {
-   transition: all 2s;
-}
+   .contact-form__actual-form-default--active,
+   .contact-form__actual-form-job--active {
+      opacity: 1;
+      transition: all 2s;
+   }
 
-.contact-form__actual-form-active {
-   opacity: 1;
-}
+   .contact-form__actual-form-default--inactive,
+   .contact-form__actual-form-job--inactive {
+      position: absolute;
+      white-space: nowrap;
+      overflow: hidden;
+      height: 1px;
+      width: 1px;
+      padding: 0;
+      border-width: 0;
+      opacity: 0;
+      transition: all 2s;
+   }
 
-.contact-form__actual-form-inactive {
-   position: absolute;
-   white-space: nowrap;
-   overflow: hidden;
-   height: 1px;
-   width: 1px;
-   padding: 0;
-   border-width: 0;
-   opacity: 0;
-}
+   .contact-form__actual-form-default-input-field input,
+   .contact-form__actual-form-default-input-field textarea,
+   .contact-form__actual-form-job-input-field input,
+   .contact-form__actual-form-job-input-field textarea {
+      color: var(--text-heading);
+      opacity: 0.5;
+      outline: none;
+      border-bottom: var(--border-subtle) 1px solid;
+   }
 
-.contact-form__actual-form-input-field input,
-.contact-form__actual-form-input-field textarea {
-   color: var(--text-heading);
-   opacity: 0.5;
-   outline: none;
-   border-bottom: var(--border-subtle) 1px solid;
-}
+   .contact-form__actual-form-default-input-field input:hover,
+   .contact-form__actual-form-default-input-field textarea:hover,
+   .contact-form__actual-form-default-input-field input:focus,
+   .contact-form__actual-form-default-input-field textarea:focus,
+   .contact-form__actual-form-job-input-field input:hover,
+   .contact-form__actual-form-job-input-field textarea:hover,
+   .contact-form__actual-form-job-input-field input:focus,
+   .contact-form__actual-form-job-input-field textarea:focus {
+      opacity: 1;
+   }
 
-.contact-form__actual-form-input-field input:hover,
-.contact-form__actual-form-input-field textarea:hover,
-.contact-form__actual-form-input-field input:focus,
-.contact-form__actual-form-input-field textarea:focus {
-   opacity: 1;
-}
+   .contact-form__actual-form-default-input-field input:not(.contact-form__actual-form-default-input--error):hover,
+   .contact-form__actual-form-default-input-field textarea:hover,
+   .contact-form__actual-form-job-input-field input:not(.contact-form__actual-form-job-input--error):hover,
+   .contact-form__actual-form-job-input-field textarea:hover {
+      border-bottom: var(--text-heading) 1px solid;
+   }
 
-.contact-form__actual-form-input-field input:not(.hasErrors):hover,
-.contact-form__actual-form-input-field textarea:hover {
-   border-bottom: var(--text-heading) 1px solid;
-}
+   .contact-form__actual-form-default-input-field input.contact-form__actual-form-default-input--error:hover,
+   .contact-form__actual-form-job-input-field input.contact-form__actual-form-job-input--error:hover {
+      border-bottom: 1px solid var(--color-status-error);
+   }
 
-.contact-form__actual-form-input-field input.hasErrors:hover {
-   border-bottom: 1px solid var(--color-status-error);
-}
+   .contact-form__actual-form-default-input-field input:not(.contact-form__actual-form-default-input--error):focus,
+   .contact-form__actual-form-default-input-field textarea:focus,
+   .contact-form__actual-form-job-input-field input:not(.contact-form__actual-form-job-input--error):focus,
+   .contact-form__actual-form-job-input-field textarea:focus {
+      border-bottom: var(--text-heading) 1px solid;
+      opacity: 1;
+   }
 
-.contact-form__actual-form-input-field input:not(.hasErrors):focus,
-.contact-form__actual-form-input-field textarea:focus {
-   border-bottom: var(--text-heading) 1px solid;
-   opacity: 1;
-}
+   .contact-form__actual-form-default-input-field input.contact-form__actual-form-default-input--error:focus,
+   .contact-form__actual-form-job-input-field input.contact-form__actual-form-job-input--error:focus {
+      border-bottom: 1px solid var(--color-status-error);
+   }
 
-.contact-form__actual-form-input-field input.hasErrors:focus {
-   border-bottom: 1px solid var(--color-status-error);
-}
+   .contact-form__actual-form-default-input-field input.contact-form__actual-form-default-input--error,
+   .contact-form__actual-form-job-input-field input.contact-form__actual-form-job-input--error {
+      border-bottom: 1px solid var(--color-status-error);
+      opacity: 0.25;
+   }
 
-.contact-form__actual-form-input-field input.hasErrors {
-   border-bottom: 1px solid var(--color-status-error);
-   opacity: 0.25;
-}
+   .contact-form__actual-form-default-input-field input::placeholder,
+   .contact-form__actual-form-default-input-field textarea::placeholder,
+   .contact-form__actual-form-job-input-field input::placeholder,
+   .contact-form__actual-form-job-input-field textarea::placeholder {
+      color: var(--text-heading);
+      transition: all 0.5s ease-in-out;
+   }
 
-.contact-form__actual-form-input-field input::placeholder,
-.contact-form__actual-form-input-field textarea::placeholder {
-   color: var(--text-heading);
-   transition: all 0.5s ease-in-out;
-}
+   .contact-form__actual-form-default-input-field input:focus::placeholder,
+   .contact-form__actual-form-default-input-field textarea:focus::placeholder,
+   .contact-form__actual-form-job-input-field input:focus::placeholder,
+   .contact-form__actual-form-job-input-field textarea:focus::placeholder {
+      color: transparent;
+   }
 
-.contact-form__actual-form-input-field input:focus::placeholder,
-.contact-form__actual-form-input-field textarea:focus::placeholder {
-   color: transparent;
-}
+   .contact-form__actual-form-default-send-button button,
+   .contact-form__actual-form-job-send-button button {
+      color: var(--text-heading);
+      background-color: var(--bg-card);
+      transition: all 0.5s ease-in-out;
+   }
 
-.contact-form__actual-form-send-button button {
-   color: var(--text-heading);
-   background-color: var(--bg-card);
-   transition: all 0.5s ease-in-out;
+   .contact-form__actual-form-default-send-button button:hover,
+   .contact-form__actual-form-job-send-button button:hover {
+      color: var(--bg-page);
+      background-color: var(--color-active);
+
+   }
 }
 
