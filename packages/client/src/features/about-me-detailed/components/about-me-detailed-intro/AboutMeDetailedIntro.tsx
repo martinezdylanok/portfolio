@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { useThemeContext } from "../../../../utils/hooks/useThemeContext/useThemeContext";
 import { CATEGORY_NAME, INTRO_TEXTS } from "../../../about-me/data/aboutMeData";
 import { useAboutMeDetailedIntroImageAnimations, useAboutMeDetailedIntroTextAnimations, useAboutMeDetailedIntroTitleAnimations } from "./utils/useAboutMeDetailedIntroAnimations";
 
 const AboutMeDetailedIntro = () => {
+   const { theme } = useThemeContext();
    const { initial: titleInitial, whileInView: titleWhileInView, transition: titleTransition, viewport: titleViewport } = useAboutMeDetailedIntroTitleAnimations();
    const textAnimations0 = useAboutMeDetailedIntroTextAnimations(0);
    const textAnimations1 = useAboutMeDetailedIntroTextAnimations(0.3);
@@ -29,7 +31,7 @@ const AboutMeDetailedIntro = () => {
                {INTRO_TEXTS[3]}
             </motion.span>
          </div>
-         <motion.img initial={imageInitial} whileInView={imageWhileInView} transition={imageTransition} viewport={imageViewport} className="about-me-detailed__intro-image max-w-1/4 grayscale hover:hue-rotate- cursor-pointer absolute top-25 right-0 rotate-270 hover:grayscale-0" src="/dylan.webp" alt="Dylan Martinez portrait" />
+         <motion.img initial={imageInitial} whileInView={imageWhileInView} transition={imageTransition} viewport={imageViewport} src={theme === "light" ? "/dylan_light_mode.webp" : "/dylan_darkmode.webp"} className="about-me-detailed__intro-image max-w-1/4 absolute top-25 right-0 rotate-270" alt="Dylan Martinez portrait" />
       </div>
    );
 };
