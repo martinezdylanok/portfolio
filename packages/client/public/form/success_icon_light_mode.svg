@@ -6,7 +6,7 @@
    fill="#edf2fb"
    version="1.1"
    id="svg796"
-   sodipodi:docname="check_icon_light_mode.svg"
+   sodipodi:docname="success_icon_light_mode.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -32,9 +32,22 @@
      inkscape:window-x="66"
      inkscape:window-y="32"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg796" />
+     inkscape:current-layer="svg796">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="652"
+       height="480.99997"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
   <path
      d="M 228,-479 0,-707 l 57,-57 171,171 367,-367 57,57 z"
      id="path794"
-     style="fill:#edf2fb;fill-opacity:1" />
+     style="fill:#333333;fill-opacity:1;stroke-width:12;stroke-dasharray:none" />
+  <path
+     style="fill:#333333;fill-opacity:1;stroke:#333333;stroke-width:1.2;stroke-dasharray:none"
+     d="M 114.48902,-593.28737 0.6081332,-707.17295 28.620746,-735.2046 l 28.012614,-28.03164 85.57234,85.56614 85.57235,85.56616 183.65051,-183.6476 183.65048,-183.6476 28.32204,28.32205 28.32208,28.32205 -211.67664,211.67662 -211.67662,211.67662 z"
+     id="path1" />
 </svg>

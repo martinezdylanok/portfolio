@@ -20,7 +20,7 @@ const ContactFormDefault = ({ activeForm }: ContactFormDefaultFormProps) => {
       <div className={`contact-form__actual-form-default contact-form__actual-form-default--${activeForm === "firstForm" ? "active" : "inactive"}`} aria-disabled={activeForm === "firstForm" ? "false" : "true"} aria-label={CONTACT_FORM_DEFAULT_FORM_ARIA_LABEL}>
          <h3 className="contact-form__actual-form-default-title pt-12 text-2xl font-hanken-grotesk font-bold whitespace-pre-line text-muted">{CONTACT_FORM_DEFAULT_FORM_H3_TEXT}</h3>
          <form className="contact-form__actual-form-default-form" data-testid="form" noValidate action="/form-sent" method="POST" onSubmit={handleSubmit(onSubmit)}>
-            <div className="contact-form__actual-form-default-fields my-24 grid grid-cols-2 gap-12">
+            <div className="contact-form__actual-form-default-fields my-24 grid grid-cols-2 gap-24">
                <div className="contact-form__actual-form-default-input-field relative">
                   <label htmlFor="name" className="contact-form__actual-form-default-label"></label>
                   <input
@@ -41,15 +41,15 @@ const ContactFormDefault = ({ activeForm }: ContactFormDefaultFormProps) => {
                   />
                   {errors.name && (
                      <>
-                        <span id="name-error-message" className="contact-form__actual-form-default-error-message absolute top-10 left-0 text-red-500">
+                        <span id="name-error-message" className="contact-form__actual-form-default-error-message absolute top-10 left-0 text-status-error">
                            {errors.name.message}
                         </span>
-                        <img src="/error_icon.svg" alt="Name error icon" className="contact-form__actual-form-default-error-icon absolute top-0 left-full"></img>
+                        <img src={theme === "light" ? "/form/error_icon_light_mode.svg" : "/form/error_icon_dark_mode.svg"} alt="Name error icon" className="contact-form__actual-form-default-error-icon absolute bottom-1/2 left-full"></img>
                      </>
                   )}
                   {!errors.name && touchedFields.name && (
                      <>
-                        <img src={theme === "light" ? "/success_icon_dark_mode.svg" : "/success_icon_light_mode.svg"} className="contact-form__actual-form-default-success-icon absolute top-0 left-full" alt="Name success icon" />
+                        <img src={theme === "light" ? "/form/success_icon_light_mode.svg" : "/form/success_icon_dark_mode.svg"} className="contact-form__actual-form-default-success-icon absolute bottom-1/2 left-full" alt="Name success icon" />
                      </>
                   )}
                </div>
@@ -74,15 +74,15 @@ const ContactFormDefault = ({ activeForm }: ContactFormDefaultFormProps) => {
                   />
                   {errors.phone && (
                      <>
-                        <span id="phone-error-message" className="contact-form__actual-form-default-error-message absolute top-10 left-0 text-red-500">
+                        <span id="phone-error-message" className="contact-form__actual-form-default-error-message absolute top-10 left-0 text-status-error">
                            {errors.phone.message}
                         </span>
-                        <img src="/error_icon.svg" alt="Phone error icon" className="contact-form__actual-form-default-error-icon absolute top-0 left-full"></img>
+                        <img src={theme === "light" ? "/form/error_icon_light_mode.svg" : "/form/error_icon_dark_mode.svg"} alt="Phone error icon" className="contact-form__actual-form-default-error-icon absolute bottom-1/2 left-full"></img>
                      </>
                   )}
                   {!errors.phone && touchedFields.phone && (
                      <>
-                        <img src={theme === "light" ? "/success_icon_dark_mode.svg" : "/success_icon_light_mode.svg"} className="contact-form__actual-form-default-success-icon absolute top-0 left-full" alt="Phone success icon" />
+                        <img src={theme === "light" ? "/form/success_icon_light_mode.svg" : "/form/success_icon_dark_mode.svg"} className="contact-form__actual-form-default-success-icon absolute bottom-1/2 left-full" alt="Phone success icon" />
                      </>
                   )}
                </div>
@@ -104,15 +104,15 @@ const ContactFormDefault = ({ activeForm }: ContactFormDefaultFormProps) => {
                   />
                   {errors.email && (
                      <>
-                        <span id="email-error-message" className="contact-form__actual-form-default-error-message absolute top-10 left-0 text-red-500">
+                        <span id="email-error-message" className="contact-form__actual-form-default-error-message absolute top-10 left-0 text-status-error">
                            {errors.email.message}
                         </span>
-                        <img src="/error_icon.svg" alt="Email error icon" className="contact-form__actual-form-default-error-icon absolute top-0 left-full"></img>
+                        <img src={theme === "light" ? "/form/error_icon_light_mode.svg" : "/form/error_icon_dark_mode.svg"} alt="Email error icon" className="contact-form__actual-form-default-error-icon absolute bottom-1/2 left-full"></img>
                      </>
                   )}
                   {!errors.email && touchedFields.email && (
                      <>
-                        <img src={theme === "light" ? "/success_icon_dark_mode.svg" : "/success_icon_light_mode.svg"} className="contact-form__actual-form-default-success-icon absolute top-0 left-full" alt="Email success icon" />
+                        <img src={theme === "light" ? "/form/success_icon_light_mode.svg" : "/form/success_icon_dark_mode.svg"} className="contact-form__actual-form-default-success-icon absolute bottom-1/2 left-full" alt="Email success icon" />
                      </>
                   )}
                </div>
