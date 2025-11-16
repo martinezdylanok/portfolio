@@ -3,7 +3,6 @@ import { PROJECT_RELATED_CONTAINER_CONTENT_ARIA_LABEL, PROJECT_RELATED_CONTAINER
 
 const ProjectRelatedContainerContent = () => {
    return (
-      //TODO: Add placeholders in the DATA file.
       <div className="project__related-container-content flex justify-between mb-12 items-end" aria-label={PROJECT_RELATED_CONTAINER_CONTENT_ARIA_LABEL}>
          <Link to={`/projects/`} className="project__related-container-content-link" aria-label={PROJECT_RELATED_CONTAINER_CONTENT_LINK_ARIA_LABEL}>
             <span className="project__related-container-content-text relative group font-hanken-grotesk text-2xl font-medium text-heading">

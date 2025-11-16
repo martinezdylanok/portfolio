@@ -31,7 +31,7 @@ const ProjectRelatedContainerProjectsProject = ({ firstPart, secondPart, project
                <div className="project__related-container-projects-project-upper-part">
                   <img className="project__related-container-projects-project-image size-[550px]" src={projectSecondaryLogo} alt={PROJECT_RELATED_CONTAINER_PROJECTS_IMAGE_ALT_TEXT} />
                </div>
-               <motion.div initial={{ bottom: -112 }} animate={{ bottom: isHovered ? -112 : 0 }} transition={{ duration: 0.3, ease: "easeOut" }} className="project__related-container-projects-project-lower-part absolute flex flex-col w-full overflow-hidden bg-page pl-4 pt-4" data-testid="related-project-lower-part">
+               <motion.div initial={{ height: 0 }} animate={{ height: isHovered ? 115 : 0 }} transition={{ duration: 0.3, ease: "easeInOut" }} className="project__related-container-projects-project-lower-part absolute flex flex-col w-full overflow-hidden bg-page pl-4 pt-4" data-testid="related-project-lower-part">
                   <motion.span className="project__related-container-projects-project-second-part text-muted font-medium text-xl mb-6" data-testid="project-second-part-name">
                      {secondPart || PROJECT_RELATED_CONTAINER_PROJECTS_SECOND_PART_NAME_PLACEHOLDER}
                   </motion.span>
