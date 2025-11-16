@@ -98,7 +98,7 @@
 
    .contact-form__actual-form-default-send-button button:hover,
    .contact-form__actual-form-job-send-button button:hover {
-      color: var(--bg-page);
+      color: white;
       background-color: var(--color-active);
 
    }
