@@ -14,7 +14,7 @@ const Header = () => {
             header
             fixed w-full min-h-[6.25rem] z-20 px-5 
             flex items-center justify-between 
-            bg-section
+            bg-page
             transition-transform duration-800 ease-in-out
             ${isVisible ? "transform-none" : "-translate-y-full"}
          `}

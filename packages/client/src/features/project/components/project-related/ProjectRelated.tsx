@@ -3,7 +3,7 @@ import { PROJECT_RELATED_ARIA_LABEL } from "./data/projectRelatedData";
 
 const ProjectRelated = () => {
    return (
-      <section className="project__related min-h-screen min-w-screen bg-section p-25" aria-label={PROJECT_RELATED_ARIA_LABEL}>
+      <section className="project__related min-h-screen min-w-screen bg-card p-25" aria-label={PROJECT_RELATED_ARIA_LABEL}>
          <ProjectRelatedContainer />
       </section>
    );

@@ -45,90 +45,125 @@
    }
  }
 
-/* PALETTE: CONCRETE (Blue/Orange) */
+/* ============================================================================
+   12-STEP NEUTRAL SCALE SYSTEM
+   ============================================================================
+   
+   Naming Convention: --neutral-0 through --neutral-11
+   Scale Direction: 0 = lightest (white), 11 = darkest (black)
+   
+   Usage Guidelines:
+   - 0-3: Light surfaces, backgrounds (light theme)
+   - 4-7: Borders, dividers, quiet elements, mid-tones
+   - 8-11: Text, dark surfaces (light theme) / backgrounds (dark theme)
+   
+   Theme Mapping:
+   - Light theme: backgrounds use 0-3, text uses 8-11, borders use 4-7
+   - Dark theme: backgrounds use 8-11, text uses 0-3, borders use 4-7
+   ============================================================================ */
+
 :root[data-theme="light"] {
-   /* RAW COLORS */
-   --palette-primary: #FFFFFF;          /* main page background */
-   --palette-secondary: #FAFAFA;        /* cards / inner sections */
-   --palette-tertiary: #E0E0E0;         /* borders, disabled */
-   --palette-text-primary: #111111;     /* body text */
-   --palette-text-secondary: #333333;   /* headings AAAAAAA */
-   --palette-text-tertiary: #A0A0A0;    /* muted text */
-   --palette-accent: #1949E6;           /* blue accent */
-   --palette-accent-active: #1949E6;    /* darker blue active state */
-   --palette-hover: #F2F2F2;            /* hover background */
+   /* NEUTRAL SCALE (12 steps: lightest → darkest) */
+   --neutral-0: #FFFFFF;   /* Pure white - lightest */
+   --neutral-1: #FAFAFA;   /* Very light gray - page backgrounds */
+   --neutral-2: #F5F5F5;   /* Light gray - card hover states */
+   --neutral-3: #E5E5E5;   /* Light-medium gray - subtle backgrounds */
+   --neutral-4: #D0D0D0;   /* Medium-light gray - subtle borders */
+   --neutral-5: #B0B0B0;   /* Medium gray - default borders */
+   --neutral-6: #909090;   /* Medium-dark gray - stronger borders */
+   --neutral-7: #707070;   /* Dark-medium gray - muted text */
+   --neutral-8: #505050;   /* Dark gray - secondary text */
+   --neutral-9: #333333;   /* Very dark gray - headings */
+   --neutral-10: #1A1A1A;  /* Near black - body text */
+   --neutral-11: #000000;   /* Pure black - darkest */
+ 
+   /* ACCENT & STATUS COLORS (non-neutral palette) */
+   --palette-accent: #1949E6;           /* blue accent - base */
+   --palette-accent-hover: #2563EB;     /* blue accent - hover (lighter, more vivid) */
+   --palette-accent-active: #1E40AF;    /* blue accent - active (darker, deeper) */
    --palette-overlay: #00000080;        /* semi-transparent overlay */
-   --palette-status-success: #4CAF50;   /* green */
-   --palette-status-error: #F44336;     /* red */
-   --palette-status-warning: #FFC107;   /* yellow */
+   --palette-status-success: #22C55E;   /* green - darker/saturated for light theme */
+   --palette-status-error: #DC2626;     /* red - darker/saturated for light theme */
+   --palette-status-warning: #F59E0B;   /* amber-yellow - distinct from blue accent */
  
-   /* SEMANTIC TOKENS */
-   --bg-page: var(--palette-primary);
-   --bg-section: var(--palette-secondary);
-   --bg-card: var(--palette-secondary);
-   --bg-card-hover: var(--palette-hover);
-   --bg-overlay: var(--palette-overlay);
+   /* SEMANTIC TOKENS - Backgrounds (mapped to light end of neutral scale) */
+   --bg-page: var(--neutral-0);              /* Main page background - lightest */
+   --bg-section: var(--neutral-1);            /* Section containers - very light */
+   --bg-card: var(--neutral-2);               /* Card backgrounds - very light */
+   --bg-card-hover: var(--neutral-3);         /* Card hover state - light gray */
+   --bg-overlay: var(--palette-overlay);      /* Overlays - semi-transparent black */
  
-   --text-heading: var(--palette-text-secondary);
-   --text-body: var(--palette-text-primary);
-   --text-muted: var(--palette-text-tertiary);
-   --text-accent: var(--palette-accent);
+   /* SEMANTIC TOKENS - Typography (mapped to dark end of neutral scale) */
+   --text-heading: var(--neutral-9);          /* Headings - very dark gray */
+   --text-body: var(--neutral-10);            /* Body text - near black */
+   --text-muted: var(--neutral-7);            /* Muted/secondary text - dark-medium gray */
+   --text-accent: var(--palette-accent);      /* Accent text - blue */
  
-   /* Borders */
-   --border-subtle: var(--palette-tertiary);
-   --border-default: color-mix(in srgb, var(--palette-tertiary), var(--palette-text-primary) 20%);
-   --border-strong: var(--palette-accent);
+   /* SEMANTIC TOKENS - Borders (mapped to mid-range of neutral scale) */
+   --border-subtle: var(--neutral-4);         /* Subtle borders - medium-light gray */
+   --border-default: var(--neutral-5);       /* Default borders - medium gray */
+   --border-strong: var(--palette-accent);   /* Strong borders - accent color */
  
-   /* States */
-   --color-focus: var(--palette-link);
-   --color-active: var(--palette-accent-active);
-   --color-disabled: var(--palette-tertiary);
+   /* SEMANTIC TOKENS - States */
+   --color-focus: var(--palette-accent);      /* Focus ring - accent color */
+   --color-active: var(--palette-accent-active); /* Active state - darker accent */
+   --color-disabled: var(--neutral-4);        /* Disabled state - medium-light gray */
  
-   /* Status */
+   /* SEMANTIC TOKENS - Status Colors */
    --color-status-success: var(--palette-status-success);
    --color-status-error: var(--palette-status-error);
    --color-status-warning: var(--palette-status-warning);
  }
  
- :root[data-theme="dark"] {
-   /* RAW COLORS */
-   --palette-primary: #252525;          /* main page background */
-   --palette-secondary: #161616;        /* cards / inner sections */
-   --palette-tertiary: #585858;         /* borders, disabled */
-   --palette-text-primary: #FFFFFF;     /* body text */
-   --palette-text-secondary: #E0E0E0;   /* headings AAAAAA */
-   --palette-text-tertiary: #A0A0A0;    /* muted text */
-   --palette-accent: rgb(245,139,107);  /* orange accent */
-   --palette-accent-active: #D84315;    /* darker orange */
-   --palette-hover: #2A2A2A;            /* hover background */
+:root[data-theme="dark"] {
+   /* NEUTRAL SCALE (12 steps: lightest → darkest) */
+   /* Same scale values, but semantic tokens map differently */
+   --neutral-0: #FFFFFF;   /* Pure white - text in dark theme */
+   --neutral-1: #FAFAFA;   /* Very light gray - headings */
+   --neutral-2: #E5E5E5;   /* Light gray - secondary text */
+   --neutral-3: #A0A0A0;   /* Light-medium gray - muted text */
+   --neutral-4: #707070;   /* Medium-light gray - subtle borders */
+   --neutral-5: #585858;   /* Medium gray - default borders */
+   --neutral-6: #505050;   /* Medium-dark gray - stronger borders */
+   --neutral-7: #3A3A3A;  /* Dark-medium gray - hover states */
+   --neutral-8: #2A2A2A;  /* Dark gray - card hover */
+   --neutral-9: #252525;  /* Very dark gray - page background */
+   --neutral-10: #1A1A1A; /* Near black - section backgrounds */
+   --neutral-11: #000000;  /* Pure black - darkest backgrounds */
+ 
+   /* ACCENT & STATUS COLORS (non-neutral palette) */
+   --palette-accent: #f58b6b;           /* orange accent - base */
+   --palette-accent-hover: #FF9F7A;     /* orange accent - hover (lighter, more vivid) */
+   --palette-accent-active: #D84315;    /* orange accent - active (darker, deeper) */
    --palette-overlay: #000000BF;        /* darker overlay */
-   --palette-status-success: #66BB6A;   /* green */
-   --palette-status-error: #EF5350;     /* red */
-   --palette-status-warning: #FFD54F;   /* yellow */
+   --palette-status-success: #4ADE80;   /* green - lighter/pastel for dark theme */
+   --palette-status-error: #F87171;     /* red - lighter/pastel for dark theme */
+   --palette-status-warning: #FCD34D;   /* yellow - more yellow, less amber (distinct from orange accent) */
  
-   /* SEMANTIC TOKENS */
-   --bg-page: var(--palette-primary);
-   --bg-section: var(--palette-secondary);
-   --bg-card: var(--palette-secondary);
-   --bg-card-hover: var(--palette-hover);
-   --bg-overlay: var(--palette-overlay);
+   /* SEMANTIC TOKENS - Backgrounds (mapped to dark end of neutral scale) */
+   --bg-page: var(--neutral-9);              /* Main page background - very dark gray */
+   --bg-section: var(--neutral-10);          /* Section containers - near black */
+   --bg-card: var(--neutral-8);            /* Card backgrounds - near black */
+   --bg-card-hover: var(--neutral-6);        /* Card hover state - dark gray */
+   --bg-overlay: var(--palette-overlay);     /* Overlays - semi-transparent black */
  
-   --text-heading: var(--palette-text-secondary);
-   --text-body: var(--palette-text-primary);
-   --text-muted: var(--palette-text-tertiary);
-   --text-accent: var(--palette-accent);
+   /* SEMANTIC TOKENS - Typography (mapped to light end of neutral scale) */
+   --text-heading: var(--neutral-2);         /* Headings - light gray */
+   --text-body: var(--neutral-0);            /* Body text - white */
+   --text-muted: var(--neutral-3);           /* Muted/secondary text - light-medium gray */
+   --text-accent: var(--palette-accent);     /* Accent text - orange */
  
-   /* Borders */
-   --border-subtle: var(--palette-tertiary);
-   --border-default: color-mix(in srgb, var(--palette-tertiary), var(--palette-text-primary) 25%);
-   --border-strong: var(--palette-accent);
+   /* SEMANTIC TOKENS - Borders (mapped to mid-range of neutral scale) */
+   --border-subtle: var(--neutral-5);        /* Subtle borders - medium gray */
+   --border-default: var(--neutral-5);       /* Default borders - medium gray */
+   --border-strong: var(--palette-accent);  /* Strong borders - accent color */
  
-   /* States */
-   --color-focus: var(--palette-link);
-   --color-active: var(--palette-accent-active);
-   --color-disabled: var(--palette-tertiary);
+   /* SEMANTIC TOKENS - States */
+   --color-focus: var(--palette-accent);     /* Focus ring - accent color */
+   --color-active: var(--palette-accent-active); /* Active state - darker accent */
+   --color-disabled: var(--neutral-5);       /* Disabled state - medium gray */
  
-   /* Status */
+   /* SEMANTIC TOKENS - Status Colors */
    --color-status-success: var(--palette-status-success);
    --color-status-error: var(--palette-status-error);
    --color-status-warning: var(--palette-status-warning);

@@ -3,7 +3,7 @@ import { PROJECT_RESULTS_ARIA_LABEL, ProjectResultsProps } from "./data/projectR
 
 const ProjectResults = ({ project }: ProjectResultsProps) => {
    return (
-      <section className="project__results min-w-screen p-25" aria-label={PROJECT_RESULTS_ARIA_LABEL}>
+      <section className="project__results min-w-screen bg-section p-25" aria-label={PROJECT_RESULTS_ARIA_LABEL}>
          <ProjectResultsContainer project={project} />
       </section>
    );

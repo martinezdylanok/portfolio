@@ -6,7 +6,7 @@ const AboutMeDetailedStory = () => {
    const { initial, whileInView, transition, viewport } = useAboutMeDetailedStoryAnimations();
 
    return (
-      <div className="about-me-detailed__story flex flex-col text-right py-25 bg-section">
+      <div className="about-me-detailed__story flex flex-col text-right py-25 bg-page">
          <motion.div initial={initial} whileInView={whileInView} transition={transition} viewport={viewport} className="about-me-detailed__story-content flex flex-col gap-12.5 min-w-screen min-h-screen">
             <h3 className="about-me-detailed__story-title font-hanken-grotesk text-[200px] text-heading font-bold leading-none">{CATEGORY_NAME[3]}</h3>
             <div className="about-me-detailed__story-images-container flex flex-col gap-12.5 h-full self-center items-center justify-center">
