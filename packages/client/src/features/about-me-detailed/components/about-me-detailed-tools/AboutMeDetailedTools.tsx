@@ -7,7 +7,7 @@ const AboutMeDetailedTools = () => {
    const { initial, whileInView, transition, viewport } = useAboutMeDetailedToolsHeaderAnimations();
 
    return (
-      <div className="about-me-detailed__tools flex flex-col py-25 bg-page">
+      <div className="about-me-detailed__tools flex flex-col py-25 bg-card">
          <motion.div initial={initial} whileInView={whileInView} transition={transition} viewport={viewport} className="about-me-detailed__tools-header flex flex-col gap-12.5 min-w-screen min-h-screen">
             <h3 className="about-me-detailed__tools-title font-hanken-grotesk text-[200px] text-heading font-bold leading-none">{CATEGORY_NAME[2]}</h3>
             <div className="about-me-detailed__tools-icon-container flex flex-col h-full self-center items-center justify-center">

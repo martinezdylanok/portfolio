@@ -12,7 +12,7 @@ const ProjectOverviewContainer = ({ project }: ProjectOvervierContainerProps) =>
    const { initial, whileInView, transition, viewport } = useProjectOverviewInnerAnimations();
 
    return (
-      <motion.div ref={containerRef} style={{ scale }} className="project__overview-container flex flex-col rounded-sm bg-card p-25" aria-label={PROJECT_OVERVIEW_CONTAINER_ARIA_LABEL}>
+      <motion.div ref={containerRef} style={{ scale }} className="project__overview-container flex flex-col rounded-sm bg-section p-25" aria-label={PROJECT_OVERVIEW_CONTAINER_ARIA_LABEL}>
          <ProjectOverviewImage project={project} />
          <motion.div initial={initial} whileInView={whileInView} transition={transition} viewport={viewport} className="project__overview-container-inner grid grid-cols-2 min-h-screen">
             <h2 className="project__overview-container-title font-hanken-grotesk row-start-1 col-start-2 text-8xl mt-25 mb-12 text-end text-heading font-bold">{PROJECT_OVERVIEW_CONTENT_TITLE_TEXT}</h2>

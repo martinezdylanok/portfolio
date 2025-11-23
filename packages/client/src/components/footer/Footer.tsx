@@ -3,7 +3,7 @@ import { FOOTER_ARIA_LABEL } from "./data/footerData";
 
 const Footer = () => {
    return (
-      <footer className="footer bg-section" aria-label={FOOTER_ARIA_LABEL}>
+      <footer className="footer bg-page" aria-label={FOOTER_ARIA_LABEL}>
          <FooterContent />
       </footer>
    );
