@@ -12,16 +12,18 @@ const Header = () => {
          aria-label={HEADER_ARIA_LABEL}
          className={`
             header
-            fixed w-full min-h-[6.25rem] z-20 px-5 
-            flex items-center justify-between 
+            fixed w-full z-9999 
             bg-page
-            transition-transform duration-800 ease-in-out
+            transition-transform duration-600 ease-in-out
             ${isVisible ? "transform-none" : "-translate-y-full"}
          `}
       >
-         <HeaderLogo />
-         <HeaderNavigation />
-         <HeaderModeSwitcher />
+         {/* TODO: Modify the header animation duration, also check if motion animation can be applied */}
+         <div className="w-full lg:max-w-7xl flex items-center justify-between p-6 mx-auto">
+            <HeaderLogo />
+            <HeaderNavigation />
+            <HeaderModeSwitcher />
+         </div>
       </header>
    );
 };
